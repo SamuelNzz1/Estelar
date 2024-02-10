@@ -13,22 +13,25 @@ type statsProps = {
     imageStatus: string;
     status: string;
     statusNumber: number;
+    cor: string;
    
   };
 export const dadosPerfil: statsProps[] = [
     {
      titulo: "Questões Resolvidas",
      status: "Total: ",
-     imageStatus: "",
+     imageStatus: "retang",
      statusNumber: 0,
+     cor: "#5664F7"
 
 
     },
     {
         titulo: "Jornada Astronômica",
         status: "Nível: ",
-        imageStatus: "",
+        imageStatus: "retang",
         statusNumber: 0,
+        cor: "#E28D0E"  
     },
    
   ];

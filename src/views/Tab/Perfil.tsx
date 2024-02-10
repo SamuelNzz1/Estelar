@@ -6,10 +6,13 @@ import { SvgXml } from "react-native-svg";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { PencilEdit } from "../../svgs/editPerfilSvg";
 import { dadosPerfil } from "../../dados/PerfilProps";
-import CardStatus from "../../components/PerfilTela/CardStatus";
-export default function Perfil(){
-    const [userName, setUserName] = useState<string | null>(null);
+import perfilImage from "../../images/Perfil.png";
 
+
+import CardStatus from "../../components/PerfilTela/CardStatus";
+export default function Perfil({navigation} : any ){
+    const [userName, setUserName] = useState<string | null>(null);
+    const [imagePerfil, setImagePerfil] = useState <any> (perfilImage);
 
     useEffect(() => {
        const auth = getAuth();
@@ -35,7 +38,7 @@ export default function Perfil(){
             <View style={styles.cont } >
                <View style ={ styles.infoPerfi }>
                     <View style = {styles.perfilImage}>
-                        <Image style ={styles.imagePerfil} source={require("../../images/Perfil.png")} />
+                        <Image style ={styles.imagePerfil} source={imagePerfil} />
                     </View>
                     {userName ?
                         <TextEstelar style={styles.bemvindo}>{userName}</TextEstelar>
@@ -43,7 +46,7 @@ export default function Perfil(){
                         <TextEstelar style={styles.bemvindo}>Anonymous</TextEstelar>
             
                     }   
-                    <TouchableOpacity style = {styles.edit}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("EditPerfil", {imagePerfil})} style = {styles.edit}>
                         <View>
                         <TextEstelar style = {styles.editPerfi}>
                             Editar perfil
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
       },
 
     perfilImage: {
-        borderRadius: 100
+        borderRadius: 125
     },
     infoPerfi:{
         alignItems: "center",
@@ -113,7 +116,8 @@ const styles = StyleSheet.create({
     },
     imagePerfil:{
         width: 100,
-        height: 100
+        height: 100,
+        borderRadius: 125
 
     },
     

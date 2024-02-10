@@ -8,6 +8,8 @@ import  TelaConfirmEmailForgot from "../views/Stack/TelaConfirmEmailForgot";
 import Tabs from "./tab.routes";
 import EmBreve from "../views/Stack/EmBreve";
 import Home from "../views/Tab/Forum";
+import TelaEditPerfil from "../views/Stack/TelaEditPerfil";
+
 const Stack = createNativeStackNavigator();
 
 
@@ -41,6 +43,11 @@ export default function StackRoutes(){
             <Stack.Screen
             name = "EmBreve"
             component={EmBreve}/>
+
+            <Stack.Screen
+            name = "EditPerfil"
+            component = {TelaEditPerfil}
+            />
             
             
 

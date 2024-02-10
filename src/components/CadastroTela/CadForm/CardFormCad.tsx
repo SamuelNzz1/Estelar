@@ -68,6 +68,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
                   uid: user.uid,
                   nome: name,
                   email: email,
+                  senha: senha
                 }); 
                 await updateProfile(user, {
                   displayName: name,

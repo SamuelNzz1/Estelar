@@ -9,17 +9,17 @@ type CardStatus = {
     titulo: string,
     status: string,
     statusNumber: number,
+    cor: string
 
 } 
 
-export default function CardStatus({status, titulo, imageStatus, statusNumber}:CardStatus){
+export default function CardStatus({status, titulo, imageStatus, statusNumber,cor}:CardStatus){
     
-    const [nivelJornada, setNivelJornada] = useState(0);
-    const [totalOBA, setTotalOBA] = useState(0);
+
 
 
     return(
-        <View style = {styles.cardStatus}>
+        <View style = { [  styles.cardStatus, {shadowColor: cor}] }>
             
         <View style = {styles.esquerdo}>
             <TextEstelar style={styles.textoprincipal}>
@@ -38,23 +38,20 @@ export default function CardStatus({status, titulo, imageStatus, statusNumber}:C
 }
 
 const styles = StyleSheet.create({
-    cardStatus:{
-        width: "80%",
+    cardStatus: {
+        width: '80%',
         height: 120,
-       
-        backgroundColor: "#212251",
+        backgroundColor: '#212251',
         borderRadius: 30,
-       
-        alignSelf: "center",
-        
-        alignItems: "center",
-        flexDirection: "row"
-        
-        
-        
-        
-    
-    },
+        alignSelf: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        elevation: 100,  // Ajuste conforme necessário para a altura da sombra
+          // Cor da sombra
+        shadowOffset: { width: 0, height: 20 },  // Configuração de offset da sombra
+        shadowOpacity: 0.5,  // Opacidade da sombra
+        shadowRadius: 4,  // Raio da sombra
+      },
     image:{
         width: 90,
         height: 90,

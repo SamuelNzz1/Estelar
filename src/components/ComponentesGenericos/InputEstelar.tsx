@@ -12,6 +12,7 @@ type inputEst = {
     keyboardType?: string | any,
     autoCapitalize?: string | any,
     value: string,
+    
     onChangeText: (text: string, type: string) => void;
 }
 
