@@ -30,23 +30,27 @@ export default function TopoCad({style, navigation} : TopoCad) {
 }
 const styles = StyleSheet.create({
  topo:{
-        
+        zIndex: -0,
+        position: "relative"
 
  },
  imagemTopo:{
     height:"100%",
     width:"100%",
     resizeMode:"cover",
+    zIndex: -1,
  },
  planeta:{
     position: "absolute",
     alignSelf: "center",
-    marginTop: "13%"
+    marginTop: "13%",
+    zIndex: 0,
  },
  voltar:{
     position:"absolute",
     marginLeft:"5%",
-    top:"20%"
+    top:"20%",
+    zIndex: 0,
  }
  
 });

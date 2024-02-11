@@ -27,6 +27,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [confirmSenha, setConfirmSenha] = useState("");
 
   
   
@@ -40,7 +41,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
 
   const handleUserRegister = async () =>{
     
-   
+   if(senha == confirmSenha){
 
     const handleEmailValidation = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -68,7 +69,8 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
                   uid: user.uid,
                   nome: name,
                   email: email,
-                  senha: senha
+                  senha: senha,
+                  profileImage: ""
                 }); 
                 await updateProfile(user, {
                   displayName: name,
@@ -116,7 +118,11 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
 
    handleEmailValidation();
     
-   
+  }
+  else{
+    Alert.alert("As duas senhas devem ser iguais");
+
+  }
 
   }
 
@@ -127,6 +133,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
       if(type == "e-mail"){setEmail(atributo)}
       if(type == "nome"){setName(atributo)}
       if(type == "senha"){setSenha(atributo)}
+      if(type == "confirmarsenha"){setConfirmSenha(atributo)}
 
   }
   
@@ -140,6 +147,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
       email = {email}
       senha = {senha}
       onChangeText = {onChangeText}
+      confirmarsenha= {confirmSenha}
       
       />
       
@@ -165,7 +173,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     alignContent: "center",
-    position: "absolute"
+    position: "absolute",
+    zIndex: 1,
   },
   textH1: {
     fontSize: RF(30),
@@ -184,7 +193,7 @@ const styles = StyleSheet.create({
     marginLeft: "8%",
   }, buttonEnviar: {
     backgroundColor: "#FFAB4C",
-    marginTop: "10%",
+    marginTop: "2%",
     height: 50,
     width: 325,
     borderRadius: 24,

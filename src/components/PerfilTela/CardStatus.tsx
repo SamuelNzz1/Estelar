@@ -19,21 +19,30 @@ export default function CardStatus({status, titulo, imageStatus, statusNumber,co
 
 
     return(
-        <View style = { [  styles.cardStatus, {shadowColor: cor}] }>
+        <View>
+        <View style = { [styles.sombraCard, {backgroundColor: cor} ]}>
             
-        <View style = {styles.esquerdo}>
-            <TextEstelar style={styles.textoprincipal}>
-                {titulo}
+            
+        </View>
+
+        <View style = { styles.cardStatus }>
+            
+            <View style = {styles.esquerdo}>
+                <TextEstelar style={styles.textoprincipal}>
+                    {titulo}
                 
-            </TextEstelar>
-            <TextEstelar style={styles.textosecu}>
-                {status} {statusNumber}
-            </TextEstelar>
+                </TextEstelar>
+                <TextEstelar style={styles.textosecu}>
+                    {status} {statusNumber}
+                </TextEstelar>
+            </View>
+            <View style = {styles.direito}>
+                <Image style = {styles.image} source={require("../../images/retang.png")}/>
+            </View>
         </View>
-        <View style = {styles.direito}>
-            <Image style = {styles.image} source={require("../../images/retang.png")}/>
         </View>
-  </View>)
+        
+        )
 
 }
 
@@ -46,11 +55,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        elevation: 100,  // Ajuste conforme necessário para a altura da sombra
-          // Cor da sombra
-        shadowOffset: { width: 0, height: 20 },  // Configuração de offset da sombra
-        shadowOpacity: 0.5,  // Opacidade da sombra
-        shadowRadius: 4,  // Raio da sombra
+          
+      },
+      sombraCard: {
+        width: '80%',
+        height: 120,
+        position: "absolute",
+        borderRadius: 30,
+        alignSelf: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        bottom: -12         
       },
     image:{
         width: 90,

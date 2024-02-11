@@ -6,10 +6,11 @@ type InputsCad ={
     name: string,
     senha: string, 
     email: string,
+    confirmarsenha: string,
     onChangeText:(text: string, type: string) => void;
     
 }
-export default function InputsCad({name, senha, email, onChangeText}: InputsCad){
+export default function InputsCad({name, senha, email, confirmarsenha, onChangeText}: InputsCad){
     const windowHeight = Dimensions.get("window").height;
     const windowWidth = Dimensions.get("window").width;
     const route = useRoute();
@@ -63,6 +64,15 @@ export default function InputsCad({name, senha, email, onChangeText}: InputsCad)
         boolean={true}
         value = {senha}
         onChangeText={(atributo) => onChangeText(atributo, "senha")}
+        />
+
+<InputEst
+        placeholder = "Confirmar senha"
+        color = "white"
+        colorBack="#25356C"
+        boolean={true}
+        value = {confirmarsenha}
+        onChangeText={(atributo) => onChangeText(atributo, "confirmarsenha")}
         />
     </View> }
     </>

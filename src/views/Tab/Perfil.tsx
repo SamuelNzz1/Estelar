@@ -11,8 +11,14 @@ import perfilImage from "../../images/Perfil.png";
 
 import CardStatus from "../../components/PerfilTela/CardStatus";
 export default function Perfil({navigation} : any ){
+
+
     const [userName, setUserName] = useState<string | null>(null);
     const [imagePerfil, setImagePerfil] = useState <any> (perfilImage);
+    const isUri = (value : any) => {
+        return typeof value === "string" && (value.startsWith("http://") || value.startsWith("https://"));
+      };
+
 
     useEffect(() => {
        const auth = getAuth();
@@ -38,6 +44,7 @@ export default function Perfil({navigation} : any ){
             <View style={styles.cont } >
                <View style ={ styles.infoPerfi }>
                     <View style = {styles.perfilImage}>
+                        
                         <Image style ={styles.imagePerfil} source={imagePerfil} />
                     </View>
                     {userName ?
@@ -46,7 +53,7 @@ export default function Perfil({navigation} : any ){
                         <TextEstelar style={styles.bemvindo}>Anonymous</TextEstelar>
             
                     }   
-                    <TouchableOpacity onPress={()=>navigation.navigate("EditPerfil", {imagePerfil})} style = {styles.edit}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("EditPerfil", {imagePerfil, setImagePerfil})} style = {styles.edit}>
                         <View>
                         <TextEstelar style = {styles.editPerfi}>
                             Editar perfil

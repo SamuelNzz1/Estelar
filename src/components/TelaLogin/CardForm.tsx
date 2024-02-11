@@ -84,6 +84,7 @@ export default function  CardForm({ navigation } : FormNavi) {
       email = {email}
       name = {name}
       onChangeText = {onChangeText}
+      confirmarsenha=""
       
       
       />

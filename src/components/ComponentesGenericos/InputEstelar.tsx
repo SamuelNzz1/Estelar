@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     inputStyle:{
         fontFamily:'Poppins_400Regular',
         width: 325,
-        height: 55,
+        height: hp(7),
         
         borderRadius: 10,
         color:"white",
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
         
         borderRadius: 10,
         color:"white",
-        paddingLeft: 20
+        paddingLeft: 20,
+       
         
     },
 
