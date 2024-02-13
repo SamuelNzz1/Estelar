@@ -8,14 +8,15 @@ import { bola2 } from "../../svgs/bolasEditPerfil";
 import { ButtonBack } from "../../components/CadastroTela/CadTopo/ButtonBack";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import InputEst from "../../components/ComponentesGenericos/InputEstelar";
-import { AuthCredential, EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential, updatePassword, updateProfile } from "firebase/auth";
-import { doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { AuthCredential, EmailAuthProvider, deleteUser, getAuth, onAuthStateChanged, reauthenticateWithCredential, updatePassword, updateProfile } from "firebase/auth";
+import { collection, deleteDoc, doc, getDocs, getFirestore, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
-import { Auth } from "firebase/auth";
+import confirmMessage from "../../images/confirmDeleteAccount.png"
 import { useRoute } from '@react-navigation/native';
-
+import { noDelete, yesDelete } from "../../svgs/ButtonsConfirmDelete";
 
 import * as ImagePicker from 'expo-image-picker';
+import { falseVisibility, trueVisibility } from "../../svgs/passwordVisibilitySvg";
 type editPerfil = {
     navigation: any;
     route: any;
@@ -28,18 +29,123 @@ export default function TelaEditPerfil({navigation}:editPerfil){
     const autenticacao = getAuth();
     const usuario : any = autenticacao.currentUser; 
     const firestore = getFirestore();
-
-
     const userId = usuario.uid; // Substitua pelo ID do usuário
-    console.log(userId);
+    const userCollection = collection(firestore, 'users');
+
+    const { imagePerfil, setImagePerfil } : any = route.params;
+    const [showImage, setShowImage] = useState(false);
+
+   const [profileImage64, setProfileImage64] = useState<string>("");
     const userRef = doc(firestore, 'users', userId);
-    console.log(userRef);
     
+    const [passwordVisibility, setPasswordVisibility] = useState(true);
+
+
+    const changeVisibility = () => {
+      
+      setPasswordVisibility((prevState) => !prevState);
+  
+    }
+   
+ 
+
+
+   
+
+
+    const obterDadosUsuario = async () => {
+        try {
+
+            const q = query(userCollection, where('uid', '==', userId));
+
+                        // Execute a consulta
+                        const querySnapshot = await getDocs(q);
+                        
+                        // Verifique se há algum documento retornadoc
+                        if (querySnapshot.size > 0) {
+                          // Se houver, pegue o ID do primeiro documento
+                          const primeiroDocumento = querySnapshot.docs[0];
+                          const idDocUsu = primeiroDocumento.id;
+                        
+                         
+
+                          const snapshot = await getDoc(doc(firestore, "users", idDocUsu));
+      
+                          if (snapshot.exists()) {
+                            const dadosUsuario = snapshot.data();
+                            const profileImage = dadosUsuario.profileImage;
+                          
+                          } else {
+                            console.log('Documento não encontrado para o usuário:', userId);
+                          }
+                   
+                    
+                        
+                        } else {
+                          console.error("Nenhum documento encontrado para o UID fornecido.");
+                        }
+
+
+
+
+
+
+
+        
+        } catch (error) {
+          console.error('Erro ao obter dados do usuário:', error);
+        }
+      };
+
+     
+      
+
+      useEffect(() => {
+        obterDadosUsuario();
+      }, []);
+
+      
+
+      
 
     
+     
+    
+      
+
+
+    
+
+
+
+    
+    const imageToBase64 = async (imageUri : string)  => {
+        try {
+          const response = await fetch(imageUri);
+          const blob = await response.blob();
+          const base64String = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+          return base64String;
+        } catch (error) {
+          console.error('Erro ao converter imagem para Base64:', error);
+          return null;
+        }
+      };
+
+   
     
     
-    const { imagePerfil, setImagePerfil } : any = route.params;
+    
+ 
+   
+ 
+
+    const [editPerfil, setEditPerfil] = useState<boolean>(false);
+
 
     useEffect(() => {
         navigation.setOptions({
@@ -54,9 +160,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
     const [novaSenha, setNovaSenha] = useState<string>("");
     const [senhaAtual, setSenhaAtual] = useState<string>("");
 
-  
-    console.log('ID do usuário autenticado:', usuario.uid);
-    console.log('ID do documento no Firestore:', userRef.id);
+
 
 
 
@@ -98,13 +202,14 @@ export default function TelaEditPerfil({navigation}:editPerfil){
             
             setNovaImagemPerfil(resultado.assets[0].uri);
 
+            setEditPerfil(true);
           
 
           }
         
       };
      
-      console.log(imagePerfil);
+    
 
 
 
@@ -115,12 +220,12 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
       const handleAlterPerfil = async () => {
-        if(name != "" && senhaAtual != "" && novaSenha != ""){
+        if(name != "" && senhaAtual != ""){
         const handleNomeValidation = async () => {
             const nomeRegex = /^[a-zA-Z ]+$/; 
 
             if(name.match(nomeRegex)){
-                if(senhaAtual.length >= 8 && novaSenha.length >= 8){
+                if((senhaAtual.length >= 8 && novaSenha.length >= 8) || (senhaAtual.length >= 8 && novaSenha.length == 0)){
                 try {
                     // Reautentica o usuário com a senha atual
                     await reauthenticateWithCredential(usuario, EmailAuthProvider.credential(usuario.email!, senhaAtual));
@@ -129,20 +234,49 @@ export default function TelaEditPerfil({navigation}:editPerfil){
                     await updatePassword(usuario!, novaSenha);
                     await updateProfile(usuario!, { displayName: name });
                     
+                  
+                   
+                    const base64String = await imageToBase64(imagePerfil);
+                   
+                    
+                    const q = query(userCollection, where('uid', '==', userId));
+
+                        // Execute a consulta
+                        const querySnapshot = await getDocs(q);
+                        
+                        // Verifique se há algum documento retornado
+                        if (querySnapshot.size > 0) {
+                          // Se houver, pegue o ID do primeiro documento
+                          const primeiroDocumento = querySnapshot.docs[0];
+                          const idDocUsu = primeiroDocumento.id;
+                        
+                       
+
+                          try{
+                            await updateDoc(doc(firestore, "users", idDocUsu), {
+                                profileImage: base64String,
+                                name: name // Substitua pelo campo que você deseja usar
+                            });
+                            console.log("sucesso");
+                            }catch{
+                                console.log("erro");
+    
+                            }
                    
                         Alert.alert("Perfil atualizado com sucesso!");
                         
-                        setImagePerfil(novaImagemPerfil);
-
-                        try{
-                        await updateDoc(userRef, {
-                            profileImage: imagePerfil, // Substitua pelo campo que você deseja usar
-                        });
-                        console.log("sucesso");
-                        }catch{
-                            console.log("erro");
-
+                        
+                        } else {
+                          console.error("Nenhum documento encontrado para o UID fornecido.");
                         }
+                            
+                   
+                       
+
+                        
+
+
+                        
 
                         navigation.goBack();
                      
@@ -164,13 +298,101 @@ export default function TelaEditPerfil({navigation}:editPerfil){
     
         };
         handleNomeValidation();
+
        
-      }else{
+      }
+      else if(editPerfil === true){
+        setImagePerfil(novaImagemPerfil);
+        setEditPerfil(false);
+        
+        const q = query(userCollection, where('uid', '==', userId));
+
+                        // Execute a consulta
+                        const querySnapshot = await getDocs(q);
+                        
+                        // Verifique se há algum documento retornado
+                        if (querySnapshot.size > 0) {
+                          // Se houver, pegue o ID do primeiro documento
+                          const primeiroDocumento = querySnapshot.docs[0];
+                          const idDocUsu = primeiroDocumento.id;
+                        
+
+                          try{
+                            await updateDoc(doc(firestore, "users", idDocUsu), {
+                                profileImage: imagePerfil,
+                            });
+                            console.log("sucesso");
+                            }catch{
+                                console.log("erro");
+    
+                            }
+                   
+                        Alert.alert("Perfil atualizado com sucesso!");
+                        
+                        
+                        } else {
+                          console.error("Nenhum documento encontrado para o UID fornecido.");
+                        }
+
+
+            navigation.goBack();
+      }
+      else{
         Alert.alert("Preencha o(s) campos vazios");
       }
     };
       
-    
+    const deslogar = () =>{
+        navigation.navigate("Login");
+
+    }
+
+
+    const deleteYes = async () =>{
+        
+
+        const q = query(userCollection, where('uid', '==', userId));
+
+                        // Execute a consulta
+        const querySnapshot = await getDocs(q);
+
+        const primeiroDocumento = querySnapshot.docs[0];
+        const idDocUsu = primeiroDocumento.id;
+
+        try {
+          // Excluir o usuário autenticado
+          await deleteUser(usuario);
+      
+          // Remover dados associados no Firestore
+          const userDocRef = doc(firestore, 'users',  idDocUsu);
+          const userDocSnapshot = await getDoc(userDocRef);
+      
+          if (userDocSnapshot.exists()) {
+            await deleteDoc(userDocRef);
+            console.log('Dados do usuário removidos do Firestore.');
+          }
+      
+          console.log('Conta de usuário excluída com sucesso.');
+          
+          deslogar();
+        } catch (error : any) {
+          console.error('Erro ao excluir conta:', error.message);
+        }
+
+    }
+    const deleteNo = () =>{
+        setShowImage(false);
+
+    }
+
+
+
+
+    const confirmDelete = () => {
+        setShowImage(true);
+
+    }
+
 
     return(
         <Container
@@ -179,8 +401,9 @@ export default function TelaEditPerfil({navigation}:editPerfil){
         >   
          <TouchableWithoutFeedback  style= {styles.container}  onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView  style= {styles.container}  behavior="padding" enabled>
-
-        <SvgXml onPress={() => navigation.navigate('HomeTab') } style = {styles.voltar} xml={ButtonBack}/>
+        <TouchableOpacity onPress={() => navigation.navigate('HomeTab') } style = {styles.voltar}>
+        <SvgXml  xml={ButtonBack}/>
+        </TouchableOpacity>
             <SvgXml style = {styles.bola1} xml={bola1}/>
             <SvgXml style = {styles.bola2} xml={bola2}/>
             
@@ -219,28 +442,55 @@ export default function TelaEditPerfil({navigation}:editPerfil){
                         <TextEstelar style={styles.inputText}>
                         Senha atual
                         </TextEstelar>
+
+                      <View>
                         <InputEst
                             placeholder = ""
                             color = "white"
                             colorBack="#212251"
-                            boolean={true}
+                            boolean={passwordVisibility}
                             value = {senhaAtual}
                             onChangeText={(atributo) => onChangeText(atributo, "senhaAtual")}
                         />
+                        <TouchableWithoutFeedback onPress={changeVisibility}>
+                        {passwordVisibility ? 
+                            <View style={styles.visibilitybuttom}>
+                            <SvgXml xml={trueVisibility} />
+                            </View>
+                                :
+                            <View style={styles.visibilitybuttom}>
+                            <SvgXml xml={falseVisibility} />
+                            </View>
+                        }
+                      </TouchableWithoutFeedback>
+                      </View>
                     </View>
 
                     <View style = {styles.inputs}>
                         <TextEstelar style={styles.inputText}>
                            Nova senha
                         </TextEstelar>
+                        <View>
                         <InputEst
                             placeholder = ""
                             color = "white"
                             colorBack="#212251"
-                            boolean={true}
+                            boolean={passwordVisibility}
                             value = {novaSenha}
                             onChangeText={(atributo) => onChangeText(atributo, "senhaNova")}
                         />
+                        <TouchableWithoutFeedback onPress={changeVisibility}>
+                        {passwordVisibility ? 
+                            <View style={styles.visibilitybuttom}>
+                            <SvgXml xml={trueVisibility} />
+                            </View>
+                                :
+                            <View style={styles.visibilitybuttom}>
+                            <SvgXml xml={falseVisibility} />
+                            </View>
+                        }
+                      </TouchableWithoutFeedback>
+                      </View>
                     </View>
 
                 </View>
@@ -249,7 +499,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
                         <TextEstelar style={styles.enviar}>Alterar Perfil</TextEstelar>
                     </TouchableOpacity>
 
-                    <TouchableOpacity  style={styles.buttonExclui}>
+                    <TouchableOpacity onPress={confirmDelete} style={styles.buttonExclui}>
                         <TextEstelar style={styles.enviarExclui}>Excluir Conta</TextEstelar>
                     </TouchableOpacity>
                 </View>
@@ -257,7 +507,30 @@ export default function TelaEditPerfil({navigation}:editPerfil){
             </View>
             </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
+                    
+      {showImage && (
+        <>
+        <View style = {styles.buttonsDeleteOrNo}>
+        
+        <TouchableOpacity onPress={deleteNo} >
+            <SvgXml xml={noDelete} />
+        </TouchableOpacity>
 
+        <TouchableOpacity onPress={deleteYes}  >
+               <SvgXml xml={yesDelete} />
+        </TouchableOpacity>
+        
+        </View>
+        
+        <Image
+          source={confirmMessage}
+            style = {styles.successImage}
+          />
+        
+        </>
+
+
+        )}
         </Container>
     )
 
@@ -269,6 +542,26 @@ const styles = StyleSheet.create({
 
       
     
+    }, 
+    visibilitybuttom:{
+      position: "absolute",
+      bottom: 15,
+      right: 10
+    },
+
+    visibilityButtons:{
+
+
+    },
+    buttonsDeleteOrNo:{
+        position:"absolute",
+        justifyContent:"center",
+        width: "100%",
+        bottom:  200,
+        flexDirection: "row",
+        gap: 15,
+        zIndex: 2,
+
     },
     buttons:{
         alignItems: "center",
@@ -368,6 +661,13 @@ const styles = StyleSheet.create({
         position:"absolute",
         left: 20,
         top:"8%"
-     }
+     },successImage: {
+        width: "100%",
+        height: "100%",
+        alignContent: "center",
+        position: "absolute",
+        zIndex: 1,
+      },
+     
 
 })

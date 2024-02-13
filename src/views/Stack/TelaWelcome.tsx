@@ -8,7 +8,7 @@ import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
 import { vector1, vector2 } from "../../svgs/welcomeTela/vectorElements";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
-
+import PreparatorioImage from '../../images/Preparatorio.png';
 type WelcomeProps = {
   navigation: {
     navigate: (screen: string) => void;
@@ -30,6 +30,7 @@ export default function Welcome( {navigation}: WelcomeProps) {
   if (!fontsLoaded) {
     
   }
+  console.log(PreparatorioImage);
 
   return (
     <ImageBackground 

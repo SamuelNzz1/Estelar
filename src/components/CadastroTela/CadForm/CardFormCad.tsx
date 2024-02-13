@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Image,  Text, View, Button, Platform, Dimensions, TouchableOpacity, StyleProp, ViewStyle, Alert } from "react-native";
+import { Modal, StyleSheet, Image,  Text, View, Button, Platform, Dimensions, TouchableOpacity, StyleProp, ViewStyle, Alert, TouchableWithoutFeedback } from "react-native";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import InputsCad from "./InputsCad";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
@@ -10,6 +10,8 @@ import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "
 import { doc, addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../../../firebase/conect";
 import { setDoc } from "firebase/firestore";
+import { trueVisibility, falseVisibility } from "../../../svgs/passwordVisibilitySvg";
+import { SvgXml } from "react-native-svg";
 type CardFormCad = {
   navigation: {
     navigate: (screen : string) => void;
@@ -28,9 +30,19 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmSenha, setConfirmSenha] = useState("");
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
 
+
+  const changeVisibility = () => {
+    
+    setPasswordVisibility((prevState) => !prevState);
+
+  }
+ 
   
   
+
+
   const windowHeight = Dimensions.get("window").height;
   const windowWidth = Dimensions.get("window").width;
   
@@ -64,12 +76,14 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
                 
                 await sendEmailVerification(user);
 
+
+                
+
                 const userCollection = collection(db, 'users');
                 await addDoc(userCollection, {
                   uid: user.uid,
-                  nome: name,
+                  name: name,
                   email: email,
-                  senha: senha,
                   profileImage: ""
                 }); 
                 await updateProfile(user, {
@@ -142,14 +156,42 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
   return (
     <View style={[style, styles.form]}>
       <TextEstelar style={styles.textH1}>Crie uma conta</TextEstelar>
+      <View>
       <InputsCad 
       name = {name}
       email = {email}
       senha = {senha}
       onChangeText = {onChangeText}
       confirmarsenha= {confirmSenha}
-      
+      boolean = {passwordVisibility}
       />
+      <View style = {styles.visibilityButtons}>
+      <TouchableWithoutFeedback onPress={changeVisibility}>
+  {passwordVisibility ? 
+    <View style={styles.visibilitybuttom2}>
+      <SvgXml xml={trueVisibility} />
+    </View>
+    :
+    <View style={styles.visibilitybuttom2}>
+      <SvgXml xml={falseVisibility} />
+    </View>
+  }
+</TouchableWithoutFeedback>
+<TouchableWithoutFeedback onPress={changeVisibility}>
+  {passwordVisibility ? 
+    <View style={styles.visibilitybuttom}>
+      <SvgXml xml={trueVisibility} />
+    </View>
+    :
+    <View style={styles.visibilitybuttom}>
+      <SvgXml xml={falseVisibility} />
+    </View>
+  }
+</TouchableWithoutFeedback>
+
+      </View>
+
+    </View>
       
      
       <TouchableOpacity onPress={handleUserRegister} style={styles.buttonEnviar}>
@@ -169,6 +211,19 @@ const styles = StyleSheet.create({
   form: {
     alignItems: "center",
   },
+  
+  visibilityButtons:{
+    position: "absolute",
+    bottom: 40,
+    right: 10
+  },
+  visibilitybuttom:{
+
+  },
+  visibilitybuttom2:{
+    bottom: 60
+  },
+
   successImage: {
     width: "100%",
     height: "100%",

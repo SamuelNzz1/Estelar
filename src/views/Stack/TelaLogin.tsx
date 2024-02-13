@@ -28,8 +28,8 @@ export default function TelaLogin({navigation}: LoginProps) {
       resizeMode="cover"
       onLoad={handleBackgroundLoad}
     >
-      <TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView  behavior="padding" enabled>
+      <TouchableWithoutFeedback style={styles.container}  onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={styles.container}  behavior="padding" enabled>
         
         {backgroundLoaded && <CardForm navigation = {navigation}/> }
           

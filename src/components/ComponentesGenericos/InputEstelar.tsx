@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     inputStyle:{
         fontFamily:'Poppins_400Regular',
         width: 325,
-        height: hp(7),
+        height: 55,
         
         borderRadius: 10,
         color:"white",

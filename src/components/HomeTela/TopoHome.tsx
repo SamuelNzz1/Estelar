@@ -12,6 +12,7 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from "react-native-responsive-screen";
+import { collection, doc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 type topoHome = {
    
    style?: StyleProp<ViewStyle>;
@@ -19,24 +20,62 @@ type topoHome = {
 
 export default function TopoHome({style} : topoHome) {
     const [userName, setUserName] = useState<string | null>(null);
+    const autenticacao = getAuth();
+    const usuario : any = autenticacao.currentUser; 
+    const firestore = getFirestore();
+    const userId = usuario.uid; // Substitua pelo ID do usuário
+    const userCollection = collection(firestore, 'users');
+
+    const obterDadosUsuario = async () => {
+      try {
+
+          const q = query(userCollection, where('uid', '==', userId));
+
+                      // Execute a consulta
+                      const querySnapshot = await getDocs(q);
+                      
+                      // Verifique se há algum documento retornadoc
+                      if (querySnapshot.size > 0) {
+                        // Se houver, pegue o ID do primeiro documento
+                        const primeiroDocumento = querySnapshot.docs[0];
+                        const idDocUsu = primeiroDocumento.id;
+                      
+                       
+
+                        const unsubscribe = onSnapshot(doc(firestore, 'users', idDocUsu), (snapshot : any) => {
+                          // Callback que será chamada sempre que o documento for alterado
+                          if (snapshot.exists()) {
+                            const dadosUsuario = snapshot.data();
+                            setUserName(dadosUsuario.name);
+                            console.log('Dados atualizados:', dadosUsuario);
+                          } else {
+                            console.log('Documento não encontrado');
+                          }
+                        });
+                  
+                      
+                      } else {
+                        console.error("Nenhum documento encontrado para o UID fornecido.");
+                      }
 
 
-   useEffect(() => {
-      const auth = getAuth();
 
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-         if (user) {
-            // Se o usuário estiver autenticado, atualize o estado com o nome do usuário
-            setUserName(user.displayName);
-         } else {
-            // Se o usuário não estiver autenticado, defina userName como null ou qualquer valor padrão desejado
-            setUserName(null);
-         }
-      });
 
-      // Certifique-se de descadastrar o ouvinte ao desmontar o componente
-      return () => unsubscribe();
-   }, []);  // Passar um array vazio para garantir que o efeito seja executado apenas uma vez
+
+
+
+      
+      } catch (error) {
+        console.error('Erro ao obter dados do usuário:', error);
+      }
+    };
+
+   
+    
+
+    useEffect(() => {
+      obterDadosUsuario();
+    }, []);
 
     
     return (

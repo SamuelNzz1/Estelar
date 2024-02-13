@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback } from "react-native";
 import HelloEstelar from "./CardComponents/HelloEstelar";
 import Inputs from "./CardComponents/Inputs";
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import { SvgXml } from "react-native-svg";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
-
+import { Image } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase/conect";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
+import { getAuth, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
+import { trueVisibility, falseVisibility } from "../../svgs/passwordVisibilitySvg";
 
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { googleCad } from "../../svgs/loginTela/googleCadSvg";
@@ -26,12 +26,20 @@ type FormNavi = {
   }
 } 
 import { useState } from "react";
+import fundoMessageEmail from "../../images/fundoEmailReenviado.png";
+
 
 export default function  CardForm({ navigation } : FormNavi) {
-
+  const [showEmailVerifiedMessage, setShowEmailVerifiedMessage] = useState(false);
+  const [showMessageEmail, setShowMessageEmail] = useState(false);
   
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+  }, [showMessageEmail])
   
- 
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   const handleUserRegister = async () =>{
     
@@ -49,7 +57,8 @@ export default function  CardForm({ navigation } : FormNavi) {
       await signInWithEmailAndPassword(auth, email, senha);
       
       if(user && !user.emailVerified){
-        Alert.alert('Erro no login', 'Por favor, verifique seu e-mail antes de fazer login.');
+        setShowEmailVerifiedMessage(true);
+
       }
       else{
         
@@ -59,6 +68,7 @@ export default function  CardForm({ navigation } : FormNavi) {
       
     } catch (error) {
       Alert.alert("E-mail ou senha incorretos. Tente novamente");
+      setShowEmailVerifiedMessage(false);
     }
   }
 
@@ -67,6 +77,18 @@ export default function  CardForm({ navigation } : FormNavi) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
+
+  const changeVisibility = () => {
+    
+    setPasswordVisibility((prevState) => !prevState);
+
+  }
+  const ok = () =>{
+    setShowMessageEmail(false);
+  }
+
+
   const onChangeText = (atributo : string, type: string) =>{
     if(type == "e-mail"){setEmail(atributo)}
     if(type == "nome"){setName(atributo)}
@@ -74,20 +96,57 @@ export default function  CardForm({ navigation } : FormNavi) {
 
 }
 
+  const showMessageEmaill = async () =>{  
+    const auth = getAuth();
+    const user : any = auth.currentUser;
+    
+    await sendEmailVerification(user)
+    .then(()=>{
+      setShowMessageEmail(true);
 
+    });
+
+  }
   return (
     <View style={styles.cardForm}>
       <SvgXml style = {styles.minilogo} xml={miniLogo} />
       <HelloEstelar />
+      <View>
       <InputsCad 
        senha = {senha}
       email = {email}
       name = {name}
       onChangeText = {onChangeText}
       confirmarsenha=""
-      
-      
+      boolean = {passwordVisibility}
       />
+      <TouchableWithoutFeedback onPress={changeVisibility}>
+  {passwordVisibility ? 
+    <View style={styles.visibilitybuttom}>
+      <SvgXml xml={trueVisibility} />
+    </View>
+    :
+    <View style={styles.visibilitybuttom}>
+      <SvgXml xml={falseVisibility} />
+    </View>
+  }
+</TouchableWithoutFeedback>
+
+  
+
+      </View>
+      {showEmailVerifiedMessage && (
+    <View style = {styles.verifiedText}>
+    <TextEstelar style={styles.editText}>E-mail não verificado.</TextEstelar>
+    <TouchableOpacity onPress={showMessageEmaill} style = {styles.buttomVerified}>
+      <TextEstelar style={styles.editText}>
+          Reenviar o e-mail
+      </TextEstelar>
+      <View style = {styles.underline} ></View>
+    </TouchableOpacity>
+    </View>
+    )
+  }
       <TouchableOpacity onPress={handleUserRegister} style={styles.buttonEnviar}>
         <TextEstelar style={styles.enviar}>Entrar</TextEstelar>
       </TouchableOpacity>
@@ -112,28 +171,125 @@ export default function  CardForm({ navigation } : FormNavi) {
           <TextEstelar style = {styles.buttonCadastro}>Clique aqui</TextEstelar>
         </TouchableOpacity>
       </View>
+    {showMessageEmail && (
+     <>
+      <Image 
+      source={fundoMessageEmail}
+      style = {styles.successImage}
+      /> 
+      <View style= {styles.messageVerified}>
+        <TextEstelar style ={styles.textBrancoReenviado } >E-mail reenviado!</TextEstelar>
+        <TextEstelar style ={styles.textBranco}>Por favor, verifique sua caixa de entrada e siga as instruções. E-mail enviado para:</TextEstelar>
+        <TextEstelar style ={styles.textBrancoEmail}>{user?.email}</TextEstelar>
+
+        <TouchableOpacity onPress={ok} style = {styles.styleButton}>
+          <TextEstelar style = {styles.textStyleButton}>OK</TextEstelar>
+        </TouchableOpacity>
+
+      </View>
+      </>
+
+     
+      
+      )
+      }
+      
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   cardForm: {
-    paddingTop: "15%",
+    
     width: "100%",
     height: "100%",
-    
-  
-    padding: 10,
-   
     alignItems: "center",
-  }, cadgoogle:{marginTop: "10%"},
+  },
+  textStyleButton:{
+    color: "#242350"
+
+  },
+  textBrancoReenviado:{
+    color: "white",
+    fontSize: RF(20),
+    position: "absolute",
+    top: -130,
+    right: 75
+
+  },
+
+  messageVerified:{
+    position:"absolute",
+    alignSelf: "center",
+    textAlignVertical:"center",
+    bottom: 200,
+    zIndex: 5,
+    width:"88%"
+
+  },textBranco:{
+    color: "white",
+    paddingHorizontal: 15,
+    top: -80,
+    textAlign: "center"
+  
+  },textBrancoEmail:{
+    color: "white",
+    paddingHorizontal: 20,
+    top: -50,
+    textAlign: "center"
+
+  },
+  successImage: {
+    width: "100%",
+    height: "100%",
+    alignContent: "center",
+    position: "absolute",
+    zIndex: 3,
+   
+   
+  },
+  buttomVerified:{
+    top: -1
+  },
+
+  editText:{
+    color: "#FA8F8F",
+    fontSize: RF(12),
+
+  },
+  
+  verifiedText:{
+    flexDirection: "row",
+    alignItems:"center",
+    justifyContent:"flex-end",
+    right: -40,
+    top: 0,
+    gap: 2
+
+  },underline: {
+    width: 108,
+    height: 1,
+    backgroundColor: '#FA8F8F', // Cor da linha
+    marginTop: -3, // Espaço entre o texto e a linha
+  },
+  visibilitybuttom:{
+    position:"absolute",
+    bottom: 30,
+    right: 10
+
+
+  },
+  
+  cadgoogle:{marginTop: "10%"},
   ou:{
     color: "white",
     marginLeft: "2%",
     marginRight: "2%",
   },
   minilogo: {
-    marginBottom: "3%"
+    marginBottom: "3%",
+    marginTop: "15%"
   },divisao: {
     alignItems:"center",
     flexDirection: "row"
@@ -163,9 +319,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: "10%"
   },
+  styleButton: {
+    backgroundColor: "#FFAB4C",
+    height: 50,
+    width: "80%",
+    borderRadius: 24,
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
+    
+  },
   mensageCadastrar: {
     flexDirection: "row",
-    marginTop: hp(8),
+    position:"absolute",
+    bottom: 20,
+    zIndex:-1
   
   },
   textCadastro:{

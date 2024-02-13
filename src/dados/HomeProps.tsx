@@ -12,6 +12,7 @@ export const imageMapping : any = {
 };
 
 
+
 type AttsProps = {
     textoprincipal: string;
     imagemFundo: string;

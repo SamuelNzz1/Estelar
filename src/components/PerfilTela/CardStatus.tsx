@@ -4,6 +4,7 @@ import TextEstelar from "../ComponentesGenericos/CustomText";
 import { SvgXml } from "react-native-svg";
 import { useState } from "react";
 import { RFValue as RF } from "react-native-responsive-fontsize";
+
 type CardStatus = {
     imageStatus: string,
     titulo: string,
