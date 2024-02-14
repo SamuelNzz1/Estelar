@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Image,  Text, View, Button, Platform, Dimensions, TouchableOpacity, StyleProp, ViewStyle, Alert, TouchableWithoutFeedback } from "react-native";
+import { Modal,ActivityIndicator, StyleSheet, Image,  Text, View, Button, Platform, Dimensions, TouchableOpacity, StyleProp, ViewStyle, Alert, TouchableWithoutFeedback } from "react-native";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import InputsCad from "./InputsCad";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
@@ -31,7 +31,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
   const [senha, setSenha] = useState("");
   const [confirmSenha, setConfirmSenha] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(true);
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const changeVisibility = () => {
     
@@ -52,13 +52,14 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
   
 
   const handleUserRegister = async () =>{
-    
+    setIsLoading(true);
    if(senha == confirmSenha){
 
     const handleEmailValidation = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (senha.length < 8) {
         Alert.alert('Erro', 'A senha deve ter pelo menos 8 caracteres.');
+        setIsLoading(false);
         return;
       }
       else if (email.match(emailRegex)) {
@@ -70,9 +71,15 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
               
 
 
-            
-                const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-                const user = userCredential.user;
+                
+                const userCredential = await createUserWithEmailAndPassword(auth, email, senha).
+                then(()=>{
+                  setIsLoading(false);
+                  setShowImage(true);
+                });
+                const autenticacao = getAuth();
+
+                const user : any = autenticacao.currentUser;
                 
                 await sendEmailVerification(user);
 
@@ -90,7 +97,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
                   displayName: name,
                 });
 
-                setShowImage(true);
+                
 
                 const timeout = setTimeout(() => {
                   setShowImage(false);
@@ -106,6 +113,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
             }
             catch (error: any) {
               console.error("Erro ao criar usuário:", error.message);
+              setIsLoading(false);
             
               if (error.code === "auth/email-already-in-use") {
                
@@ -116,7 +124,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
               }
             }
           } else {
-            
+            setIsLoading(false);
             Alert.alert('Erro', 'O nome deve conter apenas letras.');
           }
         };
@@ -124,7 +132,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
         handleNomeValidation();
         
       } else {
-  
+        setIsLoading(false);
         Alert.alert('Erro', 'E-mail inválido!');
       }
       
@@ -135,7 +143,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
   }
   else{
     Alert.alert("As duas senhas devem ser iguais");
-
+    setIsLoading(false);
   }
 
   }
@@ -194,8 +202,16 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
     </View>
       
      
-      <TouchableOpacity onPress={handleUserRegister} style={styles.buttonEnviar}>
-        <TextEstelar style={styles.enviar}>Continuar</TextEstelar>
+      <TouchableOpacity
+        onPress={handleUserRegister} style={styles.buttonEnviar}
+        disabled={isLoading}
+        >
+          {isLoading ?
+          <ActivityIndicator color="#242350" />
+          :
+          <TextEstelar style={styles.enviar}>Continuar</TextEstelar> 
+          }
+      
       </TouchableOpacity>
 
       {showImage && (
@@ -216,6 +232,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 40,
     right: 10
+  },loading:{
+    color: "white"
+
   },
   visibilitybuttom:{
 

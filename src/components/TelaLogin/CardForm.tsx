@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import HelloEstelar from "./CardComponents/HelloEstelar";
 import Inputs from "./CardComponents/Inputs";
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
@@ -32,7 +32,8 @@ import fundoMessageEmail from "../../images/fundoEmailReenviado.png";
 export default function  CardForm({ navigation } : FormNavi) {
   const [showEmailVerifiedMessage, setShowEmailVerifiedMessage] = useState(false);
   const [showMessageEmail, setShowMessageEmail] = useState(false);
-  
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showMessageError, setShowMessageError] = useState<boolean>(false);
   useEffect(() => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -42,7 +43,7 @@ export default function  CardForm({ navigation } : FormNavi) {
   const user = auth.currentUser;
 
   const handleUserRegister = async () =>{
-    
+    setIsLoading(true)
 
     console.log( senha + " " + email);
     const auth = getAuth();
@@ -54,11 +55,18 @@ export default function  CardForm({ navigation } : FormNavi) {
   
     try {
       // Verifica se o e-mail existe
-      await signInWithEmailAndPassword(auth, email, senha);
-      
+      await signInWithEmailAndPassword(auth, email, senha)
+      .
+      then(() => {
+        setIsLoading(false);
+
+      });
+
+
       if(user && !user.emailVerified){
         setShowEmailVerifiedMessage(true);
-
+        setShowMessageError(false);
+        setIsLoading(false);
       }
       else{
         
@@ -67,7 +75,8 @@ export default function  CardForm({ navigation } : FormNavi) {
 
       
     } catch (error) {
-      Alert.alert("E-mail ou senha incorretos. Tente novamente");
+      setShowMessageError(true);
+      setIsLoading(false);
       setShowEmailVerifiedMessage(false);
     }
   }
@@ -139,16 +148,33 @@ export default function  CardForm({ navigation } : FormNavi) {
     <View style = {styles.verifiedText}>
     <TextEstelar style={styles.editText}>E-mail não verificado.</TextEstelar>
     <TouchableOpacity onPress={showMessageEmaill} style = {styles.buttomVerified}>
-      <TextEstelar style={styles.editText}>
+      <TextEstelar style={styles.editText2}>
           Reenviar o e-mail
       </TextEstelar>
-      <View style = {styles.underline} ></View>
+
     </TouchableOpacity>
     </View>
     )
-  }
-      <TouchableOpacity onPress={handleUserRegister} style={styles.buttonEnviar}>
+    }
+    {showMessageError && (
+    <View style = {styles.verifiedText2}>
+    <TextEstelar style={styles.editText}>*E-mail ou senha incorretos </TextEstelar>
+    </View>
+    )
+    }
+      <TouchableOpacity
+      onPress={handleUserRegister} 
+      style={styles.buttonEnviar}
+      disabled = {isLoading}
+      
+      >
+        {isLoading
+          ?
+        <ActivityIndicator color="#242350"/>
+        :
         <TextEstelar style={styles.enviar}>Entrar</TextEstelar>
+        }
+        
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("ForgotEmail")} style={styles.forgotPass}>
         <TextEstelar  style={styles.forgotPass}>
@@ -256,6 +282,13 @@ const styles = StyleSheet.create({
   editText:{
     color: "#FA8F8F",
     fontSize: RF(12),
+    
+
+  },
+  editText2:{
+    color: "#FA8F8F",
+    fontSize: RF(12),
+    textDecorationLine: 'underline',
 
   },
   
@@ -263,16 +296,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems:"center",
     justifyContent:"flex-end",
-    right: -40,
+    marginLeft: "20%",
     top: 0,
     gap: 2
 
-  },underline: {
-    width: 108,
-    height: 1,
-    backgroundColor: '#FA8F8F', // Cor da linha
-    marginTop: -3, // Espaço entre o texto e a linha
   },
+  verifiedText2:{
+    flexDirection: "row",
+    alignItems:"center",
+    justifyContent:"flex-end",
+    marginLeft: "40%",
+    top: 0,
+    gap: 2
+
+  },
+ 
   visibilitybuttom:{
     position:"absolute",
     bottom: 30,
@@ -338,9 +376,10 @@ const styles = StyleSheet.create({
   },
   textCadastro:{
 
-    color: "white"
+    color: "#171636"
   },
   buttonCadastro:{
-    color: "#FBD440",
+    color: "#171636",
+    textDecorationLine: 'underline'
   },
 });

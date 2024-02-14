@@ -21,7 +21,7 @@ export default function CardAtt({ botao, textoprincipal, imagemFundo, location, 
   
     const onPressBotao = () => {
        
-        navigation.navigate('EmBreve');
+        navigation.navigate(location);
       };
      
     

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, ImageBackground, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { Alert, Image, ImageBackground, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ActivityIndicator } from "react-native";
 import Container from "../../components/ComponentesGenericos/Container";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { SvgXml } from "react-native-svg";
@@ -34,7 +34,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
     const { imagePerfil, setImagePerfil } : any = route.params;
     const [showImage, setShowImage] = useState(false);
-
+    const [isLoading, setIsLoading] = useState<boolean>(false);
    const [profileImage64, setProfileImage64] = useState<string>("");
     const userRef = doc(firestore, 'users', userId);
     
@@ -220,6 +220,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
       const handleAlterPerfil = async () => {
+        setIsLoading(true);
         if(name != "" && senhaAtual != ""){
         const handleNomeValidation = async () => {
             const nomeRegex = /^[a-zA-Z ]+$/; 
@@ -254,19 +255,27 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
                           try{
                             await updateDoc(doc(firestore, "users", idDocUsu), {
-                                profileImage: base64String,
+                                
                                 name: name // Substitua pelo campo que você deseja usar
-                            });
+                            }).
+                            then(()=>{
+                              setIsLoading(false);
+                              Alert.alert("Perfil atualizado com sucesso!");
+                              navigation.goBack();
+
+                            })
                             console.log("sucesso");
                             }catch{
+                              setIsLoading(false);
                                 console.log("erro");
     
                             }
                    
-                        Alert.alert("Perfil atualizado com sucesso!");
+                        
                         
                         
                         } else {
+                          setIsLoading(false);
                           console.error("Nenhum documento encontrado para o UID fornecido.");
                         }
                             
@@ -278,20 +287,22 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
                         
 
-                        navigation.goBack();
+                        
                      
                     
                   } catch (error: any) {
-                    
+                    setIsLoading(false);
                   }
                 }
                 else{
+                  setIsLoading(false);
                     Alert.alert("A senha deve conter ao menos 8 Letras/Numeros")
                 }
                 
 
             }
             else{
+              setIsLoading(false);
                 Alert.alert("O nome deve conter apenas letras")
             }
             
@@ -320,10 +331,13 @@ export default function TelaEditPerfil({navigation}:editPerfil){
                           try{
                             await updateDoc(doc(firestore, "users", idDocUsu), {
                                 profileImage: imagePerfil,
-                            });
-                            console.log("sucesso");
+                            }).
+                            then(()=>{
+                              setIsLoading(false);
+                            })
+                            
                             }catch{
-                                console.log("erro");
+                                setIsLoading(false)
     
                             }
                    
@@ -339,6 +353,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
       }
       else{
         Alert.alert("Preencha o(s) campos vazios");
+        setIsLoading(false);
       }
     };
       
@@ -495,8 +510,19 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
                 </View>
                 <View style = {styles.buttons}>
-                    <TouchableOpacity onPress={handleAlterPerfil}  style={styles.buttonEnviar}>
-                        <TextEstelar style={styles.enviar}>Alterar Perfil</TextEstelar>
+                    <TouchableOpacity 
+                    onPress={handleAlterPerfil}  
+                    style={styles.buttonEnviar}
+                    disabled = {isLoading}
+
+                    >
+                      {isLoading 
+                        ?
+                      <ActivityIndicator color="#242350"/>
+                        :
+                      <TextEstelar style={styles.enviar}>Alterar Perfil</TextEstelar>
+                      }
+                        
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={confirmDelete} style={styles.buttonExclui}>

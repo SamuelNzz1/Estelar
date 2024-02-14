@@ -95,7 +95,7 @@ export default function Perfil({navigation} : any ){
                         <TextEstelar style = {styles.editPerfi}>
                             Editar perfil
                         </TextEstelar>
-                        <View style={styles.underline} />
+                       
                         </View>
                         <SvgXml xml={PencilEdit}/>
                         
@@ -140,14 +140,9 @@ const styles = StyleSheet.create({
     },
     editPerfi:{
         color: "#C8C8C8",
-        
+        textDecorationLine: 'underline'
          
-    },underline: {
-        width: 80,
-        height: 1,
-        backgroundColor: '#C8C8C8', // Cor da linha
-        marginTop: -3, // Espaço entre o texto e a linha
-      },
+    },
 
     perfilImage: {
         borderRadius: 125
