@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         justifyContent:"flex-end"
   },
   touch: {
+    
     flex: 1,
   },
   topo: {

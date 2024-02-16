@@ -6,27 +6,73 @@ import { SvgXml } from "react-native-svg";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { PencilEdit } from "../../svgs/editPerfilSvg";
 import { dadosPerfil } from "../../dados/PerfilProps";
+import perfilImage from "../../images/Perfil.png";
+
+
 import CardStatus from "../../components/PerfilTela/CardStatus";
-export default function Perfil(){
+import { collection, getDoc, getDocs, getFirestore, query, where,  doc, onSnapshot } from "firebase/firestore";
+export default function Perfil({navigation} : any ){
+
+
     const [userName, setUserName] = useState<string | null>(null);
+    const [imagePerfil, setImagePerfil] = useState <any> (perfilImage);
+    const autenticacao = getAuth();
+    const usuario : any = autenticacao.currentUser; 
+    const firestore = getFirestore();
+    const userId = usuario.uid; // Substitua pelo ID do usuário
+    const userCollection = collection(firestore, 'users');
+
+    const obterDadosUsuario = async () => {
+        try {
+
+            const q = query(userCollection, where('uid', '==', userId));
+
+                        // Execute a consulta
+                        const querySnapshot = await getDocs(q);
+                        
+                        // Verifique se há algum documento retornadoc
+                        if (querySnapshot.size > 0) {
+                          // Se houver, pegue o ID do primeiro documento
+                          const primeiroDocumento = querySnapshot.docs[0];
+                          const idDocUsu = primeiroDocumento.id;
+                        
+                         
+
+                          const unsubscribe = onSnapshot(doc(firestore, 'users', idDocUsu), (snapshot : any) => {
+                            // Callback que será chamada sempre que o documento for alterado
+                            if (snapshot.exists()) {
+                              const dadosUsuario = snapshot.data();
+                              setUserName(dadosUsuario.name);
+                              console.log('Dados atualizados:', dadosUsuario);
+                            } else {
+                              console.log('Documento não encontrado');
+                            }
+                          });
+                    
+                        
+                        } else {
+                          console.error("Nenhum documento encontrado para o UID fornecido.");
+                        }
 
 
-    useEffect(() => {
-       const auth = getAuth();
- 
-       const unsubscribe = onAuthStateChanged(auth, (user) => {
-          if (user) {
-             // Se o usuário estiver autenticado, atualize o estado com o nome do usuário
-             setUserName(user.displayName);
-          } else {
-             // Se o usuário não estiver autenticado, defina userName como null ou qualquer valor padrão desejado
-             setUserName(null);
-          }
-       });
- 
-       // Certifique-se de descadastrar o ouvinte ao desmontar o componente
-       return () => unsubscribe();
-    }, []);  // Passar um array vazio para garantir que o efeito seja executado apenas uma vez
+
+
+
+
+
+        
+        } catch (error) {
+          console.error('Erro ao obter dados do usuário:', error);
+        }
+      };
+
+     
+      
+
+      useEffect(() => {
+        obterDadosUsuario();
+      }, []);
+
  
 
 
@@ -35,20 +81,18 @@ export default function Perfil(){
             <View style={styles.cont } >
                <View style ={ styles.infoPerfi }>
                     <View style = {styles.perfilImage}>
-                        <Image style ={styles.imagePerfil} source={require("../../images/Perfil.png")} />
+                        
+                        <Image style ={styles.imagePerfil} source={imagePerfil} />
                     </View>
-                    {userName ?
+                    {userName &&
                         <TextEstelar style={styles.bemvindo}>{userName}</TextEstelar>
-                        :
-                        <TextEstelar style={styles.bemvindo}>Anonymous</TextEstelar>
-            
                     }   
-                    <TouchableOpacity style = {styles.edit}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("EditPerfil", {imagePerfil, setImagePerfil})} style = {styles.edit}>
                         <View>
                         <TextEstelar style = {styles.editPerfi}>
                             Editar perfil
                         </TextEstelar>
-                        <View style={styles.underline} />
+                       
                         </View>
                         <SvgXml xml={PencilEdit}/>
                         
@@ -59,11 +103,18 @@ export default function Perfil(){
             </View>
 
            
-                <View style = {styles.cardNiveis}>
-                {dadosPerfil.map((carac, index) => (
-                    <CardStatus key={index} {...carac} />
-                 ))}  
-                 </View>  
+                <ScrollView 
+                showsVerticalScrollIndicator = {false}
+                style = {styles.cardNiveis}>
+                    
+                <View style = {styles.cardNiveis2}>
+
+                    {dadosPerfil.map((carac, index) => (
+                        <CardStatus key={index} {...carac} />
+                    ))}  
+                  </View>  
+
+                 </ScrollView>  
 
 
           
@@ -82,6 +133,13 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         bottom: 30,
         width: "100%",
+        height:"50%",
+        gap: 30
+
+    },
+    cardNiveis2:{
+        width: "100%",
+        height:"100%",
         gap: 30
 
     },
@@ -93,17 +151,12 @@ const styles = StyleSheet.create({
     },
     editPerfi:{
         color: "#C8C8C8",
-        
+        textDecorationLine: 'underline'
          
-    },underline: {
-        width: 80,
-        height: 1,
-        backgroundColor: '#C8C8C8', // Cor da linha
-        marginTop: -3, // Espaço entre o texto e a linha
-      },
+    },
 
     perfilImage: {
-        borderRadius: 100
+        borderRadius: 125
     },
     infoPerfi:{
         alignItems: "center",
@@ -113,7 +166,8 @@ const styles = StyleSheet.create({
     },
     imagePerfil:{
         width: 100,
-        height: 100
+        height: 100,
+        borderRadius: 125
 
     },
     

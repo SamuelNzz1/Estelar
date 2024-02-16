@@ -47,28 +47,7 @@ export default function Tabs()  {
   })}
 />
      
-      <Tab.Screen 
-      name="Forum" 
-      component={Home}
-      listeners={({ navigation, route }: any) => ({
-        tabPress: (e : any) => {
-       
-          e.preventDefault();
-         
-          
-        },
-      })}
-      options={{
-        tabBarShowLabel: false,
-        tabBarIcon: ({size} : any) => 
-        <SvgXml xml={miniLogo} 
-          width={size+40}
-          height={size+40}
-          style ={{marginBottom: 35}}
-        
-        />,
-      }}
-    />
+    
 
 <Tab.Screen 
       name="Perfil" 

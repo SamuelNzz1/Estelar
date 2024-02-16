@@ -2,14 +2,18 @@ import React from "react";
 import { View, StyleSheet, Dimensions} from "react-native";
 import InputEst from "../../ComponentesGenericos/InputEstelar";
 import { useRoute } from '@react-navigation/native';
+import { SvgXml } from "react-native-svg";
+import { trueVisibility,  falseVisibility } from "../../../svgs/passwordVisibilitySvg";
 type InputsCad ={
     name: string,
     senha: string, 
     email: string,
-    onChangeText:(text: string, type: string) => void;
+    confirmarsenha: string,
+    onChangeText:(text: string, type: string) => void,
+    boolean: boolean;
     
 }
-export default function InputsCad({name, senha, email, onChangeText}: InputsCad){
+export default function InputsCad({name, senha, email, confirmarsenha, onChangeText, boolean}: InputsCad){
     const windowHeight = Dimensions.get("window").height;
     const windowWidth = Dimensions.get("window").width;
     const route = useRoute();
@@ -28,14 +32,19 @@ export default function InputsCad({name, senha, email, onChangeText}: InputsCad)
         value = {email}
         onChangeText={(atributo) => onChangeText(atributo, "e-mail")}
         />
+
+       
          <InputEst
         placeholder = "Senha"
         color = "white"
         colorBack="#25356C"
-        boolean={true}
+        boolean={boolean}
         value = {senha}
         onChangeText={(atributo) => onChangeText(atributo, "senha")}
         />
+       
+        
+
      
     </View> : <View style = {styles.inputs}>
         <InputEst 
@@ -60,9 +69,18 @@ export default function InputsCad({name, senha, email, onChangeText}: InputsCad)
         placeholder = "Senha"
         color = "white"
         colorBack="#25356C"
-        boolean={true}
+        boolean={boolean}
         value = {senha}
         onChangeText={(atributo) => onChangeText(atributo, "senha")}
+        />
+
+<InputEst
+        placeholder = "Confirmar senha"
+        color = "white"
+        colorBack="#25356C"
+        boolean={boolean}
+        value = {confirmarsenha}
+        onChangeText={(atributo) => onChangeText(atributo, "confirmarsenha")}
         />
     </View> }
     </>
@@ -80,6 +98,15 @@ const styles = StyleSheet.create({
         gap:30,
         marginBottom:15
        
+    },
+    visibility: {
+        position:"absolute",
+        right: 10,
+        bottom:15
+    },
+    inputWithVisibility:{
+
+
     }
 
 })

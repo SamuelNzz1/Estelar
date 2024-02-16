@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../../components/ComponentesGenericos/Container";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
 import { ButtonBack } from "../../components/CadastroTela/CadTopo/ButtonBack";
@@ -12,7 +12,9 @@ import { ButtonBack } from "../../components/CadastroTela/CadTopo/ButtonBack";
 export default function EmBreve({navigation} : navi){
     return(
         <Container style={styles.cont}color="#171636" >
-            <SvgXml onPress={() => navigation.navigate('HomeTab') } style = {styles.voltar} xml={ButtonBack}/>
+            <TouchableOpacity onPress={() => navigation.navigate('HomeTab') } style = {styles.voltar}>
+        <SvgXml  xml={ButtonBack}/>
+        </TouchableOpacity>
             <TextEstelar style={styles.title}>Em breve! :) 🪐</TextEstelar>
         </Container>
     )

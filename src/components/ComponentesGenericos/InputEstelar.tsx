@@ -12,6 +12,7 @@ type inputEst = {
     keyboardType?: string | any,
     autoCapitalize?: string | any,
     value: string,
+    
     onChangeText: (text: string, type: string) => void;
 }
 
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
         
         borderRadius: 10,
         color:"white",
-        paddingLeft: 20
+        paddingLeft: 20,
+       
         
     },
 

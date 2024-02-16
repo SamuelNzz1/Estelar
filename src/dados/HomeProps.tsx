@@ -12,6 +12,7 @@ export const imageMapping : any = {
 };
 
 
+
 type AttsProps = {
     textoprincipal: string;
     imagemFundo: string;
@@ -31,10 +32,5 @@ export const dados: AttsProps[] = [
       botao: goPrepOBA,
       location: "TelaPreparatorio"
     },
-    {
-        textoprincipal: 'Forúm',
-        imagemFundo: 'Forum',
-        botao: goForum,
-        location: "TelaForum"
-      },
+
   ];
