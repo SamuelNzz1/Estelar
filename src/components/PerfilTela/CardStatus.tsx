@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { SvgXml } from "react-native-svg";
 import { useState } from "react";
 import { RFValue as RF } from "react-native-responsive-fontsize";
-
+import { collection, doc, getDocs, getFirestore, onSnapshot, query } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { where } from "firebase/firestore";
 type CardStatus = {
     imageStatus: string,
     titulo: string,
@@ -15,8 +17,77 @@ type CardStatus = {
 } 
 
 export default function CardStatus({status, titulo, imageStatus, statusNumber,cor}:CardStatus){
-    
+    const autenticacao = getAuth();
+    const usuario : any = autenticacao.currentUser; 
+    const firestore = getFirestore();
+    const userId = usuario.uid; // Substitua pelo ID do usuário
+    const userCollection = collection(firestore, 'users');
+    const [statusNumberr, setStatusNumberr] = useState<number>(0);
+    const obterDadosUsuario = async () => {
+        try {
 
+            const q = query(userCollection, where('uid', '==', userId));
+
+                        // Execute a consulta
+                        const querySnapshot = await getDocs(q);
+                        
+                        // Verifique se há algum documento retornadoc
+                        if (querySnapshot.size > 0) {
+                          // Se houver, pegue o ID do primeiro documento
+                          const primeiroDocumento = querySnapshot.docs[0];
+                          const idDocUsu = primeiroDocumento.id;
+                        
+                         
+
+                          const unsubscribe = onSnapshot(doc(firestore, 'users', idDocUsu), (snapshot : any) => {
+                            // Callback que será chamada sempre que o documento for alterado
+                            if (snapshot.exists()) {
+                              const dadosUsuario = snapshot.data();
+
+                              if(status == "Total: "){
+                            
+                              
+                              setStatusNumberr(dadosUsuario.questO);
+                              
+                              console.log('Dados atualizados:', statusNumber);
+                              console.log(dadosUsuario.questO)
+                              console.log(statusNumberr)
+                              }else if(status == "Nível: "){
+                               
+                                setStatusNumberr(dadosUsuario.nivelJ);
+                                
+                                console.log('Dados atualizados:', statusNumber);
+                                console.log(dadosUsuario.nivelJ);
+                                console.log(statusNumberr)
+                              }
+                            } else {
+                              console.log('Documento não encontrado');
+                            }
+                          });
+                    
+                        
+                        } else {
+                          console.error("Nenhum documento encontrado para o UID fornecido.");
+                        }
+
+
+
+
+
+
+
+        
+        } catch (error) {
+          console.error('Erro ao obter dados do usuário:', error);
+        }
+      };
+
+     
+      
+
+      useEffect(() => {
+        obterDadosUsuario();
+      }, []);
 
 
     return(
@@ -34,7 +105,7 @@ export default function CardStatus({status, titulo, imageStatus, statusNumber,co
                 
                 </TextEstelar>
                 <TextEstelar style={styles.textosecu}>
-                    {status} {statusNumber}
+                    {status} {statusNumberr}
                 </TextEstelar>
             </View>
             <View style = {styles.direito}>

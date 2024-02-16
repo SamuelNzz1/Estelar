@@ -88,11 +88,8 @@ export default function TopoHome({style} : topoHome) {
         <View style = {styles.grup}>
             <SvgXml style={styles.bolinhas} xml = {bolinhasTop}/>
 
-            {userName ?
-            <TextEstelar style={styles.bemvindo}>Olá, {userName}</TextEstelar>
-            :
-            <TextEstelar style={styles.bemvindo}>Olá, Anonymous</TextEstelar>
-            
+            {userName &&
+            <TextEstelar style={styles.bemvindo}>Olá, {userName}</TextEstelar>    
             }
             
         </View>

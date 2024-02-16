@@ -84,11 +84,8 @@ export default function Perfil({navigation} : any ){
                         
                         <Image style ={styles.imagePerfil} source={imagePerfil} />
                     </View>
-                    {userName ?
+                    {userName &&
                         <TextEstelar style={styles.bemvindo}>{userName}</TextEstelar>
-                        :
-                        <TextEstelar style={styles.bemvindo}>Anonymous</TextEstelar>
-            
                     }   
                     <TouchableOpacity onPress={()=>navigation.navigate("EditPerfil", {imagePerfil, setImagePerfil})} style = {styles.edit}>
                         <View>
@@ -106,11 +103,18 @@ export default function Perfil({navigation} : any ){
             </View>
 
            
-                <View style = {styles.cardNiveis}>
-                {dadosPerfil.map((carac, index) => (
-                    <CardStatus key={index} {...carac} />
-                 ))}  
-                 </View>  
+                <ScrollView 
+                showsVerticalScrollIndicator = {false}
+                style = {styles.cardNiveis}>
+                    
+                <View style = {styles.cardNiveis2}>
+
+                    {dadosPerfil.map((carac, index) => (
+                        <CardStatus key={index} {...carac} />
+                    ))}  
+                  </View>  
+
+                 </ScrollView>  
 
 
           
@@ -129,6 +133,13 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         bottom: 30,
         width: "100%",
+        height:"50%",
+        gap: 30
+
+    },
+    cardNiveis2:{
+        width: "100%",
+        height:"100%",
         gap: 30
 
     },

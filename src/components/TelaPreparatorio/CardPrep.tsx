@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import React, { useEffect } from "react";
+import { ScrollView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { useState } from "react";
@@ -17,6 +17,8 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
     const [oqueSelected, setOqueSelected] = useState<boolean>(false);
     const [provasSelected, setProvasSelected] = useState<boolean>(true);
     
+    const [provaEspecify, setProvaEspecify] = useState<number>(0);
+
     const [isSelected2023, setIsSelected2023] = useState<boolean>(false);
     
     const [isSelectedNivel1, setIsSelectedNivel1] = useState<boolean>(false);
@@ -61,8 +63,28 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
         setProvasSelected(true);
 
     }
+    useEffect(() => {
+        if(provaEspecify !== 0)
+        navigation.navigate("TelaQuestsOba", {provaEspecify});
+    }, [provaEspecify])
+    
+    
+
     const goSimulado = () =>{
+        if(isSelected2023){
+            
+            if(isSelectedNivel1){
+                    setProvaEspecify(231)
+                    
+
+            }else if(isSelectedNivel2){
+                    setProvaEspecify(232);
+            }   
+            else{
+            setShowMessageError(true)
+            }
         
+        }
 
     }
 
@@ -137,7 +159,7 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
                     <View style = {styles.yearOptions}>
                         <View style = {styles.groupRadio}>
                             <TouchableOpacity onPress={selectOptionProva2023}>
-                                <RadioButton 
+                                <RadioButton
                                     text = "2023"
                                     isSelected = {isSelected2023}
                                 />
@@ -176,7 +198,103 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
                     </View>
                     :
                     <View style = {styles.infoOba}>
-                        
+                        <ScrollView style = {styles.scrollViewBox}
+                            showsVerticalScrollIndicator = {false}
+                           
+                        >
+                            <View style = {styles.textsInfoBox}>
+                                <TextEstelar style = {styles.textPadrao}>
+                                    A OBA é uma olimpíada que visa incentivar o conhecimento científico a respeito de astronomia e astronáutica.
+                                </TextEstelar>
+
+                                <TextEstelar style = {{fontSize: RF(17), color: "#FAB77A"}}>
+                                    Como funciona?
+                                </TextEstelar>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                    Ela é realizada através de uma só prova presencial  em um único dia. A prova é composta por quatro diferentes níveis.
+                                </TextEstelar>
+                                {/* 
+                                    Níveis
+                                */}
+
+
+                                <View style = {styles.boxTextsNiveis}>
+                                    <TextEstelar style = { {color: "#FFE895"} }>
+                                        Nível 1:
+                                    </TextEstelar>
+                                    <TextEstelar style = {styles.textPadrao}>
+                                    alunos do ensino fundamental, regularmente matriculados no primeiro ao terceito ano.
+                                    </TextEstelar>
+                                </View>
+
+                                <View style = {styles.boxTextsNiveis}>
+                                    <TextEstelar style = { {color: "#FFE895"} }>
+                                        Nível 2:
+                                    </TextEstelar>
+                                    <TextEstelar style = {styles.textPadrao}>
+                                    alunos do ensino fundamental, regularmente matriculados no quarto ao quinto ano.
+
+
+                                    </TextEstelar>
+                                </View>
+
+                                <View style = {styles.boxTextsNiveis}>
+                                    <TextEstelar style = { {color: "#FFE895"} }>
+                                        Nível 3:
+                                    </TextEstelar>
+                                    <TextEstelar style = {styles.textPadrao}>
+                                    alunos do ensino fundamental, regularmente matriculados no sexto ao nono ano.
+
+                                    </TextEstelar>
+                                </View>
+
+                                <View style = {styles.boxTextsNiveis}>
+                                    <TextEstelar style = { {color: "#FFE895"} }>
+                                       Nível 4:
+                                    </TextEstelar>
+                                    <TextEstelar style = {styles.textPadrao}>
+                                    alunos do ensino médio, regurlamente matriculados em qualquer série/ano
+
+                                    </TextEstelar>
+                                </View>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                    São distribuidas cerca de 50 mil medalhas distruibuidas para todos os níveis.
+                                </TextEstelar>
+
+                                <TextEstelar style = {{fontSize: RF(17), color: "#FAB77A"}}>
+                                    Informações gerais
+                                </TextEstelar>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                -  A Prova contém 10 questões.
+                                </TextEstelar>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                - 7 questões são sobre astronomia
+
+                                </TextEstelar>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                - 3 questões de astronaútica
+                                </TextEstelar>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                - Escolas públicas e privadas
+                                podem participar.
+                                </TextEstelar>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                - Cada escola tem uma prova diferente.
+                                </TextEstelar>
+
+                                <TextEstelar style = {styles.textPadrao}>
+                                    - Pode usar calculadora
+                                </TextEstelar>
+
+                            </View>
+                        </ScrollView>
 
 
                     </View>
@@ -299,7 +417,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         position: "absolute",
-        bottom: -100,
+        bottom: -90,
         alignSelf: "center"
     },
     textButton:{
@@ -328,6 +446,41 @@ const styles = StyleSheet.create({
 
     },
     
-    infoOba:{}
+    infoOba:{
+        flex: 1,
+        padding: 20
+
+    },textPadrao:{
+        color: "white",
+        fontSize: RF(15),
+        
+
+    },
+    textPrincip:{
+        color: "#FAB77A"
+
+    },
+
+    scrollViewBox:{
+        flex: 1,
+       
+        
+    },
+    textsInfoBox:{
+        flex: 1,
+        
+        gap: 20
+
+    },
+    boxTextsNiveis:{
+        
+        gap: 2
+
+    },
+    comoFunc:{
+
+
+    },
+    
 
 })

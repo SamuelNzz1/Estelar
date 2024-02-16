@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, StyleSheet, View, Image } from "react-native";
+import { ImageBackground, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
@@ -42,7 +42,9 @@ export default function CardAtt({ botao, textoprincipal, imagemFundo, location, 
                 </TextEstelar>
             </View>
             <View style = {styles.direito}>
-                <SvgXml onPress={onPressBotao} style = {styles.botoes} xml={botao}/>
+              <TouchableOpacity style = {styles.botoes}  onPress={onPressBotao}>
+                <SvgXml  xml={botao}/>
+              </TouchableOpacity>
             </View>
       </View>
     </View>

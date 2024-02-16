@@ -4,7 +4,7 @@ import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold } from '@exp
 
 type TextEstelarProps = {
   children: React.ReactNode; 
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[];
  
 };
 
@@ -14,7 +14,7 @@ const TextEstelar = ({ children, style} : TextEstelarProps) => {
 
    
       // Lógica para quando fontDecider é uma string não vazia
-      <Text style={[{ fontFamily: 'Poppins_400Regular' }, style]}>
+      <Text style={[{ fontFamily: 'Poppins_400Regular'}, style]}>
         {children}
       </Text>
   

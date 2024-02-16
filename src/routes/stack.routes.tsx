@@ -10,7 +10,7 @@ import EmBreve from "../views/Stack/EmBreve";
 import Home from "../views/Tab/Forum";
 import TelaEditPerfil from "../views/Stack/TelaEditPerfil";
 import { TelaPreparatorio } from "../views/Stack/TelaPreparatorio";
-
+import { TelaQuestsOba } from "../views/Stack/TelaQuestsOba";
 const Stack = createNativeStackNavigator();
 
 
@@ -53,6 +53,11 @@ export default function StackRoutes(){
             <Stack.Screen
             name = "TelaPreparatorio"
             component = {TelaPreparatorio}
+            />
+            
+             <Stack.Screen
+            name = "TelaQuestsOba"
+            component = {TelaQuestsOba}
             />
             
             
