@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { View } from "react-native";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useFocusEffect} from "@react-navigation/native";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { RadioButton2 } from "../RadioButton";
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, updateDoc, where } from "firebase/firestore";
@@ -13,11 +13,12 @@ type middleProps ={
     passQuestion: () => void,
     alterVisibilityTrue: () => void,
     alterVisibilityFalse: () => void,
-    prova: any
+    prova: any,
+    provaEspecify:string
 
 
 }
-export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, alterVisibilityTrue,prova, alterVisibilityFalse}) =>{
+export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, alterVisibilityTrue,prova, alterVisibilityFalse, provaEspecify}) =>{
     const [isSelectedA, setIsSelectedA] = useState<boolean>(false);
     const [isSelectedB, setIsSelectedB] = useState<boolean>(false);
     const [isSelectedC, setIsSelectedC] = useState<boolean>(false);
@@ -190,6 +191,9 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
 
         if(isSelectedA){
             prova[questAtual].alterResp = "a";
+
+            updateAsyncStorage();
+
             if(prova[questAtual].gabarito === "a"){
                 setRespCorrectA(true);
                 
@@ -216,6 +220,9 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
         }
         else if(isSelectedB){
             prova[questAtual].alterResp = "b";
+
+            updateAsyncStorage();
+
             if(prova[questAtual].gabarito === "b"){
                 setRespCorrectB(true);
 
@@ -241,6 +248,9 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
         }
         else if(isSelectedC){
             prova[questAtual].alterResp = "c";
+
+            updateAsyncStorage();
+
             if(prova[questAtual].gabarito === "c"){
                 setRespCorrectC(true);
 
@@ -268,6 +278,8 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
         }
         else if(isSelectedD){
             prova[questAtual].alterResp = "d";
+            updateAsyncStorage();
+
             if(prova[questAtual].gabarito === "d"){
                 setRespCorrectD(true);
 
@@ -293,6 +305,8 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
         }
         else if(isSelectedE){
             prova[questAtual].alterResp = "e";
+
+            updateAsyncStorage();
             if(prova[questAtual].gabarito === "e"){
                 setRespCorrectE(true);
 
@@ -349,6 +363,63 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
         obterDadosUsuario();
       }
     }, [qtdQuestoesRespondidas])
+
+
+    
+    async function updateAsyncStorage() {
+        try {
+          const answerKey = `@estelar:${provaEspecify}:${userId}:resposta_${questAtual}`;
+          const answerData = {
+            
+            responded: prova[questAtual].respondida,
+            
+            selectedOption: prova[questAtual].alterResp,
+            
+          };
+          console.log(prova[questAtual].respondida);
+          console.log(prova[questAtual].alterResp);
+      
+          await AsyncStorage.setItem(answerKey, JSON.stringify(answerData));
+        } catch (error) {
+          console.error('Erro ao salvar informações no AsyncStorage:', error);
+        }
+      }
+
+     
+
+      useEffect(() => {
+        const retrieveAnswer = async () => {
+          try {
+            const answerKey = `@estelar:${provaEspecify}:${userId}:resposta_${questAtual}`;
+            const storedAnswer = await AsyncStorage.getItem(answerKey);
+      
+            if (storedAnswer) {
+              const parsedAnswer = JSON.parse(storedAnswer);
+      
+              // Atualizar o estado local com as informações recuperadas
+              prova[questAtual].respondida = parsedAnswer.responded;
+              prova[questAtual].alterResp = parsedAnswer.selectedOption;
+               
+              // Adicione lógica para configurar outros estados conforme necessário
+            }
+          } catch (error) {
+            console.error('Erro ao recuperar informações do AsyncStorage:', error);
+          }
+        };
+      
+        retrieveAnswer();
+      }, [questAtual]);
+     
+      useEffect(() => {
+        console.log( prova[questAtual].respondida);
+       
+      }, [prova[questAtual].respondida])
+      useEffect(() => {
+        console.log( prova[questAtual].alterResp);
+       
+      }, [prova[questAtual].alterResp])
+      
+      
     
    // prova[questAtual].respondida = false;
    // prova[questAtual].alterResp = "";

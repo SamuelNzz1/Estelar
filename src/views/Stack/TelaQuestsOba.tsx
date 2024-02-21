@@ -60,6 +60,7 @@ export const TelaQuestsOba: React.FC<typeQuests> = ({navigation, route}) =>{
         alterVisibilityTrue = {alterVisibilityTrue}
         alterVisibilityFalse = {alterVisibilityFalse}
         prova={Prova23N1}
+        provaEspecify = "2023N1"
        />
        </>
        : provaEspecify === 232 ?
@@ -71,6 +72,7 @@ export const TelaQuestsOba: React.FC<typeQuests> = ({navigation, route}) =>{
         passQuestion = {passQuestion}
         provaQuantidadeQuestoes={Prova23N2.length}
         visibleButton = {visibleButtons}
+        
        />
        <MiddleQuests
         questAtual={questAtual}
@@ -78,6 +80,7 @@ export const TelaQuestsOba: React.FC<typeQuests> = ({navigation, route}) =>{
         alterVisibilityTrue = {alterVisibilityTrue}
         alterVisibilityFalse = {alterVisibilityFalse}
         prova={Prova23N2}
+        provaEspecify = "2023N2"
        />
        </>
        :

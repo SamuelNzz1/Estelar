@@ -172,13 +172,12 @@ const styles = StyleSheet.create({
     },
     
     cont:{
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        borderRadius: 164,
         backgroundColor: "#171636", 
-        height: "90%",
+        height: "95%",
         width: "100%",
         position: "absolute",
-        bottom: -10
+        bottom: -20
     }, 
     backPer:{
         flex: 1,

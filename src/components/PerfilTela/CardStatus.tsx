@@ -7,6 +7,8 @@ import { RFValue as RF } from "react-native-responsive-fontsize";
 import { collection, doc, getDocs, getFirestore, onSnapshot, query } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { where } from "firebase/firestore";
+import { imageMapping } from "../../dados/PerfilProps";
+
 type CardStatus = {
     imageStatus: string,
     titulo: string,
@@ -17,6 +19,9 @@ type CardStatus = {
 } 
 
 export default function CardStatus({status, titulo, imageStatus, statusNumber,cor}:CardStatus){
+
+    const image = imageMapping[imageStatus];
+
     const autenticacao = getAuth();
     const usuario : any = autenticacao.currentUser; 
     const firestore = getFirestore();
@@ -109,7 +114,7 @@ export default function CardStatus({status, titulo, imageStatus, statusNumber,co
                 </TextEstelar>
             </View>
             <View style = {styles.direito}>
-                <Image style = {styles.image} source={require("../../images/retang.png")}/>
+                <Image style = {styles.image} source={image}/>
             </View>
         </View>
         </View>
