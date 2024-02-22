@@ -51,6 +51,8 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
     const userId = usuario.uid; // Substitua pelo ID do usuário
     const userCollection = collection(firestore, 'users');
 
+    
+
     const obterDadosUsuario = async () => {
         try {
 
@@ -419,7 +421,14 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
        
       }, [prova[questAtual].alterResp])
       
-      
+      useEffect(() =>{
+        setIsSelectedA(false);
+        setIsSelectedB(false);
+        setIsSelectedC(false);
+        setIsSelectedD(false);
+        setIsSelectedE(false);
+
+      }, [questAtual]);
     
    // prova[questAtual].respondida = false;
    // prova[questAtual].alterResp = "";
@@ -1084,7 +1093,7 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
                 </ScrollView>
 
             </View>
-            {isSelectedA || isSelectedB || isSelectedC || isSelectedD || isSelectedE ?
+            {(isSelectedA || isSelectedB || isSelectedC || isSelectedD || isSelectedE) && prova[questAtual].respondida === false ?
                 <TouchableOpacity disabled = {buttonDisabled} onPress={responder} style = {styles.buttonResp2}>
                 <TextEstelar
                 style = {styles.textButton}
