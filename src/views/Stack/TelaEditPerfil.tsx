@@ -637,7 +637,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#171636",
         width: "100%",
         height: "70%",
-        marginTop: "5%"
+        marginTop: "1%"
 
     },
     formInputs:{
@@ -669,7 +669,7 @@ const styles = StyleSheet.create({
     },
     changeImage:{
         gap: 30,
-        marginTop: "5%",
+        marginTop: "2%",
         alignItems: "center"
 
 
@@ -686,7 +686,7 @@ const styles = StyleSheet.create({
     },voltar:{
         position:"absolute",
         left: 20,
-        top:"8%"
+        top:"2%"
      },successImage: {
         width: "100%",
         height: "100%",

@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
         bottom: 30,
         width: "100%",
         height:"50%",
-        gap: 30
+        gap: 30,
+    
 
     },
     cardNiveis2:{
