@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Container from "../../components/ComponentesGenericos/Container"
 import { View } from "react-native"
 import { TopoQuests } from "../../components/TelaPreparatorio/TelaQuests/TopoQuests"
-import { Prova23N1, Prova23N2 } from "../../dados/ProvasDados"
+import { Prova23N1, Prova23N2, Prova23N3, Prova23N4 } from "../../dados/ProvasDados"
 import { MiddleQuests } from "../../components/TelaPreparatorio/TelaQuests/MiddleQuests"
 import { RadioButton2 } from "../../components/TelaPreparatorio/RadioButton"
 type typeQuests = {
@@ -15,6 +15,7 @@ export const TelaQuestsOba: React.FC<typeQuests> = ({navigation, route}) =>{
     const [visibleButtons, setVisibleButtons] = useState<boolean>(true);
 
     const { provaEspecify } = route.params;
+
     useEffect(() => {
         console.log(provaEspecify);
     }, [provaEspecify])
@@ -81,6 +82,46 @@ export const TelaQuestsOba: React.FC<typeQuests> = ({navigation, route}) =>{
         alterVisibilityFalse = {alterVisibilityFalse}
         prova={Prova23N2}
         provaEspecify = "2023N2"
+       />
+       </>
+       : provaEspecify === 233 ?
+       <>
+       <TopoQuests
+        numberQ={Prova23N3[questAtual].numberQ}
+        navigation={navigation}
+        backQuestion={backQuestion}
+        passQuestion = {passQuestion}
+        provaQuantidadeQuestoes={Prova23N3.length}
+        visibleButton = {visibleButtons}
+        
+       />
+       <MiddleQuests
+        questAtual={questAtual}
+        passQuestion = {passQuestion}
+        alterVisibilityTrue = {alterVisibilityTrue}
+        alterVisibilityFalse = {alterVisibilityFalse}
+        prova={Prova23N3}
+        provaEspecify = "2023N3"
+       />
+       </>
+       : provaEspecify === 234 ?
+       <>
+       <TopoQuests
+        numberQ={Prova23N4[questAtual].numberQ}
+        navigation={navigation}
+        backQuestion={backQuestion}
+        passQuestion = {passQuestion}
+        provaQuantidadeQuestoes={Prova23N4.length}
+        visibleButton = {visibleButtons}
+        
+       />
+       <MiddleQuests
+        questAtual={questAtual}
+        passQuestion = {passQuestion}
+        alterVisibilityTrue = {alterVisibilityTrue}
+        alterVisibilityFalse = {alterVisibilityFalse}
+        prova={Prova23N4}
+        provaEspecify = "2023N4"
        />
        </>
        :

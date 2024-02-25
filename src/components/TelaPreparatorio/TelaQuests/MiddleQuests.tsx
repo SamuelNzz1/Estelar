@@ -465,21 +465,41 @@ export const MiddleQuests: React.FC<middleProps> = ({questAtual, passQuestion, a
 
                             {prova[questAtual].afirmativas && 
                                 <View style = {styles.boxAfirmativas}>
-                                    <TextEstelar>
+                                    {prova[questAtual].afirmativa1 && 
+
+                                        <TextEstelar>
                                         (  ) - {prova[questAtual].afirmativa1}
                                     </TextEstelar>
-                                    <TextEstelar>
+                                    
+                                    }
+                                    
+                                    {prova[questAtual].afirmativa2 && 
+                                        <TextEstelar>
                                         (  ) - {prova[questAtual].afirmativa2}
-                                    </TextEstelar>
+                                        </TextEstelar>
+                                   
+                                    }
+                                    
+                                    {prova[questAtual].afirmativa3 &&
                                     <TextEstelar>
-                                        (  ) - {prova[questAtual].afirmativa3}
+                                    (  ) - {prova[questAtual].afirmativa3}
                                     </TextEstelar>
+                                        
+                                    }
+                                    
+                                    {prova[questAtual].afirmativa4 && 
+                                    
                                     <TextEstelar>
-                                        (  ) - {prova[questAtual].afirmativa4}
+                                    (  ) - {prova[questAtual].afirmativa4}
                                     </TextEstelar>
+                                    }
+                                   
+                                    {prova[questAtual].afirmativa5 &&
                                     <TextEstelar>
-                                        (  ) - {prova[questAtual].afirmativa5}
+                                    (  ) - {prova[questAtual].afirmativa5}
                                     </TextEstelar>
+                                    }
+                                    
                             </View>
                             }
 
@@ -1213,7 +1233,8 @@ const styles = StyleSheet.create({
     },
     imageEnunciado:{
         width: "100%",
-        height: 300
+        height: 300,
+        resizeMode: "contain"
 
     },
     boxAfirmativas:{

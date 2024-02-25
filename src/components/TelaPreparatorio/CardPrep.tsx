@@ -23,6 +23,8 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
     
     const [isSelectedNivel1, setIsSelectedNivel1] = useState<boolean>(false);
     const [isSelectedNivel2, setIsSelectedNivel2] = useState<boolean>(false);
+    const [isSelectedNivel3, setIsSelectedNivel3] = useState<boolean>(false);
+    const [isSelectedNivel4, setIsSelectedNivel4] = useState<boolean>(false);
 
     const [showMessageError, setShowMessageError] = useState<boolean>(false);
     const [showNivel, setShowNivel] = useState<boolean>(false);
@@ -42,10 +44,28 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
     const selectOptionNivel1 = () =>{
         setIsSelectedNivel1(!isSelectedNivel1);
         setIsSelectedNivel2(false);
+        setIsSelectedNivel3(false);
+        setIsSelectedNivel4(false);
     }
     const selectOptionNivel2 = () =>{
         setIsSelectedNivel2(!isSelectedNivel2);
         setIsSelectedNivel1(false);
+        setIsSelectedNivel3(false);
+        setIsSelectedNivel4(false);
+        
+    }
+    const selectOptionNivel3 = () =>{
+        setIsSelectedNivel3(!isSelectedNivel3);
+        setIsSelectedNivel1(false);
+        setIsSelectedNivel2(false);
+        setIsSelectedNivel4(false);
+    }
+    const selectOptionNivel4 = () =>{
+        setIsSelectedNivel4(!isSelectedNivel4);
+        setIsSelectedNivel1(false);
+        setIsSelectedNivel3(false);
+        setIsSelectedNivel2(false);
+
     }
     const optionsNivel = () =>{
         if(isSelected2023){
@@ -63,9 +83,11 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
         setProvasSelected(true);
 
     }
+    
     useEffect(() => {
         if(provaEspecify !== 0)
         navigation.navigate("TelaQuestsOba", {provaEspecify});
+        
     }, [provaEspecify])
     
     
@@ -79,6 +101,10 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
 
             }else if(isSelectedNivel2){
                     setProvaEspecify(232);
+            }else if(isSelectedNivel3){
+                setProvaEspecify(233);
+            }else if(isSelectedNivel4){
+            setProvaEspecify(234);
             }   
             else{
             setShowMessageError(true)
@@ -176,6 +202,7 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
                     : showNivel ?
                     <View style = {styles.nivelOptions}>
                         <View style = {styles.groupRadio}>
+                            <View style = {styles.groupRadio2}>
                             <TouchableOpacity onPress={selectOptionNivel1}>
                                 <RadioButton 
                                     text = "Nível 1"
@@ -188,6 +215,21 @@ export const CardPrep: React.FC<propCard> = ({navigation}) => {
                                     isSelected = {isSelectedNivel2}
                                 />
                             </TouchableOpacity>
+                            </View>
+                            <View style = {styles.groupRadio2}>
+                            <TouchableOpacity onPress={selectOptionNivel3}>
+                                <RadioButton 
+                                    text = "Nivel 3"
+                                    isSelected = {isSelectedNivel3}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={selectOptionNivel4}>
+                                <RadioButton 
+                                    text = "Nivel 4"
+                                    isSelected = {isSelectedNivel4}
+                                />
+                            </TouchableOpacity>
+                            </View>
                         </View>
                         <TouchableOpacity onPress={goSimulado} style = {styles.buttonNivel}>
                             <TextEstelar style={styles.textButton}>
@@ -394,9 +436,15 @@ const styles = StyleSheet.create({
         
     },
     groupRadio:{
-        marginLeft: "10%",
         marginTop: "5%",
-        gap: 15
+        gap: 35,
+        flexDirection: "row",
+        alignItems:"center",
+        width: "100%",
+        justifyContent:"center"
+    },
+    groupRadio2:{
+        gap: 10
     },
     button: {
         backgroundColor: "#FF7747",
@@ -424,7 +472,7 @@ const styles = StyleSheet.create({
         color: "white"
     },
     nivelOptions:{
-
+            width: "100%"
     },
     textYearSelected:{
         color: "white",
