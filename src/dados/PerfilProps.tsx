@@ -1,10 +1,12 @@
 import React from "react";
 import { Svg } from "react-native-svg";
 
-
+import star from "../images/star.png";
+import planet from "../images/planet.png";
 
 export const imageMapping : any = {
-  
+  star: star,
+  planet: planet,
 };
 
 
@@ -20,16 +22,16 @@ export const dadosPerfil: statsProps[] = [
     {
      titulo: "Questões Resolvidas",
      status: "Total: ",
-     imageStatus: "retang",
+     imageStatus: 'star',
      statusNumber: 0,
-     cor: "#5664F7"
+     cor: "#F26EB1"
 
 
     },
     {
         titulo: "Jornada Astronômica",
         status: "Nível: ",
-        imageStatus: "retang",
+        imageStatus: 'planet',
         statusNumber: 0,
         cor: "#E28D0E"  
     },

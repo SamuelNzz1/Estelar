@@ -23,21 +23,15 @@ export default function InputEst({placeholder, color, boolean, colorBack, keyboa
     return(
     <>
     
-    {windowHeight < 875 ? 
+   
           
           <TextInput  onChangeText={(value) => onChangeText(value, placeholder)} value = {value} keyboardType={keyboardType} autoCapitalize={autoCapitalize}  placeholder={placeholder} placeholderTextColor={color} secureTextEntry = {boolean} style = {[styles.inputStyle2, {backgroundColor:colorBack}]} >
           
           </TextInput> 
           
-          :
-
-          <TextInput onChangeText={(value) => onChangeText(value, placeholder)} value = {value}  keyboardType={keyboardType} autoCapitalize={autoCapitalize}  placeholder={placeholder} placeholderTextColor={color} secureTextEntry = {boolean} style = {[styles.inputStyle, {backgroundColor:colorBack}]} >
           
-          </TextInput>
 
-
-    }
-        
+       
     </>)
 }
 
@@ -54,7 +48,7 @@ const styles = StyleSheet.create({
     },  inputStyle2 :{
         fontFamily:'Poppins_400Regular',
         width: 325,
-        height: hp(8),
+        height: 55,
         
         borderRadius: 10,
         color:"white",

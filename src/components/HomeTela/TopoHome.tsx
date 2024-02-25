@@ -7,7 +7,7 @@ import { RFValue as RF } from "react-native-responsive-fontsize";
 import { bolonaHome } from "../../svgs/bolona";
 import { RetanguloTorto } from "../../svgs/retanguloTortoHome";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
+import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -95,6 +95,7 @@ export default function TopoHome({style} : topoHome) {
         </View>
 
         <SvgXml style={styles.retangulo} xml={RetanguloTorto} />
+        <SvgXml   xml={miniLogo}  style={styles.miniLogo} />
    
         
         
@@ -115,6 +116,12 @@ const styles = StyleSheet.create({
 
     
     
+
+ },
+ miniLogo:{
+  position: "absolute",
+  right: 10,
+  top: 70
 
  },
     grup:{gap: 25, paddingLeft: 35, marginTop: "22%"},

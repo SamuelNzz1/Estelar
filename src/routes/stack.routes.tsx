@@ -7,10 +7,11 @@ import TelaForgotSucess from "../views/Stack/TelaForgotSucess";
 import  TelaConfirmEmailForgot from "../views/Stack/TelaConfirmEmailForgot";
 import Tabs from "./tab.routes";
 import EmBreve from "../views/Stack/EmBreve";
-import Home from "../views/Tab/Forum";
+import Home from "../views/Tab/Home";
 import TelaEditPerfil from "../views/Stack/TelaEditPerfil";
 import { TelaPreparatorio } from "../views/Stack/TelaPreparatorio";
 import { TelaQuestsOba } from "../views/Stack/TelaQuestsOba";
+import { TelaViagemAstro } from "../views/Stack/TelaViagemAstro";
 const Stack = createNativeStackNavigator();
 
 
@@ -49,6 +50,11 @@ export default function StackRoutes(){
             name = "EditPerfil"
             component = {TelaEditPerfil}
             />
+            <Stack.Screen
+            name = "TelaViagem"
+            component = {TelaViagemAstro}
+            />
+            
             
             <Stack.Screen
             name = "TelaPreparatorio"
