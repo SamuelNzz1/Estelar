@@ -12,9 +12,9 @@ type Container = {
 export default function Container({children, style, color} : Container){
    
     return(
-    <SafeAreaView style = {[styles.container, {backgroundColor: color } ,style ]}>
+    <View style = {[styles.container, {backgroundColor: color } ,style ]}>
         {children}
-    </SafeAreaView>
+    </View>
     
     )
 

@@ -112,6 +112,7 @@ export default function Perfil({navigation} : any ){
                     ))}  
                   </View>  
 
+                  
                  
 
 
@@ -126,12 +127,13 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: RF(15)
     },
-    cardNiveis:{
+    cardNiveis2:{
         position: "absolute",
         alignSelf: "center",
         bottom: 30,
         width: "100%",
         height:"50%",
+        gap: 30,
        
     
 
