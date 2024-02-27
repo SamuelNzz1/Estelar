@@ -34,32 +34,42 @@ export const TelaViagemAstro: React.FC<propsViagem> = ({navigation}: propsViagem
         color="#171636"
     >
       
-             <TopMapViagem
-                navigation = {navigation}
-            />
-        
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                style = {styles.midleViagemMap}
-            >   
-                <ImageBackground 
-                source={mapViagem}
-                style = {styles.mapViagem}  
-                onLoad={handleBackgroundLoad}          
-                >
-                    {backroundLoaded && 
-                    
-                        <MidleMapViagem
+             
+                  <>
+                      <TopMapViagem
                         navigation={navigation}
-                        />                
-                    
-                    }
-                   
+                        />
 
-                </ImageBackground>
-            </ScrollView>
-        
-            <BottomMapViagem />
+                        <ScrollView
+                            style = {styles.midleViagemMap}
+                            showsVerticalScrollIndicator ={false}
+                        >
+
+                                <ImageBackground
+                                    source={mapViagem}
+                                    style={styles.mapViagem}
+                                    onLoad={handleBackgroundLoad}
+                                >
+                                        {backroundLoaded &&
+
+                                            <MidleMapViagem
+                                            navigation={navigation}
+                                            ></MidleMapViagem>
+
+                                        }
+
+
+
+                                </ImageBackground>
+                                   
+
+                        </ScrollView>
+                        <BottomMapViagem/>
+
+                  
+                  </>
+             
+             
         
                 
        

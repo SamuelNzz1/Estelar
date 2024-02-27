@@ -103,9 +103,7 @@ export default function Perfil({navigation} : any ){
             </View>
 
            
-                <ScrollView 
-                showsVerticalScrollIndicator = {false}
-                style = {styles.cardNiveis}>
+              
                     
                 <View style = {styles.cardNiveis2}>
 
@@ -114,7 +112,7 @@ export default function Perfil({navigation} : any ){
                     ))}  
                   </View>  
 
-                 </ScrollView>  
+                 
 
 
           
@@ -134,15 +132,17 @@ const styles = StyleSheet.create({
         bottom: 30,
         width: "100%",
         height:"50%",
-        gap: 30,
+       
     
 
     },
     cardNiveis2:{
+        position: "absolute",
+        alignSelf: "center",
+        bottom: 30,
         width: "100%",
-        height:"100%",
-        gap: 30,
-        
+        height:"50%",
+        gap: 30
 
     },
     edit:{
