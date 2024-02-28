@@ -19,6 +19,7 @@ export const BottomMapViagem: React.FC<propsBottom> = () => {
 const styles = StyleSheet.create({
     bottomMap:{
         height: 60,
-        backgroundColor: "#272650"
+        backgroundColor: "#272650",
+        width: "100%"
     }
 })

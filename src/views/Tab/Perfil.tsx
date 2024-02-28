@@ -103,6 +103,7 @@ export default function Perfil({navigation} : any ){
             </View>
 
            
+              
                     
                 <View style = {styles.cardNiveis2}>
 
@@ -112,6 +113,7 @@ export default function Perfil({navigation} : any ){
                   </View>  
 
                   
+                 
 
 
           
@@ -132,6 +134,17 @@ const styles = StyleSheet.create({
         width: "100%",
         height:"50%",
         gap: 30,
+       
+    
+
+    },
+    cardNiveis2:{
+        position: "absolute",
+        alignSelf: "center",
+        bottom: 30,
+        width: "100%",
+        height:"50%",
+        gap: 30
 
     },
     edit:{
