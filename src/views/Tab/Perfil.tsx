@@ -11,6 +11,7 @@ import perfilImage from "../../images/Perfil.png";
 
 import CardStatus from "../../components/PerfilTela/CardStatus";
 import { collection, getDoc, getDocs, getFirestore, query, where,  doc, onSnapshot } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Perfil({navigation} : any ){
 
 
@@ -73,11 +74,19 @@ export default function Perfil({navigation} : any ){
         obterDadosUsuario();
       }, []);
 
+      const logout = async () =>{
+        await AsyncStorage.removeItem('@estelar:usuarioLogadoo').
+        then(() => autenticacao.signOut().then(() =>    navigation.navigate('Login') ) );
+        
+      
+     
+      }
  
 
 
     return(
         <View style={styles.backPer }>
+          
             <View style={styles.cont } >
                <View style ={ styles.infoPerfi }>
                     <View style = {styles.perfilImage}>
@@ -93,10 +102,11 @@ export default function Perfil({navigation} : any ){
                             Editar perfil
                         </TextEstelar>
                        
+                       
                         </View>
                         <SvgXml xml={PencilEdit}/>
-                        
                     </TouchableOpacity>
+                    
                   
                
                </View>
@@ -138,15 +148,7 @@ const styles = StyleSheet.create({
     
 
     },
-    cardNiveis2:{
-        position: "absolute",
-        alignSelf: "center",
-        bottom: 30,
-        width: "100%",
-        height:"50%",
-        gap: 30
 
-    },
     edit:{
         flexDirection: "row",
         justifyContent:"center",

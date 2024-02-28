@@ -59,7 +59,7 @@ export default function Welcome( {navigation}: WelcomeProps) {
              </TextEstelar>
             </View>
             <TouchableOpacity>
-            <SvgXml onPress={()=> navigation.navigate('Login') } style={styles.buttonSvg} xml={ButtonGo} />
+              <SvgXml onPress={()=> navigation.navigate('Login') } style={styles.buttonSvg} xml={ButtonGo} />
             </TouchableOpacity>
           </View>
 

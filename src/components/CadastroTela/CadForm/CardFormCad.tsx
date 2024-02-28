@@ -96,8 +96,6 @@ export default function CardFormCad({ style, navigation, mostrarImagem } : CardF
                   profileImage: "",
                   questO: 0,
                   nivelJ: 0,
-                  prova23N1: false,
-                  prova23N2: false,
                 }); 
                 await updateProfile(user, {
                   displayName: name,

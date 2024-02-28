@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import TelaWelcome from "../views/Stack/TelaWelcome";
 import TelaLogin from "../views/Stack/TelaLogin";
@@ -13,9 +13,35 @@ import { TelaPreparatorio } from "../views/Stack/TelaPreparatorio";
 import { TelaQuestsOba } from "../views/Stack/TelaQuestsOba";
 import { TelaViagemAstro } from "../views/Stack/TelaViagemAstro";
 const Stack = createNativeStackNavigator();
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/conect";
 
+export default function StackRoutes() {
+  const navigation : any = useNavigation();
 
-export default function StackRoutes(){
+  useEffect(() => {
+    const checkIfLoggedIn = async () => {
+      const userToken = await AsyncStorage.getItem('@estelar:usuarioLogadoo');
+      
+      if (userToken) {
+        // Se existirem dados salvos, realizar o parse do JSON
+        const storedData = JSON.parse(userToken);
+      
+        // Agora, você pode acessar os valores do objeto
+        const email = storedData.email;
+        const senha = storedData.senha;
+
+        await signInWithEmailAndPassword(auth, email, senha).
+        then(()=> navigation.navigate('HomeTab'));
+       
+    }
+      
+    };
+
+    checkIfLoggedIn();
+  }, [navigation]);
     return(
         <Stack.Navigator screenOptions={{headerShown:false}}>
             <Stack.Screen 
@@ -25,6 +51,9 @@ export default function StackRoutes(){
             <Stack.Screen 
                 name="Login"
                 component={TelaLogin}
+                options={{
+      
+        }}
             />
             <Stack.Screen 
                 name="Cadastro"

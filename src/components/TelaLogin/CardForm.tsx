@@ -27,6 +27,7 @@ type FormNavi = {
 } 
 import { useState } from "react";
 import fundoMessageEmail from "../../images/fundoEmailReenviado.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function  CardForm({ navigation } : FormNavi) {
@@ -69,7 +70,13 @@ export default function  CardForm({ navigation } : FormNavi) {
         setIsLoading(false);
       }
       else{
-        
+        const answerData = {
+            
+          email: email,
+          senha: senha
+          
+        };
+        await AsyncStorage.setItem('@estelar:usuarioLogadoo',  JSON.stringify(answerData));
         toHome();
       }
 
