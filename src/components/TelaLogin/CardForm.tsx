@@ -41,7 +41,7 @@ export default function  CardForm({ navigation } : FormNavi) {
   
   const auth = getAuth();
   const user = auth.currentUser;
-
+  
   const handleUserRegister = async () =>{
     setIsLoading(true)
 
@@ -76,6 +76,7 @@ export default function  CardForm({ navigation } : FormNavi) {
       
     } catch (error) {
       setShowMessageError(true);
+      setSenha("");
       setIsLoading(false);
       setShowEmailVerifiedMessage(false);
     }
@@ -116,6 +117,31 @@ export default function  CardForm({ navigation } : FormNavi) {
     });
 
   }
+
+  const goCad = () =>{
+    navigation.navigate("Cadastro")
+
+    setShowMessageError(false)
+
+   
+    setSenha("");
+    setEmail("");
+
+
+
+  }
+  const goForgot = () =>{
+    navigation.navigate("ForgotEmail")
+
+    setShowMessageError(false)
+    
+    setSenha("");
+    setEmail("");
+
+
+
+  }
+
   return (
     <View style={styles.cardForm}>
       <SvgXml style = {styles.minilogo} xml={miniLogo} />
@@ -128,6 +154,7 @@ export default function  CardForm({ navigation } : FormNavi) {
       onChangeText = {onChangeText}
       confirmarsenha=""
       boolean = {passwordVisibility}
+      error = {showMessageError}
       />
       <TouchableWithoutFeedback onPress={changeVisibility}>
   {passwordVisibility ? 
@@ -176,7 +203,7 @@ export default function  CardForm({ navigation } : FormNavi) {
         }
         
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("ForgotEmail")} style={styles.forgotPass}>
+      <TouchableOpacity onPress={goForgot} style={styles.forgotPass}>
         <TextEstelar  style={styles.forgotPass}>
           {" "}
           Esqueceu a senha?{" "}
@@ -193,7 +220,7 @@ export default function  CardForm({ navigation } : FormNavi) {
 
       <View style={styles.mensageCadastrar}>
         <TextEstelar style = {styles.textCadastro}>Não possui uma conta? </TextEstelar>
-        <TouchableOpacity onPress={() => navigation.navigate('Cadastro') }>
+        <TouchableOpacity onPress={goCad}>
           <TextEstelar style = {styles.buttonCadastro}>Clique aqui</TextEstelar>
         </TouchableOpacity>
       </View>
@@ -341,7 +368,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   enviar: {
-    color: "white",
+    color: "#242350",
   }, linha: {
     height: 1, 
     backgroundColor: 'white',

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CardFormCad from "../../components/CadastroTela/CadForm/CardFormCad";
 import {
   Keyboard,
@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   StyleSheet,
+  Image,
 } from "react-native";
 
 import {
@@ -21,12 +22,25 @@ type cadNav = {
 }
 
 export default function TelaCadastro({ navigation }: cadNav) {
+  const [showImage, setShowImage] = useState(false);
+  const mostrarImagem = () =>{
+    setShowImage(prevState => !prevState);
+
+  }
+
   return (
     <Container color="#111D47">
       <TouchableWithoutFeedback style={styles.touch} onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView style={styles.touch} behavior="padding" enabled>
+
+        {showImage && (
+        <Image
+          source={require('../../images/fundoCadSucess.png')}
+         style = {styles.successImage}
+          />
+        )}
           <TopoCad style={styles.topo} navigation={navigation} />
-          <CardFormCad style={styles.form} navigation={navigation} />
+          <CardFormCad mostrarImagem = {mostrarImagem} style={styles.form} navigation={navigation} />
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </Container>
@@ -45,5 +59,12 @@ const styles = StyleSheet.create({
   },
   form: {
     flex:1
+},
+successImage: {
+  width: "100%",
+  height: "100%",
+  alignContent: "center",
+  position: "absolute",
+  zIndex: 1,
 },
 });

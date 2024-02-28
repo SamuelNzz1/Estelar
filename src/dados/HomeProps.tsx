@@ -3,12 +3,11 @@ import { Svg } from "react-native-svg";
 import { goViagem, goForum, goPrepOBA } from "../svgs/botoesHome";
 import ViagemAstroImage from '../images/ViagemAstro.png';
 import PreparatorioImage from '../images/Preparatorio.png';
-import ForumImage from '../images/Forum.png';
-
+import Ep from "../images/Ep.png";
 export const imageMapping : any = {
   ViagemAstro: ViagemAstroImage,
   Preparatorio: PreparatorioImage,
-  Forum: ForumImage,
+  Ep: Ep,
 };
 
 
@@ -32,5 +31,12 @@ export const dados: AttsProps[] = [
       botao: goPrepOBA,
       location: "TelaPreparatorio"
     },
+    {
+      textoprincipal: 'Espaço Virtual',
+      imagemFundo: 'Ep',
+      botao: goForum,
+      location: "TelaEp"
+    },
+    
 
   ];

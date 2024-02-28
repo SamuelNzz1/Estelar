@@ -17,13 +17,15 @@ type CardFormCad = {
     navigate: (screen : string) => void;
 
   }
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>,
+  mostrarImagem: () => void,
+
 }
 
 
 
 
-export default function CardFormCad({ style, navigation } : CardFormCad) {
+export default function CardFormCad({ style, navigation, mostrarImagem } : CardFormCad) {
   
   const [showImage, setShowImage] = useState(false);
   const [name, setName] = useState("");
@@ -75,7 +77,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, senha).
                 then(()=>{
                   setIsLoading(false);
-                  setShowImage(true);
+                  mostrarImagem();
                 });
                 const autenticacao = getAuth();
 
@@ -104,9 +106,9 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
                 
 
                 const timeout = setTimeout(() => {
-                  setShowImage(false);
+                  mostrarImagem();
                   toLogin();
-                }, 5000);
+                }, 2000);
 
                
                 
@@ -218,12 +220,7 @@ export default function CardFormCad({ style, navigation } : CardFormCad) {
       
       </TouchableOpacity>
 
-      {showImage && (
-        <Image
-          source={require('../../../images/fundoCadSucess.png')}
-         style = {styles.successImage}
-          />
-        )}
+     
     </View>
   );
 }
@@ -247,13 +244,7 @@ const styles = StyleSheet.create({
     bottom: 60
   },
 
-  successImage: {
-    width: "100%",
-    height: "100%",
-    alignContent: "center",
-    position: "absolute",
-    zIndex: 1,
-  },
+ 
   textH1: {
     fontSize: RF(30),
     marginTop: 40,
@@ -277,7 +268,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     alignItems: "center",
     justifyContent: "center",
-  },enviar:{color: "white"},
+  },enviar:{color: "#242350"},
  
 
 });

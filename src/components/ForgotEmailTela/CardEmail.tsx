@@ -80,5 +80,5 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         alignItems: "center",
         justifyContent: "center",
-      },enviar:{color: "white"},
+      },enviar:{color: "#242350"},
 })

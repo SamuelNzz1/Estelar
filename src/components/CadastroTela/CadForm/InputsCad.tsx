@@ -10,10 +10,11 @@ type InputsCad ={
     email: string,
     confirmarsenha: string,
     onChangeText:(text: string, type: string) => void,
-    boolean: boolean;
+    boolean: boolean,
+    error?: boolean,
     
 }
-export default function InputsCad({name, senha, email, confirmarsenha, onChangeText, boolean}: InputsCad){
+export default function InputsCad({name, senha, email, confirmarsenha, onChangeText, boolean, error}: InputsCad){
     const windowHeight = Dimensions.get("window").height;
     const windowWidth = Dimensions.get("window").width;
     const route = useRoute();
@@ -31,6 +32,7 @@ export default function InputsCad({name, senha, email, confirmarsenha, onChangeT
         keyboardType="email-address"
         value = {email}
         onChangeText={(atributo) => onChangeText(atributo, "e-mail")}
+        error = {error}
         />
 
        
@@ -41,6 +43,7 @@ export default function InputsCad({name, senha, email, confirmarsenha, onChangeT
         boolean={boolean}
         value = {senha}
         onChangeText={(atributo) => onChangeText(atributo, "senha")}
+        error = {error}
         />
        
         
