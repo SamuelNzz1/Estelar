@@ -11,10 +11,16 @@ type buttonProps = {
     current?: boolean,
     numberFase?: number,
     disabled?: boolean,
-    planet: string
+    planet: string,
+    goFase? :  (planet : string) => void;
 }
 
-export const ButtonPlanet: React.FC<buttonProps> = ({navigation, style, current, numberFase, disabled}) =>{
+export const ButtonPlanet: React.FC<buttonProps> = ({navigation, style, current, numberFase, disabled, goFase, planet}) =>{
+    const handlePress = () => {
+        if (goFase) {
+          goFase(planet);
+        }
+      };
     return (
     <>
         {disabled ? 
@@ -53,7 +59,7 @@ export const ButtonPlanet: React.FC<buttonProps> = ({navigation, style, current,
         
         
         :
-        <TouchableOpacity  style = {[styles.fase, style]}>
+        <TouchableOpacity onPress={handlePress} style = {[styles.fase, style]}>
         {current ?
             (
                 <View style = {styles.completedFase}>
@@ -99,7 +105,7 @@ export const ButtonPlanet: React.FC<buttonProps> = ({navigation, style, current,
 const styles = StyleSheet.create({
     fase:{
         width: 100,
-        height: 200,
+        height: 100,
         alignItems:"center",
         
 

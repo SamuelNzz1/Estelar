@@ -28,6 +28,7 @@ export const TelaQuestsOba: React.FC<typeQuests> = ({navigation, route}) =>{
     const passQuestion = () =>{
         if(questAtual < Prova23N1.length){
         setQuestAtual(questAtual + 1);
+        console.log("passou")
         }
     }
     const alterVisibilityTrue = () =>{

@@ -37,13 +37,16 @@ export const MidleMapViagem: React.FC<propsMidleViagem> = ({navigation}) =>{
     const [currentFase5, setCurrentFase5] = useState<boolean>(false);
     const [currentFase6, setCurrentFase6] = useState<boolean>(false);
 
-    
+    const goFase = (planet : string) =>{
+        navigation.navigate("TelaQuestsJornada", {planet} );
+
+    }
 
 
     return (
     <View style = {styles.planets}>
 
-        <ButtonPlanet planet="Terra" style={styles.planetButton1} navigation={navigation} numberFase={1} current = {currentFase1}/>
+        <ButtonPlanet  planet="Terra" goFase={goFase}  style={styles.planetButton1} navigation={navigation} numberFase={1} current = {currentFase1}/>
         
         
         {completFase1 ? 
@@ -70,7 +73,7 @@ export const MidleMapViagem: React.FC<propsMidleViagem> = ({navigation}) =>{
         <ButtonPlanet planet="Urano" disabled = {true} style={styles.planetButton5} navigation={navigation} numberFase={5} current = {currentFase5}/>
         }
 
-    { (completFase1 && completFase2 && completFase3 && completFase4 && completFase5) ?     
+        { (completFase1 && completFase2 && completFase3 && completFase4 && completFase5) ?     
        <ButtonPlanet planet="Netuno" style={styles.planetButton6} navigation={navigation} numberFase={6} current = {currentFase6}/>
         :
         <ButtonPlanet planet="Netuno" disabled = {true} style={styles.planetButton6} navigation={navigation} numberFase={6} current = {currentFase6}/>
@@ -96,32 +99,32 @@ const styles = StyleSheet.create({
     },
     planetButton1:{
         position: "absolute",
-        bottom: 75,
+        bottom: 115,
         left: 10
     },
     planetButton2:{
         position: "absolute",
-        bottom: 270,
+        bottom: 330,
         right: 20
     },
     planetButton3:{
         position: "absolute",
-        bottom: 495,
+        bottom: 560,
         left: 1
     },
     planetButton4:{
         position: "absolute",
-        bottom: 730,
+        bottom: 830,
         right: 35
     },
     planetButton5:{
         position: "absolute",
-        bottom: 970,
+        bottom: 1120,
         left: 1
     },
     planetButton6:{
         position: "absolute",
-        bottom: 1220,
+        bottom: 1350,
         right: 10
     }
    

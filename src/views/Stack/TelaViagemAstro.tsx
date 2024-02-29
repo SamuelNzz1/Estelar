@@ -84,7 +84,7 @@ export const TelaViagemAstro: React.FC<propsViagem> = ({navigation}: propsViagem
 const styles = StyleSheet.create({
     midleViagemMap:{
         flex: 1,
-        padding: 20
+        
     }
     ,mapViagem:{
         width: "100%",

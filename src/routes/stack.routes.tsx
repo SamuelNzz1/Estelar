@@ -17,7 +17,8 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/conect";
-
+import { TelaQuestsJornadas } from "../views/Stack/TelaQuestsJornada";
+import { Resultado } from "../views/Stack/Resultado";
 export default function StackRoutes() {
   const navigation : any = useNavigation();
 
@@ -93,6 +94,14 @@ export default function StackRoutes() {
              <Stack.Screen
             name = "TelaQuestsOba"
             component = {TelaQuestsOba}
+            />
+             <Stack.Screen
+            name = "TelaQuestsJornada"
+            component = {TelaQuestsJornadas}
+            />
+            <Stack.Screen
+            name = "TelaResultado"
+            component = {Resultado}
             />
             
             
