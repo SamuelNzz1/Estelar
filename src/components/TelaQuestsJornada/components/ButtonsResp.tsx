@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         flexDirection: "row",
-        gap: 10
+        gap: 10,
+        padding: 5
 
     },
     buttonSombra: {
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     },
     textAlter:{
         color: "#2C2C2C",
-        fontSize: RF(15)
+        fontSize: RF(15),
 
     },
     selecionado: {

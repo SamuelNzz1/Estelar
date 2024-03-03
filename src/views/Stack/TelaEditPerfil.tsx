@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, ImageBackground, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ActivityIndicator } from "react-native";
+import { Alert, Image, ImageBackground, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ActivityIndicator, SafeAreaView } from "react-native";
 import Container from "../../components/ComponentesGenericos/Container";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { SvgXml } from "react-native-svg";
@@ -410,9 +410,9 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
     return(
-        <Container
-            color = "#14132E"
-            style= {styles.container}
+        <SafeAreaView
+        
+            style= {[styles.container, {backgroundColor: "#14132E"}]}
         >   
          <TouchableWithoutFeedback  style= {styles.container}  onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView  style= {styles.container}  behavior="padding" enabled>
@@ -557,7 +557,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
         )}
-        </Container>
+        </SafeAreaView>
     )
 
 }

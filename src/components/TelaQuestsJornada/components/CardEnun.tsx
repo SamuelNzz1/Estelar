@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, StyleSheet, View } from "react-native"
+import { Image, ScrollView, StyleSheet, View } from "react-native"
 import TextEstelar from "../../ComponentesGenericos/CustomText"
 import { RFValue as RF } from "react-native-responsive-fontsize"
 type propsCard = {
@@ -17,20 +17,24 @@ export const CardEnum: React.FC<propsCard> = ({enunciado, imagem}) => {
             <View
              style = {styles.enum}
             >
+            <ScrollView
+            showsVerticalScrollIndicator = {false}
+            style = {[styles.scroll ]}
+            contentContainerStyle = {{justifyContent:"center", alignItems:"center"}}
+            >
                 <TextEstelar style = {styles.textEnun}>
                     {enunciado}
                 </TextEstelar>
                 {imagem && 
-                    <View
-                    style = {styles.imagemCard}
-                    >
+                 
                         <Image
                             source={imagem}
                             style={styles.imagem}
                         />
 
-                    </View>
+                   
                 }
+            </ScrollView>
                
 
             </View>
@@ -57,7 +61,14 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         alignItems:"center",
         justifyContent:"center",
+       
+    },
+    scroll:{
+     width: "100%",
+        height: "100%",
         padding: 15
+      
+        
     },
     sombraEnum: {
         width: "100%",
@@ -72,21 +83,23 @@ const styles = StyleSheet.create({
     },
     textEnun: {
         color: "#2C2C2C",
-        fontSize: RF(18),
+        fontSize: RF(16),
+        alignSelf:"center"
 
     },
     imagemCard:{
         width: "100%",
-        height: "70%",
+        height: "80%",
         borderRadius: 21,
         overflow: "hidden",
       
         
     },
     imagem: {
-        width: "100%",
-        height:"100%",
+        width: 250,
+        height:250,
         resizeMode: "contain", 
+        
         
     }
 

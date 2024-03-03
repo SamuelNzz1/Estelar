@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     }
     ,mapViagem:{
         width: "100%",
-        height: 1600,
+        height: 1800,
         resizeMode: "cover",
         justifyContent: "center",
        

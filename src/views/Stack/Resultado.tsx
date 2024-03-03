@@ -3,7 +3,7 @@ import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from "reac
 import fundoResultado from "../../images/fundoResultado.png"
 import { SvgXml } from "react-native-svg";
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
-import { resultadoMissao, resultadoMissao2 } from "../../svgs/resultadoMissao";
+import { resultadoMissaoConcluida, resultadoMissaoFalhada, resultadoMissao2 } from "../../svgs/resultadoMissao";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import completeMission from "../../images/completeMission.png"
@@ -14,6 +14,7 @@ type resultadoProps = {
 export const Resultado: React.FC<resultadoProps> = ({route, navigation}) =>{
     const [backgroundLoaded, setBackgroundLoaded] = useState<boolean>(false);
     const {quantidadeCertas} = route.params
+    const missaoText = quantidadeCertas >= 3 ? "Missão Concluída!" : "Missão Falhada!";
     const handleBack = () =>{
         setBackgroundLoaded(true);
     }
@@ -38,24 +39,24 @@ export const Resultado: React.FC<resultadoProps> = ({route, navigation}) =>{
             <View
                 style = {styles.cardResultado}
             >
-                <SvgXml style = {{zIndex: -1, position:"absolute", top: 50 }} xml={resultadoMissao}/>
+                <SvgXml style = {{zIndex: -1, position:"absolute", top: 50 }} xml={quantidadeCertas >= 3 ?  resultadoMissaoConcluida : resultadoMissaoFalhada}/>
                 <TextEstelar
                 style={{color: "white", fontSize: RF(20), position:"absolute", top: 60}}
                 >
-                    Missão Concluída!
+                   {missaoText}
                 </TextEstelar>
 
                 <Image
                     source={completeMission}
-                    style={{width: 150, height: 150}}
+                    style={{width: 200, height: 200, marginTop: 80}}
                 />
                 <View style = {{flexDirection: "row",gap: 5, width: "100%", justifyContent:"center", alignItems:"center"}}>
                     <TextEstelar
-                        style={{color: "#F26EB1", fontSize: 30}}
+                        style={{color: quantidadeCertas >= 3 ? "#78DA70" : "#DA7070", fontSize: 35}}
                     >
                         {(quantidadeCertas/5)*100}%
                     </TextEstelar>
-                    <TextEstelar  style={{color: "white", fontSize: 30}}>
+                    <TextEstelar  style={{color: "white", fontSize: 35}}>
                         Score
                     </TextEstelar>
             
