@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Keyboard, KeyboardAvoidingView } from "react-native";
+import { Keyboard, KeyboardAvoidingView, StatusBar } from "react-native";
 import {
   View,
   StyleSheet,
@@ -28,6 +28,7 @@ export default function TelaLogin({navigation}: LoginProps) {
       resizeMode="cover"
       onLoad={handleBackgroundLoad}
     >
+      
       <TouchableWithoutFeedback style={styles.container}  onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView style={styles.container}  behavior="padding" enabled>
         
