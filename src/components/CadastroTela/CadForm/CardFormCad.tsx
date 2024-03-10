@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
 
   },
   visibilitybuttom2:{
-    bottom: 60
+    bottom: 65
   },
 
  

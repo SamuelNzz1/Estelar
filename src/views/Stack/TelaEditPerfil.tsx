@@ -119,22 +119,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
     
-    const imageToBase64 = async (imageUri : string)  => {
-        try {
-          const response = await fetch(imageUri);
-          const blob = await response.blob();
-          const base64String = await new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-          });
-          return base64String;
-        } catch (error) {
-          console.error('Erro ao converter imagem para Base64:', error);
-          return null;
-        }
-      };
+    
 
    
     
@@ -237,7 +222,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
                     
                   
                    
-                    const base64String = await imageToBase64(imagePerfil);
+                   
                    
                     
                     const q = query(userCollection, where('uid', '==', userId));

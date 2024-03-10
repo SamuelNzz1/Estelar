@@ -59,7 +59,7 @@ export default function CardStatus({status, titulo, imageStatus, statusNumber,co
                               console.log(statusNumberr)
                               }else if(status == "Nível: "){
                                
-                                setStatusNumberr(dadosUsuario.nivelJ);
+                                setStatusNumberr(dadosUsuario.nivelJ + 1);
                                 
                                 console.log('Dados atualizados:', statusNumber);
                                 console.log(dadosUsuario.nivelJ);
