@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
-import { correct, incorrect, correct2 } from "../../../svgs/correct";
+import { correct, incorrect, correct2, incorrect2 } from "../../../svgs/correct";
 import { SvgXml } from "react-native-svg";
 type Alternativa = {
     id: number;
@@ -42,7 +42,7 @@ export const ButtonResp: React.FC<buttonProps> = ({alternativa,selecionar,corret
             >
                 {alternativa.alter1 || alternativa.alter2 || alternativa.alter3 || alternativa.alter4}
             </TextEstelar>
-            <SvgXml xml={correct}/>
+            <SvgXml style = {{position: "absolute", right: 10, alignSelf:"center"}} xml={correct}/>
             
         </TouchableOpacity>
         <View 
@@ -63,7 +63,7 @@ export const ButtonResp: React.FC<buttonProps> = ({alternativa,selecionar,corret
           >
               {alternativa.alter1 || alternativa.alter2 || alternativa.alter3 || alternativa.alter4}
           </TextEstelar>
-          <SvgXml xml={incorrect}/>
+          <SvgXml style = {{position: "absolute", right: 10, alignSelf:"center"}} xml={incorrect2}/>
           
       </TouchableOpacity>
       <View 
@@ -76,7 +76,7 @@ export const ButtonResp: React.FC<buttonProps> = ({alternativa,selecionar,corret
         <>
             <TouchableOpacity
       disabled={true}
-      style={[styles.buttonPrincip]}
+      style={[styles.buttonPrincip, {backgroundColor:"#3FB62B"}]}
       onPress={ selecionarr }
       >
           <TextEstelar
@@ -84,11 +84,11 @@ export const ButtonResp: React.FC<buttonProps> = ({alternativa,selecionar,corret
           >
               {alternativa.alter1 || alternativa.alter2 || alternativa.alter3 || alternativa.alter4}
           </TextEstelar>
-          <SvgXml xml={correct}/>
+         
   
       </TouchableOpacity>
       <View 
-      style = {[styles.buttonSombra]}
+      style={[styles.buttonSombra, {backgroundColor:"#1C6010"}]}
       >
 
       </View>
@@ -105,7 +105,7 @@ export const ButtonResp: React.FC<buttonProps> = ({alternativa,selecionar,corret
           >
               {alternativa.alter1 || alternativa.alter2 || alternativa.alter3 || alternativa.alter4}
           </TextEstelar>
-          <SvgXml xml={incorrect}/>
+          
   
       </TouchableOpacity>
       <View 

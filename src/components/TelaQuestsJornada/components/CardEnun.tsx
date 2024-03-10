@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     textEnun: {
         color: "#2C2C2C",
         fontSize: RF(16),
-        alignSelf:"center"
+        alignSelf:"center",
 
     },
     imagemCard:{
