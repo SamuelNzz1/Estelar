@@ -19,7 +19,7 @@ type propsViagem = {
 
 export const TelaViagemAstro: React.FC<propsViagem> = ({navigation}: propsViagem) =>{
     
-    const [backroundLoaded, setBackgroundLoaded] = useState <boolean> (false); 
+    const [backgroundLoaded, setBackgroundLoaded] = useState <boolean> (false); 
 
 
     const handleBackgroundLoad = () => {
@@ -36,36 +36,34 @@ export const TelaViagemAstro: React.FC<propsViagem> = ({navigation}: propsViagem
       
              
                   <>
-                      <TopMapViagem
+                    <TopMapViagem 
                         navigation={navigation}
-                        />
+                    />
 
-                        <ScrollView
-                            style = {styles.midleViagemMap}
-                            showsVerticalScrollIndicator ={false}
-                        >
+                    <ScrollView
+                        showsVerticalScrollIndicator = {false}
+                        style = {styles.midleViagemMap}
+                    >
 
-                                <ImageBackground
-                                    source={mapViagem}
-                                    style={styles.mapViagem}
-                                    onLoad={handleBackgroundLoad}
-                                >
-                                        {backroundLoaded &&
-
-                                            <MidleMapViagem
-                                            navigation={navigation}
-                                            ></MidleMapViagem>
-
-                                        }
-
+                        <ImageBackground
+                            source={mapViagem}
+                            style = {styles.mapViagem}
+                            onLoad={handleBackgroundLoad}
+                         >
+                            {backgroundLoaded && 
+                                <MidleMapViagem
+                                    navigation={navigation}
+                                />
+                                
+                            }
 
 
-                                </ImageBackground>
-                                   
+                        </ImageBackground>
 
-                        </ScrollView>
-                        <BottomMapViagem/>
 
+
+                    </ScrollView>
+                    <BottomMapViagem />
                   
                   </>
              
