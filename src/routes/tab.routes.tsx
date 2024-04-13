@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { miniLogo } from "../svgs/welcomeTela/minilogoSvg";
-import Forum from "../views/Tab/Forum";
+
 import { SvgXml } from "react-native-svg";
 import { HomeSvg } from "../svgs/homeSvg";
 import { perfilSvg, perfilSvgSelected } from "../svgs/perfilSvg";
@@ -13,7 +13,7 @@ import { useRoute } from "@react-navigation/native";
 
 import { homeSvgSelected } from "../svgs/homeSvg";
 
-const Tab = createBottomTabNavigator();
+const Tab : any = createBottomTabNavigator();
 
 export default function Tabs()  {
   let routeName: null;

@@ -19,6 +19,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/conect";
 import { TelaQuestsJornadas } from "../views/Stack/TelaQuestsJornada";
 import { Resultado } from "../views/Stack/Resultado";
+import { TelaEp } from "../views/Stack/TelaEp";
+import { TelaSobreEp } from "../views/Stack/TelaSobreEp";
 export default function StackRoutes() {
   const navigation : any = useNavigation();
 
@@ -43,70 +45,27 @@ export default function StackRoutes() {
 
     checkIfLoggedIn();
   }, [navigation]);
+  const Stack : any= createNativeStackNavigator();
     return(
-        <Stack.Navigator screenOptions={{headerShown:false}}>
-            <Stack.Screen 
-                name="Initial"
-                component={TelaWelcome}
-            />
-            <Stack.Screen 
-                name="Login"
-                component={TelaLogin}
-                options={{
-      
-        }}
-            />
-            <Stack.Screen 
-                name="Cadastro"
-                component={TelaCadastro}
-            />
-             <Stack.Screen 
-                name="ForgotEmail"
-                component={TelaConfirmEmailForgot}
-            />
-             <Stack.Screen 
-                name="ForgotSucess"
-                component={TelaForgotSucess}
-            />
-            <Stack.Screen
-            name = "HomeTab"
-            component={Tabs}/>
-
-            <Stack.Screen
-            name = "EmBreve"
-            component={EmBreve}/>
-
-            <Stack.Screen
-            name = "EditPerfil"
-            component = {TelaEditPerfil}
-            />
-            <Stack.Screen
-            name = "TelaViagem"
-            component = {TelaViagemAstro}
-            />
-            
-            
-            <Stack.Screen
-            name = "TelaPreparatorio"
-            component = {TelaPreparatorio}
-            />
-            
-             <Stack.Screen
-            name = "TelaQuestsOba"
-            component = {TelaQuestsOba}
-            />
-             <Stack.Screen
-            name = "TelaQuestsJornada"
-            component = {TelaQuestsJornadas}
-            />
-            <Stack.Screen
-            name = "TelaResultado"
-            component = {Resultado}
-            />
-            
-            
-
-        </Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+     <>
+      <Stack.Screen name="Initial" component={TelaWelcome} />
+      <Stack.Screen name="Login" component={TelaLogin} />
+      <Stack.Screen name="Cadastro" component={TelaCadastro} />
+      <Stack.Screen name="ForgotEmail" component={TelaConfirmEmailForgot} />
+      <Stack.Screen name="ForgotSucess" component={TelaForgotSucess} />
+      <Stack.Screen name="HomeTab" component={Tabs} />
+      <Stack.Screen name="EmBreve" component={EmBreve} />
+      <Stack.Screen name="EditPerfil" component={TelaEditPerfil} />
+      <Stack.Screen name="TelaViagem" component={TelaViagemAstro} />
+      <Stack.Screen name="TelaPreparatorio" component={TelaPreparatorio} />
+      <Stack.Screen name="TelaQuestsOba" component={TelaQuestsOba} />
+      <Stack.Screen name="TelaQuestsJornada" component={TelaQuestsJornadas} />
+      <Stack.Screen name="TelaResultado" component={Resultado} />
+      <Stack.Screen name="TelaEp" component={TelaEp} />
+      <Stack.Screen name="TelaSobreEp" component={TelaSobreEp} />
+    </>
+    </Stack.Navigator>
     )
 
 }

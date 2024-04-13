@@ -3,7 +3,7 @@ import { Text, TextStyle } from 'react-native';
 import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
 type TextEstelarProps = {
-  children: React.ReactNode; 
+  children?: React.ReactNode; 
   style?: TextStyle | TextStyle[];
  
 };

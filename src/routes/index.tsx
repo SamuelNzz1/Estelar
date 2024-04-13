@@ -7,8 +7,9 @@ export default function Routes(){
   
  return(
     <NavigationContainer>
+      <>
        <StackRoutes></StackRoutes>
-
+       </>
     </NavigationContainer>
  ) 
 
