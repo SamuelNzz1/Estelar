@@ -20,6 +20,7 @@ export const MidleEp: React.FC<PropsMidleEp> = ({navigation, nameProd}) => {
      {nameProd === '' ? (
   dadoPlanets.map(item => (
     <CardPlanet
+      key = {item.nome}
       navigation={navigation}
       name={item.nome}
       subtitulo={item.subtitulo}
@@ -30,6 +31,7 @@ export const MidleEp: React.FC<PropsMidleEp> = ({navigation, nameProd}) => {
 ) : (
   filteredData.map(item => (
     <CardPlanet
+      key = {item.nome}
       navigation={navigation}
       name={item.nome}
       subtitulo={item.subtitulo}

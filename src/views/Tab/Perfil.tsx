@@ -74,13 +74,7 @@ export default function Perfil({navigation} : any ){
         obterDadosUsuario();
       }, []);
 
-      const logout = async () =>{
-        await AsyncStorage.removeItem('@estelar:usuarioLogadoo').
-        then(() => autenticacao.signOut().then(() =>    navigation.navigate('Login') ) );
-        
       
-     
-      }
      
  
 

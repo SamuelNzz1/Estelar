@@ -12,11 +12,14 @@ import { AuthCredential, EmailAuthProvider, deleteUser, getAuth, onAuthStateChan
 import { collection, deleteDoc, doc, getDocs, getFirestore, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
 import confirmMessage from "../../images/confirmDeleteAccount.png"
+import confirmMessageLogout from "../../images/sairContaConfirm.png"
 import { useRoute } from '@react-navigation/native';
 import { noDelete, yesDelete } from "../../svgs/ButtonsConfirmDelete";
+import { logout } from "../../svgs/logout";
 
 import * as ImagePicker from 'expo-image-picker';
 import { falseVisibility, trueVisibility } from "../../svgs/passwordVisibilitySvg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 type editPerfil = {
     navigation: any;
     route: any;
@@ -37,6 +40,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
     const [isLoading, setIsLoading] = useState<boolean>(false);
    const [profileImage64, setProfileImage64] = useState<string>("");
     const userRef = doc(firestore, 'users', userId);
+    const [logouty, setLogouty] = useState<boolean> (false);
     
     const [passwordVisibility, setPasswordVisibility] = useState(true);
 
@@ -380,6 +384,17 @@ export default function TelaEditPerfil({navigation}:editPerfil){
         }
 
     }
+    const logoutYes = async () =>{
+        
+
+      await AsyncStorage.removeItem('@estelar:usuarioLogadoo').
+      then(() => autenticacao.signOut().then(() =>    navigation.navigate('Login') ) );
+
+  }
+  const logoutNo = () =>{
+    setLogouty(false);
+
+}
     const deleteNo = () =>{
         setShowImage(false);
 
@@ -387,12 +402,20 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
 
-
+   
+    
     const confirmDelete = () => {
         setShowImage(true);
 
     }
 
+    const logoutt = async () =>{
+        setLogouty(true);
+    }
+    useEffect(() => {
+        
+    }, [logouty])
+    
 
     return(
         <SafeAreaView
@@ -402,8 +425,13 @@ export default function TelaEditPerfil({navigation}:editPerfil){
          <TouchableWithoutFeedback  style= {styles.container}  onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView  style= {styles.container}  behavior="padding" enabled>
         <TouchableOpacity onPress={() => navigation.navigate('HomeTab') } style = {styles.voltar}>
-        <SvgXml  xml={ButtonBack}/>
+          <SvgXml  xml={ButtonBack}/>
         </TouchableOpacity>
+       
+        <TouchableOpacity onPress={logoutt} style = {styles.logout}>
+          <SvgXml  xml={logout} />
+        </TouchableOpacity>
+
             <SvgXml style = {styles.bola1} xml={bola1}/>
             <SvgXml style = {styles.bola2} xml={bola2}/>
             
@@ -535,6 +563,29 @@ export default function TelaEditPerfil({navigation}:editPerfil){
         
         <Image
           source={confirmMessage}
+            style = {styles.successImage}
+          />
+        
+        </>
+
+
+        )}
+        {logouty && (
+        <>
+        <View style = {styles.buttonsDeleteOrNo}>
+        
+        <TouchableOpacity onPress={logoutNo} >
+            <SvgXml xml={noDelete} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={logoutYes}  >
+               <SvgXml xml={yesDelete} />
+        </TouchableOpacity>
+        
+        </View>
+        
+        <Image
+            source={confirmMessageLogout}
             style = {styles.successImage}
           />
         
@@ -679,6 +730,12 @@ const styles = StyleSheet.create({
         position: "absolute",
         zIndex: 1,
       },
+      logout: {
+        position: "absolute",
+        right: 20,
+        top: 20,
+        zIndex: 2
+      }
      
 
 })
