@@ -6,7 +6,11 @@ import { SvgXml } from "react-native-svg";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { PencilEdit } from "../../svgs/editPerfilSvg";
 import { dadosPerfil } from "../../dados/PerfilProps";
-import perfilImage from "../../images/Perfil.png";
+
+import noImagem from "../../images/Perfil.png";
+import Avatar1 from "../../images/Avatar1.png";
+import Avatar2 from "../../images/Avatar2.png";
+import Avatar3 from "../../images/Avatar3.png";
 
 
 import CardStatus from "../../components/PerfilTela/CardStatus";
@@ -16,7 +20,9 @@ export default function Perfil({navigation} : any ){
 
 
     const [userName, setUserName] = useState<string | null>(null);
-    const [imagePerfil, setImagePerfil] = useState <any> (perfilImage);
+    const [imagePerfil, setImagePerfil] = useState <any> ("");
+    const [imagePerfil2, setImagePerfil2] = useState<any>(noImagem);
+
     const autenticacao = getAuth();
     const usuario : any = autenticacao.currentUser; 
     const firestore = getFirestore();
@@ -44,7 +50,8 @@ export default function Perfil({navigation} : any ){
                             if (snapshot.exists()) {
                               const dadosUsuario = snapshot.data();
                               setUserName(dadosUsuario.name);
-                              console.log('Dados atualizados:', dadosUsuario);
+                              const profileImage = dadosUsuario.profileImage;
+                              setImagePerfil(profileImage);
                             } else {
                               console.log('Documento não encontrado');
                             }
@@ -67,7 +74,20 @@ export default function Perfil({navigation} : any ){
         }
       };
 
-     
+     useEffect(() => {
+          if(imagePerfil== "../../images/Perfil.png"){
+            setImagePerfil2(noImagem);
+          }
+         else if(imagePerfil == "../../images/Avatar1.png"){
+            setImagePerfil2(Avatar1);
+          }
+          else if(imagePerfil == "../../images/Avatar2.png"){
+            setImagePerfil2(Avatar2);
+          }
+          else if(imagePerfil == "../../images/Avatar3.png"){
+            setImagePerfil2(Avatar3);
+          }
+     }, [imagePerfil] )
       
 
       useEffect(() => {
@@ -86,7 +106,7 @@ export default function Perfil({navigation} : any ){
                <View style ={ styles.infoPerfi }>
                     <View style = {styles.perfilImage}>
                         
-                        <Image style ={styles.imagePerfil} source={imagePerfil} />
+                        <Image style ={styles.imagePerfil} source={imagePerfil2} />
                     </View>
                     {userName &&
                         <TextEstelar style={styles.bemvindo}>{userName}</TextEstelar>

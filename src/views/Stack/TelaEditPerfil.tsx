@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, ImageBackground, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ActivityIndicator, SafeAreaView } from "react-native";
+import { Alert, Image, ImageBackground, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ActivityIndicator, SafeAreaView, ScrollView } from "react-native";
 import Container from "../../components/ComponentesGenericos/Container";
+import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { SvgXml } from "react-native-svg";
 import { bola1 } from "../../svgs/bolasEditPerfil";
@@ -20,6 +21,15 @@ import { logout } from "../../svgs/logout";
 import * as ImagePicker from 'expo-image-picker';
 import { falseVisibility, trueVisibility } from "../../svgs/passwordVisibilitySvg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import noImagem from "../../images/Perfil.png";
+import Avatar1 from "../../images/Avatar1.png";
+import Avatar2 from "../../images/Avatar2.png";
+import Avatar3 from "../../images/Avatar3.png";
+import { Pressable } from "react-native";
+
+
+
 type editPerfil = {
     navigation: any;
     route: any;
@@ -28,22 +38,35 @@ type editPerfil = {
 
 export default function TelaEditPerfil({navigation}:editPerfil){
     const route = useRoute();
-
+    const [isLoadingP, setIsLoadingP] = useState<boolean> (false);
     const autenticacao = getAuth();
     const usuario : any = autenticacao.currentUser; 
     const firestore = getFirestore();
     const userId = usuario.uid; // Substitua pelo ID do usuário
     const userCollection = collection(firestore, 'users');
+    
+    const [pickImage, setPickImage] = useState<any>("");
+    const [pickAv1, setPickAv1] = useState<boolean> (false);
+    const [pickAv2, setPickAv2] = useState<boolean> (false);
+    const [pickAv3, setPickAv3] = useState<boolean> (false);
 
-    const { imagePerfil, setImagePerfil } : any = route.params;
+    const [newImage, setNewImage] = useState<any> ();
+
+
+    const [profileImage, setProfileImage] = useState <any> ("")
+    const [imagePerfil, setImagePerfil] = useState<any>(noImagem);
+
+
     const [showImage, setShowImage] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-   const [profileImage64, setProfileImage64] = useState<string>("");
+  
     const userRef = doc(firestore, 'users', userId);
     const [logouty, setLogouty] = useState<boolean> (false);
     
     const [passwordVisibility, setPasswordVisibility] = useState(true);
 
+
+    const [showAvatar, setShowAvatar] = useState<boolean> (false);
 
     const changeVisibility = () => {
       
@@ -78,7 +101,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
                           if (snapshot.exists()) {
                             const dadosUsuario = snapshot.data();
                             const profileImage = dadosUsuario.profileImage;
-                          
+                            setProfileImage(profileImage);
                           } else {
                             console.log('Documento não encontrado para o usuário:', userId);
                           }
@@ -101,7 +124,21 @@ export default function TelaEditPerfil({navigation}:editPerfil){
         }
       };
 
-     
+     useEffect(() => {
+        if(profileImage == "../../images/Perfil.png"){
+          setImagePerfil(noImagem);
+        }
+        else if(profileImage == "../../images/Avatar1.png"){
+          setImagePerfil(Avatar1);
+        }
+        else if(profileImage == "../../images/Avatar2.png"){
+          setImagePerfil(Avatar2);
+        }
+        else if(profileImage == "../../images/Avatar3.png"){
+          setImagePerfil(Avatar3);
+        }
+
+     }, [profileImage])
       
 
       useEffect(() => {
@@ -136,13 +173,9 @@ export default function TelaEditPerfil({navigation}:editPerfil){
     const [editPerfil, setEditPerfil] = useState<boolean>(false);
 
 
-    useEffect(() => {
-        navigation.setOptions({
-          params: { setImagePerfil: setImagePerfil }, // Ou apenas { setImagePerfil } se ambos tiverem o mesmo nome
-        });
-      }, [navigation, setImagePerfil]);
+   
 
-    const [novaImagemPerfil, setNovaImagemPerfil] = useState<string |  null>(null);
+  
 
     
     const [name, setName] = useState("");
@@ -162,9 +195,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
         if(type == "senhaNova"){setNovaSenha(atributo)}
     
     }
-    const reload = () =>{
-        navigation.navigate("EditPerfil");
-    }
+  
 
     useEffect(() => {
         if (usuario && usuario.displayName) {
@@ -174,28 +205,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
       }, [usuario]);
 
       const selecionarImagem = async () => {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    
-        if (status !== 'granted') {
-          console.error('Permissão negada para acessar a biblioteca de mídia');
-          return;
-        }
-    
-        const resultado = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-        });
-        if (!resultado.canceled) {
-            
-            setNovaImagemPerfil(resultado.assets[0].uri);
-
-            setEditPerfil(true);
-          
-
-          }
-        
+        setShowAvatar(!showAvatar);
       };
      
     
@@ -302,7 +312,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
        
       }
       else if(editPerfil === true){
-        setImagePerfil(novaImagemPerfil);
+       
         setEditPerfil(false);
         
         const q = query(userCollection, where('uid', '==', userId));
@@ -319,7 +329,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
                           try{
                             await updateDoc(doc(firestore, "users", idDocUsu), {
-                                profileImage: imagePerfil,
+                              
                             }).
                             then(()=>{
                               setIsLoading(false);
@@ -417,6 +427,157 @@ export default function TelaEditPerfil({navigation}:editPerfil){
     }, [logouty])
     
 
+
+    const selectImage = (image : string) => {
+
+      if(image == "avatar1") {
+        setPickAv1(true);
+
+        setPickAv2(false);
+        setPickAv3(false);
+      }
+      else if(image == "avatar2") {
+        setPickAv2(true);
+        
+        setPickAv1(false);
+        setPickAv3(false);
+        
+      }
+      else if(image == "avatar3") {
+        setPickAv3(true);
+        
+        setPickAv1(false);
+        setPickAv2(false);
+      }
+
+    } 
+  
+    const  changeAvatar = async () => {
+      setIsLoadingP(true);
+      if(pickAv1 == true){
+        const q = query(userCollection, where('uid', '==', userId));
+
+        // Execute a consulta
+        const querySnapshot = await getDocs(q);
+        
+        // Verifique se há algum documento retornado
+        if (querySnapshot.size > 0) {
+          // Se houver, pegue o ID do primeiro documento
+          const primeiroDocumento = querySnapshot.docs[0];
+          const idDocUsu = primeiroDocumento.id;
+        
+       
+  
+          try{
+            await updateDoc(doc(firestore, "users", idDocUsu), {
+                
+                profileImage: "../../images/Avatar1.png" // Substitua pelo campo que você deseja usar
+            }).
+            then(()=>{
+              setIsLoadingP(false);
+              Alert.alert("Foto atualizada com sucesso!");
+              
+  
+            })
+            console.log("sucesso");
+            }catch{
+              setIsLoadingP(false);
+              console.log("erro");
+  
+            }
+   
+        
+        
+        
+        } else {
+          setIsLoading(false);
+          console.error("Nenhum documento encontrado para o UID fornecido.");
+        }
+      }
+      else if(pickAv2 == true){
+        const q = query(userCollection, where('uid', '==', userId));
+
+        // Execute a consulta
+        const querySnapshot = await getDocs(q);
+        
+        // Verifique se há algum documento retornado
+        if (querySnapshot.size > 0) {
+          // Se houver, pegue o ID do primeiro documento
+          const primeiroDocumento = querySnapshot.docs[0];
+          const idDocUsu = primeiroDocumento.id;
+        
+       
+  
+          try{
+            await updateDoc(doc(firestore, "users", idDocUsu), {
+                
+                profileImage: "../../images/Avatar2.png" // Substitua pelo campo que você deseja usar
+            }).
+            then(()=>{
+              setIsLoadingP(false);
+              Alert.alert("Foto atualizada com sucesso!");
+              
+  
+            })
+            console.log("sucesso");
+            }catch{
+              console.log("erro");
+              setIsLoadingP(false);
+            }
+   
+        
+        
+        
+        } else {
+          setIsLoading(false);
+          console.error("Nenhum documento encontrado para o UID fornecido.");
+        }
+      }
+      else if(pickAv3 == true){
+        const q = query(userCollection, where('uid', '==', userId));
+
+        // Execute a consulta
+        const querySnapshot = await getDocs(q);
+        
+        // Verifique se há algum documento retornado
+        if (querySnapshot.size > 0) {
+          // Se houver, pegue o ID do primeiro documento
+          const primeiroDocumento = querySnapshot.docs[0];
+          const idDocUsu = primeiroDocumento.id;
+        
+       
+  
+          try{
+            await updateDoc(doc(firestore, "users", idDocUsu), {
+                
+                profileImage: "../../images/Avatar3.png" // Substitua pelo campo que você deseja usar
+            }).
+            then(()=>{
+              setIsLoadingP(false);
+              Alert.alert("Foto atualizada com sucesso!");
+              
+  
+            })
+            console.log("sucesso");
+            }catch{
+              console.log("erro");
+              setIsLoadingP(false);
+            }
+   
+        
+        
+        
+        } else {
+          setIsLoading(false);
+          console.error("Nenhum documento encontrado para o UID fornecido.");
+        }
+      }
+                   
+                    
+    
+
+    }
+
     return(
         <SafeAreaView
         
@@ -438,12 +599,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
             <View style = {styles.changeImage}>
                 <TouchableOpacity onPress={selecionarImagem}>
                     <View  style = {styles.perfil}>
-                      {
-                      isUri(imagePerfil) ? 
-                      <Image style={styles.imagePerfil} source={{ uri: imagePerfil }} />
-                      :
-                      <Image style={styles.imagePerfil} source={imagePerfil} />
-                    }
+                        <Image style={styles.imagePerfil} source={imagePerfil} />
                     </View>
                 </TouchableOpacity>
                 
@@ -593,6 +749,74 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
         )}
+
+{showAvatar == true 
+          && 
+          (
+            
+              <View
+                style = { { height: "100%", width: "100%", position: "absolute", } }
+              >
+                <Pressable
+                style = { {  width: "100%", height: "60%", backgroundColor: "#000000", opacity: 0.3 } }
+                onPress={selecionarImagem}
+                >
+                   
+                </Pressable>
+                <View
+                  style = { {  width: "100%", height: "50%", backgroundColor: "#272650", borderTopRightRadius: 30, borderTopLeftRadius: 30, gap: 5} }
+                >
+                  <View style = { {flexDirection: "row", alignItems: "center", justifyContent: "center", width: "100%", height: "20%", borderTopRightRadius: 30, borderTopLeftRadius: 30, } }>
+                      <TextEstelar
+                        style = {{color: "white", fontSize: RF(23), fontWeight: "bold"}}
+                      >
+                        Selecione
+                      </TextEstelar>
+                      <SvgXml style = {{ position: "absolute", right: 10 }} xml = {miniLogo} />
+                  </View>
+
+                  <ScrollView 
+                     contentContainerStyle = { { height: 130, width: 500, flexDirection: "row", gap: 40, paddingHorizontal: 10, alignItems:"center", justifyContent:"center"} }
+                      horizontal = {true}
+                      showsHorizontalScrollIndicator={false}
+                  > 
+                    
+                    <TouchableOpacity onPress = { () => selectImage("avatar1") } style = {{borderRadius: 100, width: 120, height: 120, ... (pickAv1 && {borderWidth: 2, borderColor: "#FF7747"})  }}>
+                      <Image source={Avatar1} style = {{  width: '100%', height: '100%',}}  resizeMode="contain" /> 
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity onPress = { () => selectImage("avatar2") }  style = {{borderRadius: 100, width: 120, height: 120,  ... (pickAv2 && {borderWidth: 2, borderColor: "#FF7747"})}}>
+                      <Image source={Avatar2} style = {{  width: '100%', height: '100%',}}  resizeMode="contain" /> 
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity onPress = { () => selectImage("avatar3") } style = {{borderRadius: 100, width: 120, height: 120, ... (pickAv3 && {borderWidth: 2, borderColor: "#FF7747"}) }}>
+                      <Image source={Avatar3} style = {{  width: '100%', height: '100%',}}  resizeMode="contain" /> 
+                    </TouchableOpacity>
+
+
+                  </ScrollView>
+
+                  <TouchableOpacity onPress={changeAvatar} style = {{width: "80%", alignSelf: "center" , justifyContent: "center", alignItems: "center",  height: 50, position: "absolute", bottom: 60, backgroundColor: "#FFAB4C", borderRadius: 40}}>
+                   {isLoadingP ? 
+                   
+                   <ActivityIndicator color="#242350"/>
+                  :   
+                  <TextEstelar style = {{color : "#171636", fontSize: RF(15), }}>
+                      
+                  Confirmar
+                </TextEstelar>
+                  }
+                   
+                  </TouchableOpacity>
+
+
+                </View>
+              </View>
+             
+          )        
+        }   
+
+        
         </SafeAreaView>
     )
 

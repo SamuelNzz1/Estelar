@@ -93,7 +93,7 @@ export default function CardFormCad({ style, navigation, mostrarImagem } : CardF
                   uid: user.uid,
                   name: name,
                   email: email,
-                  profileImage: "",
+                  profileImage: "../../images/Perfil.png",
                   questO: 0,
                   nivelJ: 0,
                 }); 
