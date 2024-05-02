@@ -1,5 +1,5 @@
 import React from "react";
-import { jupiter, marte, terra, mercurio } from "../svgs/planetsSvg";
+import { jupiter, marte, terra, mercurio, venus, saturno, urano, netuno } from "../svgs/planetsSvg";
 type PlanetsProps = {
     svg: string,
     nome: string,
@@ -37,6 +37,34 @@ export const dadoPlanets: PlanetsProps[] = [
         nome: "Mercúrio",
         subtitulo: "É o planeta mais próximo do sol.",
         number: 4
+
+    },
+    {
+        svg: venus,
+        nome: "Vênus",
+        subtitulo: "Vênus tem o dia mais longo que o ano.",
+        number: 5
+
+    },
+    {
+        svg: saturno,
+        nome: "Saturno",
+        subtitulo: "Saturno é o sexto planeta a partir do Sol ",
+        number: 6
+
+    },
+    {
+        svg: urano,
+        nome: "Urano",
+        subtitulo: "Urano é o sétimo planeta a partir do Sol.",
+        number: 7
+
+    },
+    {
+        svg: netuno,
+        nome: "Netuno",
+        subtitulo: "Netuno possui um tamanho ligeiramente menor que o de Urano",
+        number: 8
 
     },
 

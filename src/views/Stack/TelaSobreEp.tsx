@@ -20,6 +20,7 @@ export const TelaSobreEp: React.FC<PropsSobreEp> = ({route, navigation}) =>{
 
             <TopTelaSobreEp 
                 navigation={navigation}
+                number = {number}
             />
             <MidleSobreEp
                 navigation={navigation}

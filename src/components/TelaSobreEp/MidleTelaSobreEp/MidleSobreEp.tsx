@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { SvgXml } from "react-native-svg";
-import { jupiter, mercurio, terra, marte } from "../../../svgs/planetsSvg";
+import { jupiter, mercurio, terra, marte, venus, saturno, urano, netuno } from "../../../svgs/planetsSvg";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
 import { PlanetsEp } from "../../../dados/PlanetsProps";
 import { RFValue as RF } from "react-native-responsive-fontsize";
@@ -17,7 +17,7 @@ export const MidleSobreEp: React.FC<PropsMidleSobre> = ({navigation, number}) =>
     <View style = {{ alignItems: "center", paddingHorizontal: 10, marginBottom: 20}}>
         
         <View style = {{borderColor: "white", gap: 10  }} >
-                <SvgXml xml={ number == 1 ? jupiter : number == 2 ? marte : number == 3 ? terra : mercurio } style = {{ alignSelf:"center"}} />
+                <SvgXml xml={ number == 1 ? jupiter : number == 2 ? marte : number == 3 ? terra : number == 4 ? mercurio : number == 5 ? venus : number == 6 ? saturno : number == 7 ? urano : netuno } style = {{ alignSelf:"center"}} />
                     <View style = {{ width: "100%",}}>
                     <TextEstelar  style={[styles.textpadrao, {fontSize: RF(40)}]} >
                         {
