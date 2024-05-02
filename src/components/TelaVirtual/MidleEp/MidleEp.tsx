@@ -1,8 +1,11 @@
 import React from "react";
 import { Animated, FlatList, View } from "react-native";
 import { CardPlanet } from "./cardPlanets/CardPlanet";
+import { SvgXml } from "react-native-svg";
+import { searchIcon } from "../../../svgs/search";
 import { dadoPlanets } from "../../../dados/EpProps";
-
+import TextEstelar from "../../ComponentesGenericos/CustomText";
+import { RFValue as RF } from "react-native-responsive-fontsize";
 type PropsMidleEp = {
     navigation: any,
     nameProd: string,
@@ -13,7 +16,7 @@ export const MidleEp: React.FC<PropsMidleEp> = ({navigation, nameProd}) => {
       );
     return (
     <View
-        style = {{ flex: 1, paddingVertical: 50, alignItems: "center", gap: 150}}
+        style = {{ flex: 1, paddingVertical: 50, alignItems: "center", gap: 150, justifyContent: "center"}}
     >
      
         
@@ -28,17 +31,27 @@ export const MidleEp: React.FC<PropsMidleEp> = ({navigation, nameProd}) => {
       svg={item.svg}
     />
   ))
-) : (
+) : filteredData.length > 0 ? (
   filteredData.map(item => (
-    <CardPlanet
-      key = {item.nome}
-      navigation={navigation}
-      name={item.nome}
-      subtitulo={item.subtitulo}
-      number={item.number}
-      svg={item.svg}
-    />
+      <CardPlanet
+          key={item.nome}
+          navigation={navigation}
+          name={item.nome}
+          subtitulo={item.subtitulo}
+          number={item.number}
+          svg={item.svg}
+      />
   ))
+) : (
+  <View
+    style = {{alignSelf: "center", flexDirection: "row", gap: 10,  alignItems: "center", justifyContent: "center" }}
+  >
+    <SvgXml xml = {searchIcon}/>
+    <TextEstelar style = {{ fontSize: RF(20), color: "#29266B"}}>
+      Não encontrado
+    </TextEstelar>
+
+  </View>
 )}
 
     </View>)
