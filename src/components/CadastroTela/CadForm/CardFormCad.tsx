@@ -96,6 +96,8 @@ export default function CardFormCad({ style, navigation, mostrarImagem } : CardF
                   profileImage: "../../images/Perfil.png",
                   questO: 0,
                   nivelJ: 0,
+                  stars: 0,
+                  
                 }); 
                 await updateProfile(user, {
                   displayName: name,

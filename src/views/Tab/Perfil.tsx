@@ -131,10 +131,14 @@ export default function Perfil({navigation} : any ){
               
                     
                 <View style = {styles.cardNiveis2}>
-
+                  <ScrollView
+                    showsVerticalScrollIndicator = {false}
+                    contentContainerStyle = {{gap: 30, paddingBottom: 20}}
+                  > 
                     {dadosPerfil.map((carac, index) => (
                         <CardStatus key={index} {...carac} />
                     ))}  
+                    </ScrollView>
                   </View>  
 
                   
@@ -155,11 +159,11 @@ const styles = StyleSheet.create({
     cardNiveis2:{
         position: "absolute",
         alignSelf: "center",
-        bottom: 30,
+        bottom: 10,
         width: "100%",
         height:"50%",
         gap: 30,
-       
+        
     
 
     },

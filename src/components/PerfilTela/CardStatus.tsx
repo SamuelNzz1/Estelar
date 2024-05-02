@@ -49,7 +49,7 @@ export default function CardStatus({status, titulo, imageStatus, statusNumber,co
                             if (snapshot.exists()) {
                               const dadosUsuario = snapshot.data();
 
-                              if(status == "Total: "){
+                              if(imageStatus == 'oba'){
                             
                               
                               setStatusNumberr(dadosUsuario.questO);
@@ -57,13 +57,17 @@ export default function CardStatus({status, titulo, imageStatus, statusNumber,co
                               console.log('Dados atualizados:', statusNumber);
                               console.log(dadosUsuario.questO)
                               console.log(statusNumberr)
-                              }else if(status == "Nível: "){
+                              }else if(imageStatus == 'planet'){
                                
                                 setStatusNumberr(dadosUsuario.nivelJ + 1);
                                 
                                 console.log('Dados atualizados:', statusNumber);
                                 console.log(dadosUsuario.nivelJ);
                                 console.log(statusNumberr)
+                              }
+                              else if (imageStatus == 'star'){
+                                setStatusNumberr(dadosUsuario.stars);
+
                               }
                             } else {
                               console.log('Documento não encontrado');
