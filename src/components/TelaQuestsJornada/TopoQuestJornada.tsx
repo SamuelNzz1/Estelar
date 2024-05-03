@@ -5,24 +5,66 @@ import { ButtonBack } from "../CadastroTela/CadTopo/ButtonBack";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { cronometro } from "../../svgs/cronometroSvg";
+import { heartT, heartF } from "../../svgs/heart";
 type propsTopoJornada = {
     navigation: any,
     planet: string,
     numberQ: number,
-    tempoRestante: number
+    tempoRestante: number,
+    lifes: number
 }
-export const TopoQuestJornada: React.FC<propsTopoJornada> = ({navigation, planet, numberQ, tempoRestante}) =>{
+export const TopoQuestJornada: React.FC<propsTopoJornada> = ({navigation, planet, numberQ, tempoRestante, lifes }) =>{
     return (
     <View style = {styles.topoView}>
         <View style = {styles.acima}>
             <TouchableOpacity onPress={() => navigation.goBack()} style = {styles.voltar}>
                 <SvgXml  xml={ButtonBack}/>
             </TouchableOpacity>
-            <TextEstelar
-                style = {styles.textPlanet}
+            <View
+                style = {styles.hearts} 
             >
-                {planet}
-            </TextEstelar>
+                {lifes == 3
+                    ? 
+                    (
+                        <>
+                            <SvgXml xml = {heartT} />   
+                            <SvgXml xml = {heartT} />
+                            <SvgXml xml = {heartT} />
+
+                        </>
+                    )
+                    : lifes == 2 ? 
+                    
+                    (
+                        <>
+                            <SvgXml xml = {heartT} />   
+                            <SvgXml xml = {heartT} />
+                            <SvgXml xml = {heartF} />
+
+                        </>
+                    )
+                    : lifes == 1 ? 
+                    (
+                        <>
+                            <SvgXml xml = {heartT} />   
+                            <SvgXml xml = {heartF} />
+                            <SvgXml xml = {heartF} />
+
+                        </>
+                    )
+                    : 
+                    (
+                        <>
+                            <SvgXml xml = {heartF} />   
+                            <SvgXml xml = {heartF} />
+                            <SvgXml xml = {heartF} />
+
+                        </>
+                    )
+
+                }
+
+            </View>
             <View
             style = {styles.cronometro}
             >      
@@ -76,6 +118,18 @@ const styles = StyleSheet.create({
             
         
     },
+    hearts: {
+        flexDirection: "row",
+        gap: 10,
+        alignItems: "center",
+        justifyContent: "center",
+        width: 100,
+        height: 30,
+        marginTop: 0,
+        marginLeft: 25
+
+    },
+
     textPlanet: {
         color: "white",
         fontSize: RF(18),

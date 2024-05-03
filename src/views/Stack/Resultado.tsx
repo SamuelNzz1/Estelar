@@ -7,6 +7,7 @@ import { resultadoMissaoConcluida, resultadoMissaoFalhada, resultadoMissao2 } fr
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import completeMission from "../../images/completeMission.png"
+import { starPoint, starPointM } from "../../svgs/starPoint";
 type resultadoProps = {
     route: any,
     navigation: any,
@@ -60,6 +61,12 @@ export const Resultado: React.FC<resultadoProps> = ({route, navigation}) =>{
                         Score
                     </TextEstelar>
             
+                </View>
+                <View style = {{flexDirection: "row", gap: 5, alignItems: "center"}}>
+                    <TextEstelar style = {{fontSize: RF(25), color: "#FF7747" }}>
+                        +{quantidadeCertas*5}
+                    </TextEstelar>
+                    <SvgXml xml={starPoint} />
                 </View>
                 <TouchableOpacity  onPress = {() => navigation.navigate("TelaViagem")} style = {{alignItems:"center", backgroundColor:"#FC9E01", borderRadius:19, padding: 10, width: "80%", marginTop: 20}}>
 

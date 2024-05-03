@@ -12,13 +12,15 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
     const [questAtual, setQuestAtual] = useState<number>(0);
     const {planet}  = route.params;
     const [backgroundLoaded, setBackgroundLoaded] = useState<boolean>(false);
-    const [tempoRestante, setTempoRestante] = useState(60);
+    const [lifes, setLifes] = useState<number>(3);
     
+    const [tempoRestante, setTempoRestante] = useState(60);
+    const [pausado, setPausado] = useState<boolean> (false); 
     useEffect(() => {
         const timer : any = setInterval(() => {
-            if (tempoRestante > 0) {
+            if (tempoRestante > 0 && !pausado) {
               setTempoRestante((prev) => prev - 1);
-            } else {
+            } else if (tempoRestante <= 0 ){
               // Lógica quando o tempo se esgota
               clearInterval(timer);
             }
@@ -26,7 +28,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
           
 
         return () => clearInterval(timer);
-    }, [tempoRestante]);
+    }, [tempoRestante, pausado]);
    
     const reiniciarTempo = () => {
         setTempoRestante(60);
@@ -50,11 +52,23 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
         setQuestAtual(questAtual + 1);
         }
     }
+    const plusLife = () => {
+        setLifes(prevState => prevState + 1);
+    }
+    const minusLife = () => {
+        setLifes(prevState => prevState - 1);
+
+    }
+    const toggleGame = () => {
+        setPausado( prevState => !prevState);
+
+    }
+
     return (
         
         <ImageBackground
             source={image}
-            style = {{flex: 1, paddingTop: 5, paddingHorizontal: 10}}
+            style = {{flex: 1, }}
     
         >  
        
@@ -66,6 +80,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                     planet = {planet}
                     numberQ={Nivel1Terra[questAtual].numberQ}
                     tempoRestante={tempoRestante}
+                    lifes={lifes}
                     />
                     <MidleQuestJornada
                         navigation={navigation}
@@ -76,6 +91,10 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         tempoRestante={tempoRestante}
                         zerarTempo={zerarTempo}
                         planet = {planet}
+                        plusLife={plusLife}
+                        minusLife={minusLife}
+                        lifes={lifes}
+                        toggleGame={toggleGame}
 
                     />
                 
@@ -90,6 +109,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                     planet = {planet}
                     numberQ={Nivel2Marte[questAtual].numberQ}
                     tempoRestante={tempoRestante}
+                    lifes={lifes}
                     />
                     <MidleQuestJornada
                         navigation={navigation}
@@ -100,7 +120,10 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         tempoRestante={tempoRestante}
                         zerarTempo={zerarTempo}
                         planet = {planet}
-
+                        plusLife={plusLife}
+                        minusLife={minusLife}
+                        lifes={lifes}
+                        toggleGame={toggleGame}
                     />
                     
                     </>
@@ -114,6 +137,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                     planet = {planet}
                     numberQ={Nivel3Jupiter[questAtual].numberQ}
                     tempoRestante={tempoRestante}
+                    lifes={lifes}
                     />
                     <MidleQuestJornada
                         navigation={navigation}
@@ -124,6 +148,10 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         tempoRestante={tempoRestante}
                         zerarTempo={zerarTempo}
                         planet = {planet}
+                        plusLife={plusLife}
+                        minusLife={minusLife}
+                        lifes={lifes}
+                        toggleGame={toggleGame}
 
                     />
                     </>
@@ -138,6 +166,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                     planet = {planet}
                     numberQ={Nivel4Saturno[questAtual].numberQ}
                     tempoRestante={tempoRestante}
+                    lifes={lifes}
                     />
                     <MidleQuestJornada
                         navigation={navigation}
@@ -148,6 +177,10 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         tempoRestante={tempoRestante}
                         zerarTempo={zerarTempo}
                         planet = {planet}
+                        plusLife={plusLife}
+                        minusLife={minusLife}
+                        lifes={lifes}
+                        toggleGame={toggleGame}
 
                     />
                     </>
@@ -162,6 +195,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                     planet = {planet}
                     numberQ={Nivel5Urano[questAtual].numberQ}
                     tempoRestante={tempoRestante}
+                    lifes={lifes}
                     />
                     <MidleQuestJornada
                         navigation={navigation}
@@ -172,6 +206,10 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         tempoRestante={tempoRestante}
                         zerarTempo={zerarTempo}
                         planet = {planet}
+                        plusLife={plusLife}
+                        minusLife={minusLife}
+                        lifes={lifes}
+                        toggleGame={toggleGame}
 
                     />
 
@@ -187,6 +225,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                     planet = {planet}
                     numberQ={Nivel6Netuno[questAtual].numberQ}
                     tempoRestante={tempoRestante}
+                    lifes={lifes}
                     />
                     <MidleQuestJornada
                         navigation={navigation}
@@ -197,6 +236,10 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         tempoRestante={tempoRestante}
                         zerarTempo={zerarTempo}
                         planet = {planet}
+                        plusLife={plusLife}
+                        minusLife={minusLife}
+                        lifes={lifes}
+                        toggleGame={toggleGame}
 
                     />
                     </>

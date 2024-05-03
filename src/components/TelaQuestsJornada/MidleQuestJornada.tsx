@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react"
-import { ScrollView, StyleSheet, View } from "react-native"
+import { Alert, Image, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { CardEnum } from "./components/CardEnun"
 import { ButtonResp } from "./components/ButtonsResp"
 import { getAuth } from "firebase/auth"
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, updateDoc, where } from "firebase/firestore"
-
+import TextEstelar from "../ComponentesGenericos/CustomText"
+import { RFValue as RF } from "react-native-responsive-fontsize"
+import { SvgXml } from "react-native-svg"
+import { starPoint, starPointM } from "../../svgs/starPoint"
+import { astronautaRequest, starsRequest } from "../../svgs/fundoAstronautaRequest"
 type propsMidleQuestJornada = {
 navigation: any,
 nivel: any,
@@ -12,59 +16,93 @@ numberQ: number,
 passQuestion: () => void,
 reiniciarTempo: () => void,
 zerarTempo: () => void,
+plusLife: () => void,
+minusLife: () => void,
+toggleGame: () => void,
+lifes:  number,
 tempoRestante: number,
 timer?: any,
 planet: string
 }
-export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation, nivel, numberQ, passQuestion, reiniciarTempo, tempoRestante, timer, zerarTempo, planet}) =>{
+export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation, nivel, numberQ, lifes,  passQuestion, reiniciarTempo, tempoRestante, timer, zerarTempo, planet, plusLife, minusLife, toggleGame}) =>{
     const autenticacao = getAuth();
     const usuario : any = autenticacao.currentUser; 
     const firestore = getFirestore();
     const userId = usuario.uid; // Substitua pelo ID do usuário
     const userCollection = collection(firestore, 'users');
     const [nivelPlaneta, setNivelPlaneta] = useState<number>(0);
-    
 
+    const [starCoust, setStarCoust] = useState<number>(20);
+    const [pass, setPass] = useState<boolean>(false);
+    const [starsWins, setStarsWin] = useState<number>(0);
     const [alternativaSelecionada, setAlternativaSelecionada] = React.useState<string>("");
     const [correta, setCorreta] = React.useState<boolean | null>(null);
     const [respondida, setRespondida] = React.useState<boolean | null> (null);
     const [quantidadeCertas, setQuantidadeCertas] = React.useState<number>(0);
     const [quantidadeRespondidas, setQuantidadeRespondidas] = React.useState<number>(0);
     const [nivelAtual, setNivelAtual] = useState<number>(0);
-    
+    const [showOfert, setShowOfert] = useState<boolean>(false);
+    const [stars, setStars] = useState<number>(-1);
+
     const selecionarAlter = (alternativaId : number) =>{
         setAlternativaSelecionada(alternativaId.toString());
 
         setRespondida(true);
-        setQuantidadeRespondidas(prevState => prevState + 1);
 
+      
+        setQuantidadeRespondidas(prevState => prevState + 1);
+     
+         
+        
+        
     }
     useEffect(()=>{
       
         if(alternativaSelecionada === nivel[numberQ].gabarito){
             setCorreta(true);
            
-            if(!tempoEsgotado)
+            if(!tempoEsgotado){
             setQuantidadeCertas(prevState => prevState + 1);
+             
+            setStars(prevState => prevState + 5);
+            setStarsWin(prevState => prevState + 5);
+              
+
+
+            }
+
 
         }
+        else if (quantidadeRespondidas > 0 && alternativaSelecionada !== ""){
+          minusLife();
+
+        }
+
         if(alternativaSelecionada !== ""){
+        
         const timeout = setTimeout(() => {
-          
+
+        
             passQuestion();
               
+
             setCorreta(null);
             setRespondida(null);
             setAlternativaSelecionada("");
+            
             reiniciarTempo();
+            
            
             
           },2500);
-        }
+        
+      }
     }, [alternativaSelecionada])
 
     const [tempoEsgotado, setTempoEsgotado] = useState(false);
-
+    useEffect(()=>{
+      console.log(pass);
+    }, [pass])
     useEffect(()=>{
         console.log(quantidadeCertas);
 
@@ -81,9 +119,13 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
             setRespondida(true);
             setQuantidadeRespondidas(prevState => prevState + 1);
             setAlternativaSelecionada(nivel[numberQ].gabarito);
-            
+            minusLife();
             const timeout = setTimeout(() => {
+            
                 passQuestion();
+
+
+
                 setCorreta(null);
                 setRespondida(null);
                 setAlternativaSelecionada("");
@@ -135,6 +177,46 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
 
     }
 
+    const attStarsFire = async () =>{
+        
+
+      const q = query(userCollection, where('uid', '==', userId));
+
+                      // Execute a consulta
+                      const querySnapshot = await getDocs(q);
+                      
+                      // Verifique se há algum documento retornado
+                      if (querySnapshot.size > 0) {
+                        // Se houver, pegue o ID do primeiro documento
+                        const primeiroDocumento = querySnapshot.docs[0];
+                        const idDocUsu = primeiroDocumento.id;
+                      
+                     
+
+                        try{
+                          await updateDoc(doc(firestore, "users", idDocUsu), {
+                              
+                             stars: stars,  
+                          })
+
+                          }catch{
+                            
+                              console.log("error");
+  
+                          }
+                 
+                      
+                      
+                      
+                      } else {
+                  
+                        console.error("Nenhum documento encontrado para o UID fornecido.");
+                      }
+                          
+
+  }
+
+
 
 
     useEffect(()=>{
@@ -176,6 +258,7 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
                             if (snapshot.exists()) {
                               const dadosUsuario = snapshot.data();
                               setNivelAtual(dadosUsuario.nivelJ);
+                              setStars(dadosUsuario.stars);
                              
                             } else {
                               console.log('Documento não encontrado');
@@ -227,7 +310,47 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
   valuePlanet();
 }, [planet]);
 
+
+
+
+useEffect(() => {
+    if(lifes == 0){
+      
+      toggleGame();
+      
+    }
+    
+}, [lifes] )
+
+
+const continueGame = () => {
+  if(stars >= starCoust){
+    setStars (prevState => prevState - starCoust);
+    plusLife();
+    toggleGame();
+    setStarCoust(prevState => prevState + 15);
+
+
+ 
+  }
+  else{
+    Alert.alert("Estrelas Insuficientes");
+  }
+}
+const stopGame = () => {
+  navigation.goBack()
+
+}
+
+
+useEffect(() => {
+  if(stars !== -1 && nivelPlaneta === nivelAtual ){
+    attStarsFire();
+  }  
+}, [stars])
+
     return(
+      <>
     <View
         style = {styles.midleView}
     >  
@@ -256,7 +379,98 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
 
         </View>
 
+       
+
     </View>
+     
+     {lifes == 0 &&
+      <ImageBackground
+        style = {{position: "absolute", height: "100%", width: "100%", alignItems:"center", justifyContent: "center"   }}
+        source={require("../../images/fundoPreto.png")}
+      >
+        
+        <View
+          style = {{borderRadius: 40, width: "90%", borderWidth: 3, borderColor: "#8DBFD4", height: "80%" , overflow: "hidden", backgroundColor: "#0C0126"}}
+        >
+          <View
+            style = { { borderBottomLeftRadius: 40, width: 140, height: 60, backgroundColor: "#212758", position: "absolute", top: 0, right: -10} }
+          >
+            <View
+              style = {{flexDirection: "row", gap: 10, alignItems:'center', justifyContent: "flex-start", marginLeft: 20}}
+            >
+              <TextEstelar
+                style = {{color: "#F9D040", fontSize: RF(20)}}
+              >
+                {stars}  
+              </TextEstelar>  
+
+              <SvgXml xml = {starPoint} />
+
+
+            </View> 
+
+          </View>
+          
+          <View
+            style = {styles.topViewRequest}
+            
+          >
+              <SvgXml  xml={starsRequest} style = {{position: "absolute", top: 60, zIndex: 2}} /> 
+              <SvgXml xml={astronautaRequest}  style = {{position: "absolute", top: 80}} />
+          </View>
+          <View
+              style = {styles.bottomViewRequest}
+          >
+            <View
+              style = {{justifyContent: "center", alignItems: "center", width: "70%", flexDirection: "row", }}
+            >
+              <View style = {{alignItems: "center"}}>
+                <TextEstelar style = {{color:"white", fontSize: RF(17)}}>
+                  Você deseja mais uma 
+                </TextEstelar>
+                <View style = {{flexDirection: "row", gap: 5, width: "100%"}}>
+                  <TextEstelar style = {{color:"white", fontSize: RF(17), alignSelf: 'flex-start', marginLeft: 20}}>
+                    tentativa por
+                  </TextEstelar>
+                  <View style = {{flexDirection: "row"}}>
+                    <TextEstelar style = {{color:"#F8D043", fontSize: RF(17),}}>
+                      {starCoust}
+                    </TextEstelar>
+                    <SvgXml xml={starPointM}/>
+                    <TextEstelar style = {{color:"#F8D043", fontSize: RF(17),}}>
+                      ? 
+                    </TextEstelar>
+                  </View>
+                </View>
+
+                
+              </View>
+             
+            </View>
+            <View style = {{width: "100%", gap: 30, alignItems: 'center', marginTop: 20 }}>
+                <TouchableOpacity
+                    style = {[styles.button,  {backgroundColor: "#3FB62B"} ] }
+                    onPress={continueGame}
+                  >
+                      <TextEstelar style = {{color: "black", fontSize: RF(16)}}>
+                        Sim!
+                      </TextEstelar>
+                  </TouchableOpacity>
+                  <TouchableOpacity 
+                    style = {[styles.button, {backgroundColor: "#FF9B9B"} ]}
+                    onPress={stopGame}
+                  >
+                      <TextEstelar style = {{color: "black", fontSize: RF(16)}}>
+                        Não
+                      </TextEstelar>
+                  </TouchableOpacity>
+              </View>
+          </View>
+        </View>
+
+      </ImageBackground>
+    }
+    </>
     )
 
 
@@ -274,6 +488,36 @@ const styles = StyleSheet.create({
         width:"90%",
         height: "55%",
         gap: 15
-    }
+    },
+    topViewRequest: {
+      height: "45%",
+      
+      width: "100%", 
+      borderTopRightRadius: 35,
+      borderTopLeftRadius: 35,
+
+    },
+    bottomViewRequest:{
+      height: "55%",
+      alignItems: "center",
+      paddingTop: 30,
+      
+      borderBottomLeftRadius: 35,
+      borderBottomRightRadius: 35,
+      width: "100%",
+      zIndex: 2,
+      overflow: 'hidden',
+      backgroundColor: "#0C0126"
+
+
+    },
+    button: {
+      height: 55,
+      width: "80%",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 10
+
+    },
 
 })
