@@ -17,14 +17,16 @@ passQuestion: () => void,
 reiniciarTempo: () => void,
 zerarTempo: () => void,
 plusLife: () => void,
+backQuestion: () => void,
 minusLife: () => void,
 toggleGame: () => void,
+repetir: (numeroQ : number) => void,
 lifes:  number,
 tempoRestante: number,
 timer?: any,
 planet: string
 }
-export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation, nivel, numberQ, lifes,  passQuestion, reiniciarTempo, tempoRestante, timer, zerarTempo, planet, plusLife, minusLife, toggleGame}) =>{
+export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation, nivel, numberQ,repetir, lifes, backQuestion,  passQuestion, reiniciarTempo, tempoRestante, timer, zerarTempo, planet, plusLife, minusLife, toggleGame}) =>{
     const autenticacao = getAuth();
     const usuario : any = autenticacao.currentUser; 
     const firestore = getFirestore();
@@ -81,10 +83,10 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
         if(alternativaSelecionada !== ""){
         
         const timeout = setTimeout(() => {
-
-        
-            passQuestion();
               
+            
+            passQuestion();
+           
 
             setCorreta(null);
             setRespondida(null);
@@ -94,7 +96,7 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
             
            
             
-          },2500);
+          },1000);
         
       }
     }, [alternativaSelecionada])
@@ -131,7 +133,7 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
                 setAlternativaSelecionada("");
                 reiniciarTempo();
                 setTempoEsgotado(false);
-            }, 2500);
+            }, 1000);
         }else{
             reiniciarTempo();
         }
@@ -220,7 +222,7 @@ export const MidleQuestJornada: React.FC<propsMidleQuestJornada> = ({navigation,
 
 
     useEffect(()=>{
-        if(quantidadeRespondidas === 5){
+        if(quantidadeRespondidas >= 5 && numberQ + 1 === 5 && quantidadeCertas >= 3){
                 zerarTempo();
                 navigation.navigate("TelaResultado", {quantidadeCertas});
                 if(quantidadeCertas >= 3){
@@ -318,6 +320,7 @@ useEffect(() => {
       
       toggleGame();
       
+
     }
     
 }, [lifes] )
@@ -329,7 +332,9 @@ const continueGame = () => {
     plusLife();
     toggleGame();
     setStarCoust(prevState => prevState + 15);
-
+    
+    repetir(numberQ - 1);
+   
 
  
   }

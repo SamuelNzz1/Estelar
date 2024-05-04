@@ -42,6 +42,9 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
 
       
     }
+    const repetir = (numeroQ : number) => {
+        setQuestAtual(numeroQ);
+    }
 
 
     const backQuestion = () =>{
@@ -95,6 +98,8 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         minusLife={minusLife}
                         lifes={lifes}
                         toggleGame={toggleGame}
+                        backQuestion = {backQuestion}
+                        repetir={repetir}
 
                     />
                 
@@ -124,6 +129,8 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         minusLife={minusLife}
                         lifes={lifes}
                         toggleGame={toggleGame}
+                        backQuestion = {backQuestion}
+                        repetir={repetir}
                     />
                     
                     </>
@@ -152,7 +159,8 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         minusLife={minusLife}
                         lifes={lifes}
                         toggleGame={toggleGame}
-
+                        backQuestion = {backQuestion}
+                        repetir={repetir}
                     />
                     </>
 
@@ -181,6 +189,8 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         minusLife={minusLife}
                         lifes={lifes}
                         toggleGame={toggleGame}
+                        backQuestion = {backQuestion}
+                        repetir={repetir}
 
                     />
                     </>
@@ -210,6 +220,8 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         minusLife={minusLife}
                         lifes={lifes}
                         toggleGame={toggleGame}
+                        backQuestion = {backQuestion}
+                        repetir={repetir}
 
                     />
 
@@ -240,6 +252,8 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
                         minusLife={minusLife}
                         lifes={lifes}
                         toggleGame={toggleGame}
+                        backQuestion = {backQuestion}
+                        repetir={repetir}
 
                     />
                     </>
