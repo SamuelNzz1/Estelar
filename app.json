@@ -1,5 +1,6 @@
 {
   "expo": {
+    "consoleWarning": false,
     "name": "Estelar",
     "slug": "Estelar",
     "version": "1.0.0",

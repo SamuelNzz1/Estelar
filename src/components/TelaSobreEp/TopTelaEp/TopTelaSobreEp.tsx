@@ -12,21 +12,24 @@ export const TopTelaSobreEp: React.FC<PropsTelaSobreEp> = ({navigation, number})
     const [modelo, setModelo] = useState<any>("");
     useEffect(() => {
         if(number == 1){
-            setModelo("jupiter.glb");
+            setModelo("/jupiter.glb");
             
         }
         else if(number == 2){
-            setModelo("marte.glb");
+            setModelo("/marte.glb");
         }
         else if(number == 3){
-            setModelo("terra.glb");
+            setModelo("/terra.glb");
         }
-        else{
-            setModelo("mercurio.glb");
+        else if (number == 4){
+            setModelo("/mercurio.glb");
         }     
+        else if(number == 8){
+            setModelo("/netuno.glb");
+        }
         
     }, [number])
-
+  
     
     const openAR = () => {
         const url = `https://estelar-ar.vercel.app/?modelo=${encodeURIComponent(modelo)}`;
@@ -34,7 +37,10 @@ export const TopTelaSobreEp: React.FC<PropsTelaSobreEp> = ({navigation, number})
         Linking.openURL(url).catch(err => console.error("Não foi possível carregar a página", err));
 
     }
- 
+    
+  
+   
+
     return(
     <View
         style = {{height: "10%",}}
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         right: 20,
         top: 40,
+        zIndex: 3
        
         
     },
