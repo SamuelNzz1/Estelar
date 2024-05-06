@@ -796,7 +796,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
                   </ScrollView>
 
-                  <TouchableOpacity onPress={changeAvatar} style = {{width: "80%", alignSelf: "center" , justifyContent: "center", alignItems: "center",  height: 50, position: "absolute", bottom: 75, backgroundColor: "#FFAB4C", borderRadius: 40}}>
+                  <TouchableOpacity onPress={changeAvatar} style = {{width: "80%", alignSelf: "center" , justifyContent: "center", alignItems: "center",  height: 50, position: "absolute", bottom: 80, backgroundColor: "#FFAB4C", borderRadius: 40}}>
                    {isLoadingP ? 
                    
                    <ActivityIndicator color="#242350"/>
