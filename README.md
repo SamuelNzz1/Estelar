@@ -53,6 +53,16 @@ Implementaremos um recurso de feedback detalhado para cada questão respondida i
 <img src="assets/PerfilEdit2.jpeg" width="250" height="auto">
 </div>
 
+### Jornada Astronômica
+
+<div> 
+<img src="assets/Jornada1.jpeg" width="250" height="auto">
+<img src="assets/Jornada2.jpeg" width="250" height="auto">
+<img src="assets/Jornada3.jpeg" width="250" height="auto">
+<img src="assets/Jornada4.jpeg" width="250" height="auto">
+<img src="assets/Jornada5.jpeg" width="250" height="auto">
+</div>
+
 
 
 ## Tecnologias Utilizadas
