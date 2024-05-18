@@ -63,6 +63,28 @@ Implementaremos um recurso de feedback detalhado para cada questão respondida i
 <img src="assets/Jornada5.jpeg" width="250" height="auto">
 </div>
 
+### Preparatório da OBA
+
+<div> 
+<img src="assets/PrepOba1.jpeg" width="250" height="auto">
+<img src="assets/PrepOba2.jpeg" width="250" height="auto">
+<img src="assets/PrepOba3.jpeg" width="250" height="auto">
+<img src="assets/PrepOba4.jpeg" width="250" height="auto">
+</div>
+
+### Ambiente Virtual
+
+<div> 
+<img src="assets/Ambiente1.jpeg" width="250" height="auto">
+<img src="assets/Ambiente2.jpeg" width="250" height="auto">
+<img src="assets/Ambiente3.jpeg" width="250" height="auto">
+<img src="assets/Ambiente4.jpeg" width="250" height="auto">
+<img src="assets/Ambiente5.jpeg" width="250" height="auto">
+<img src="assets/Ambiente6.jpeg" width="250" height="auto"> 
+</div>
+
+
+
 
 
 ## Tecnologias Utilizadas
