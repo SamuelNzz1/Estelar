@@ -36,6 +36,13 @@ Desenvolverei um guia interativo que ensinará os usuários a manipular os plane
 
 Implementaremos um recurso de feedback detalhado para cada questão respondida incorretamente no preparatório da OBA, fornecendo comentários explicativos para ajudar o usuário a entender melhor os conceitos e melhorar seu desempenho em tentativas futuras.
 
+## Telas da Aplicação
+
+### Login/Cadastro
+
+![Login](assets/Login-Cadastro1.jpeg)
+
+![Cadastro](assets/Login-Cadastro2.jpeg)
 
 ## Tecnologias Utilizadas
 
