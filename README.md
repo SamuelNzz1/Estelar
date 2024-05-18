@@ -89,11 +89,12 @@ Implementaremos um recurso de feedback detalhado para cada questão respondida i
 
 ## Tecnologias Utilizadas
 
-- TypeScript
-- Firebase
-- React Native
-- Web XR (para realidade aumentada)
-- Three.js (para visualização 3D)
+- ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+- ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+- ![React Native](https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+- ![Web XR](https://img.shields.io/badge/Web_XR-7D3C98?style=for-the-badge&logo=webxr&logoColor=white)
+- ![Three.js](https://img.shields.io/badge/Three.js-black?style=for-the-badge&logo=three.js&logoColor=white)
+
 
 ## Instalação
 
