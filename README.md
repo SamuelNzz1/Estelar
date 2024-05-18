@@ -40,9 +40,11 @@ Implementaremos um recurso de feedback detalhado para cada questão respondida i
 
 ### Login/Cadastro
 
+<div> 
 <img src="assets/Login-Cadastro1.jpeg" width="250" height="auto">
-
 <img src="assets/Login-Cadastro2.jpeg" width="250" height="auto">
+</div>
+
 
 ## Tecnologias Utilizadas
 
