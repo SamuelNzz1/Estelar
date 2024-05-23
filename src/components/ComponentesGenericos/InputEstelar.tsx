@@ -2,7 +2,7 @@ import React from "react";
 import { Dimensions, StyleSheet, TextStyle } from "react-native";
 import { TextInput } from "react-native";
 import { Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+
 
 type inputEst = {
     placeholder: string;
@@ -13,12 +13,12 @@ type inputEst = {
     autoCapitalize?: string | any,
     value: string,
     error?:boolean,
-    style?: TextStyle | TextStyle[];
+    style?: TextStyle | TextStyle[],
     
     onChangeText: (text: string, type: string) => void;
 }
 
-export default function InputEst({placeholder, color, boolean, colorBack, keyboardType, autoCapitalize, value, onChangeText, error, style} : inputEst){
+export default function InputEst( {placeholder, color, boolean, colorBack, keyboardType, autoCapitalize, value, onChangeText, error, style} : inputEst){
 
     const windowHeight = Dimensions.get("window").height;
     const windowWidth = Dimensions.get("window").width;

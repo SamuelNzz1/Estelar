@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import HelloEstelar from "./CardComponents/HelloEstelar";
-import Inputs from "./CardComponents/Inputs";
+
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import { SvgXml } from "react-native-svg";
-import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
 import { Image } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { doc, setDoc } from "firebase/firestore";
@@ -14,10 +13,7 @@ import { trueVisibility, falseVisibility } from "../../svgs/passwordVisibilitySv
 
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { googleCad } from "../../svgs/loginTela/googleCadSvg";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import InputsCad from "../CadastroTela/CadForm/InputsCad";
 type FormNavi = {

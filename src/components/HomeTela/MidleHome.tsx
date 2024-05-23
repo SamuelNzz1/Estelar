@@ -4,11 +4,6 @@ import TextEstelar from "../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import CardAtt from "./CardAtt";
 import { dados } from "../../dados/HomeProps";
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-  } from "react-native-responsive-screen";
-
 
 type navi ={
     navigation: any

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react"
-import { StyleSheet, TouchableOpacity, View } from "react-native"
-import { Dimensions } from 'react-native';
+import { StyleSheet, View } from "react-native"
+
 //import componentes
 import { ButtonPlanet } from "./MiniComponents/ButtonPlanet"
 
 
 //import components genericos
 
-import { SvgXml } from "react-native-svg"
-import TextEstelar from "../ComponentesGenericos/CustomText"
+
 import { getAuth } from "firebase/auth";
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 

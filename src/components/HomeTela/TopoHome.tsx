@@ -8,10 +8,6 @@ import { bolonaHome } from "../../svgs/bolona";
 import { RetanguloTorto } from "../../svgs/retanguloTortoHome";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-  } from "react-native-responsive-screen";
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 type topoHome = {
    
