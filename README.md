@@ -36,14 +36,65 @@ Desenvolverei um guia interativo que ensinará os usuários a manipular os plane
 
 Implementaremos um recurso de feedback detalhado para cada questão respondida incorretamente no preparatório da OBA, fornecendo comentários explicativos para ajudar o usuário a entender melhor os conceitos e melhorar seu desempenho em tentativas futuras.
 
+## Telas da Aplicação
+
+### Login/Cadastro
+
+<div> 
+<img src="assets/Login-Cadastro1.jpeg" width="250" height="auto">
+<img src="assets/Login-Cadastro2.jpeg" width="250" height="auto">
+<img src="assets/Login-Cadastro3.jpeg" width="250" height="auto">
+</div>
+
+### Edição de perfil
+
+<div> 
+<img src="assets/PerfilEdit1.jpeg" width="250" height="auto">
+<img src="assets/PerfilEdit2.jpeg" width="250" height="auto">
+</div>
+
+### Jornada Astronômica
+
+<div> 
+<img src="assets/Jornada1.jpeg" width="250" height="auto">
+<img src="assets/Jornada2.jpeg" width="250" height="auto">
+<img src="assets/Jornada3.jpeg" width="250" height="auto">
+<img src="assets/Jornada4.jpeg" width="250" height="auto">
+<img src="assets/Jornada5.jpeg" width="250" height="auto">
+</div>
+
+### Preparatório da OBA
+
+<div> 
+<img src="assets/PrepOba1.jpeg" width="250" height="auto">
+<img src="assets/PrepOba2.jpeg" width="250" height="auto">
+<img src="assets/PrepOba3.jpeg" width="250" height="auto">
+<img src="assets/PrepOba4.jpeg" width="250" height="auto">
+</div>
+
+### Ambiente Virtual
+
+<div> 
+<img src="assets/Ambiente1.jpeg" width="250" height="auto">
+<img src="assets/Ambiente2.jpeg" width="250" height="auto">
+<img src="assets/Ambiente3.jpeg" width="250" height="auto">
+<img src="assets/Ambiente4.jpeg" width="250" height="auto">
+<img src="assets/Ambiente5.jpeg" width="250" height="auto">
+<img src="assets/Ambiente6.jpeg" width="250" height="auto"> 
+</div>
+
+
+
+
 
 ## Tecnologias Utilizadas
 
-- TypeScript
-- Firebase
-- React Native
-- Web XR (para realidade aumentada)
-- Three.js (para visualização 3D)
+- ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+- ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+- ![React Native](https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+- ![Web XR](https://img.shields.io/badge/Web_XR-7D3C98?style=for-the-badge&logo=webxr&logoColor=white)
+- ![Three.js](https://img.shields.io/badge/Three.js-black?style=for-the-badge&logo=three.js&logoColor=white)
+
 
 ## Instalação
 
