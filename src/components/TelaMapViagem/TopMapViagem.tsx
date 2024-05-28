@@ -31,18 +31,21 @@ const styles = StyleSheet.create({
     topo:{
         backgroundColor: "#14132E",
         height: "15%",
-        justifyContent: "center"
+        justifyContent: "center",
+        flexDirection: "row"
     },
     voltar:{
         position: "absolute",
         left: 20,
-        top: 40
+        alignSelf: "center"
         
     },
     go:{
         position: "absolute",
         right: 20,
-        top: 30,
+       
+        alignSelf: "center",
+        
         
         
     }

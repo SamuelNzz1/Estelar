@@ -69,7 +69,7 @@ export const ProfileRankingM : React.FC<ProfileRankingProps> = ({name, level, st
 
 const styles = StyleSheet.create({
   ProfileRanking: {
-    width: 150,
+    width: 170,
     height: 40,
     backgroundColor: "#2F376B",
     borderRadius: 100,

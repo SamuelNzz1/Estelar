@@ -22,7 +22,7 @@ export const RankingView : React.FC<RankingViewProps> = ({navigation}) => {
 
   const ranking = useUserRanking();
   
-  if (ranking.length < 3) {
+  if (ranking.length < 1) {
     // Render some loading or fallback UI
     return (
       <ImageBackground source={image} style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -44,6 +44,7 @@ export const RankingView : React.FC<RankingViewProps> = ({navigation}) => {
           xml={podio}
           
         />
+        {ranking[1] &&
          <ProfileRankingM
           style={{ position: "absolute", bottom: 2, left: -20 }}
           name={ranking[1].name}
@@ -51,6 +52,8 @@ export const RankingView : React.FC<RankingViewProps> = ({navigation}) => {
           profileImage={ranking[1].profileImage}
           stars={ranking[1].stars}
         />
+        }
+        {ranking[0] &&
         <ProfileRankingM
           style={{ position: "absolute", top: 2, alignSelf: "center" }}
           name={ranking[0].name}
@@ -58,6 +61,8 @@ export const RankingView : React.FC<RankingViewProps> = ({navigation}) => {
           profileImage={ranking[0].profileImage}
           stars={ranking[0].stars}
         />
+        }
+        {ranking[2] &&
         <ProfileRankingM
           style={{ position: "absolute", bottom: 2, right: -20 }}
           name={ranking[2].name}
@@ -65,6 +70,7 @@ export const RankingView : React.FC<RankingViewProps> = ({navigation}) => {
           profileImage={ranking[2].profileImage}
           stars={ranking[2].stars}
         />
+        }
         
 
      </View>

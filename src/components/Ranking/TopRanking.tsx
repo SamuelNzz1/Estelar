@@ -15,14 +15,14 @@ export const TopRanking : React.FC<TopProps> = ({navigation}) => {
     style = {styles.topStyles}
   >
     <TouchableOpacity
-      style = {{position : "absolute", left: 20, alignSelf: "center",}}
+      style = {{position : "absolute", left: 20, alignSelf: "flex-end",}}
       onPress = {() => navigation.goBack()}
     >
       <SvgXml xml={ButtonBack}/>
     </TouchableOpacity>
 
     <TextEstelar
-      style = {{color: "white", fontSize: RF(25), alignSelf: "center",}}
+      style = {{color: "white", fontSize: RF(25), alignSelf: "flex-end",}}
     >
         Ranking
     </TextEstelar>

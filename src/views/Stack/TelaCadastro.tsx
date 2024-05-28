@@ -9,10 +9,6 @@ import {
   Image,
 } from "react-native";
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 import TopoCad from "../../components/CadastroTela/CadTopo/TopoCad";
 import Container from "../../components/ComponentesGenericos/Container";
 type cadNav = {

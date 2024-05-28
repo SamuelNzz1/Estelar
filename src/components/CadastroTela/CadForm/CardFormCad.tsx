@@ -97,6 +97,7 @@ export default function CardFormCad({ style, navigation, mostrarImagem } : CardF
                   questO: 0,
                   nivelJ: 0,
                   stars: 0,
+                  lifes: 0,
                   
                 }); 
                 await updateProfile(user, {
