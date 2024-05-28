@@ -19,8 +19,10 @@ export const CardEnum: React.FC<propsCard> = ({enunciado, imagem}) => {
             >
             <ScrollView
             showsVerticalScrollIndicator = {false}
-            style = {[styles.scroll ]}
-            contentContainerStyle = {{justifyContent:"center", alignItems:"center"}}
+        
+            contentContainerStyle = {[{justifyContent:"center", alignItems:"center"}, !imagem && {   width: "100%",
+            height: "100%",
+            padding: 15} ]}
             >
                 <TextEstelar style = {styles.textEnun}>
                     {enunciado}
@@ -52,6 +54,7 @@ const styles = StyleSheet.create({
         width: "90%",
         height: "40%",
         borderRadius: 24,
+        paddingTop: 20
         
     },
     enum: {
@@ -65,8 +68,8 @@ const styles = StyleSheet.create({
     },
     scroll:{
      width: "100%",
-        height: "100%",
-        padding: 15
+     height: "100%",
+     padding: 15
       
         
     },
@@ -98,7 +101,8 @@ const styles = StyleSheet.create({
     imagem: {
         width: 250,
         height:250,
-        resizeMode: "contain", 
+        resizeMode: "contain",
+
         
         
     }

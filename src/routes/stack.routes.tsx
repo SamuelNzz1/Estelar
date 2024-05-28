@@ -21,6 +21,7 @@ import { TelaQuestsJornadas } from "../views/Stack/TelaQuestsJornada";
 import { Resultado } from "../views/Stack/Resultado";
 import { TelaEp } from "../views/Stack/TelaEp";
 import { TelaSobreEp } from "../views/Stack/TelaSobreEp";
+import { RankingView } from "../views/Stack/TelaRanking";
 export default function StackRoutes() {
   const navigation : any = useNavigation();
 
@@ -64,6 +65,7 @@ export default function StackRoutes() {
       <Stack.Screen name="TelaResultado" component={Resultado} />
       <Stack.Screen name="TelaEp" component={TelaEp} />
       <Stack.Screen name="TelaSobreEp" component={TelaSobreEp} />
+      <Stack.Screen name="TelaRanking" component={RankingView} />
     </>
     </Stack.Navigator>
     )

@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { SvgXml } from "react-native-svg";
 import { ButtonBack } from "../CadastroTela/CadTopo/ButtonBack";
+import { rankingIcon } from "../../svgs/ranking";
 
 type propsTopo = {
     navigation: any
@@ -15,6 +16,9 @@ export const TopMapViagem: React.FC<propsTopo> = ({navigation}) =>{
         <TouchableOpacity onPress={() => navigation.goBack()} style = {styles.voltar}>
             <SvgXml  xml={ButtonBack}/>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("TelaRanking")} style = {styles.go}>
+            <SvgXml  xml={rankingIcon}/>
+        </TouchableOpacity>
         
 
     </View>
@@ -26,12 +30,20 @@ export const TopMapViagem: React.FC<propsTopo> = ({navigation}) =>{
 const styles = StyleSheet.create({
     topo:{
         backgroundColor: "#14132E",
-        height: "12%",
+        height: "15%",
         justifyContent: "center"
     },
     voltar:{
-        marginLeft: "5%"
-       
+        position: "absolute",
+        left: 20,
+        top: 40
+        
+    },
+    go:{
+        position: "absolute",
+        right: 20,
+        top: 30,
+        
         
     }
     
