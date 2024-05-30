@@ -16,26 +16,6 @@ O "Preparatório para a OBA" permite aos usuários praticar com questões de edi
 
 O "Ambiente Virtual" oferece uma exploração educativa dos planetas do sistema solar. Nesta modalidade, os usuários podem optar por visualizar os planetas em realidade aumentada, sendo redirecionados para o site Estelar AR, onde a experiência se torna ainda mais imersiva.
 
-## Futuras Implementações
-
-Diversas melhorias estão planejadas para serem implementadas no Estelar para enriquecer a experiência do usuário e expandir as funcionalidades do aplicativo
-
-### Sistema de Recuperação de Vidas
-
-Um sistema de recuperação de vidas será introduzido, onde os corações se regenerarão após um período de tempo determinado, permitindo uma jogabilidade contínua e balanceada.
-
-### Suporte a Realidade Aumentada para iOS
-
-A funcionalidade de realidade aumentada será estendida para dispositivos iOS, ampliando o acesso e a usabilidade da aplicação.
-
-### Guia Interativo para a Realidade Aumentada
-
-Desenvolverei um guia interativo que ensinará os usuários a manipular os planetas na realidade aumentada, incluindo instruções para girar, aproximar e explorar os planetas de forma mais intuitiva e educativa.
-
-### Feedback Detalhado para Questões Erradas no Preparatório da OBA
-
-Implementaremos um recurso de feedback detalhado para cada questão respondida incorretamente no preparatório da OBA, fornecendo comentários explicativos para ajudar o usuário a entender melhor os conceitos e melhorar seu desempenho em tentativas futuras.
-
 ## Telas da Aplicação
 
 ### Login/Cadastro
