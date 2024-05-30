@@ -5,9 +5,9 @@ import HelloEstelar from "./CardComponents/HelloEstelar";
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import { SvgXml } from "react-native-svg";
 import { Image } from "react-native";
-import { getAuth, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
+import { sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
 import { trueVisibility, falseVisibility } from "../../svgs/passwordVisibilitySvg";
-
+import { auth } from "../../../firebase/conect";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { googleCad } from "../../svgs/loginTela/googleCadSvg";
 
@@ -29,17 +29,17 @@ export default function  CardForm({ navigation } : FormNavi) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showMessageError, setShowMessageError] = useState<boolean>(false);
   useEffect(() => {
-    const auth = getAuth();
+  
     const user = auth.currentUser;
   }, [showMessageEmail])
   
-  const auth = getAuth();
+ 
   const user = auth.currentUser;
   
   const handleUserRegister = async () =>{
     setIsLoading(true)
 
-    const auth = getAuth();
+  
     const user = auth.currentUser;
     
     const toHome = () =>{
@@ -106,7 +106,7 @@ export default function  CardForm({ navigation } : FormNavi) {
 }
 
   const showMessageEmaill = async () =>{  
-    const auth = getAuth();
+
     const user : any = auth.currentUser;
     
     await sendEmailVerification(user)
