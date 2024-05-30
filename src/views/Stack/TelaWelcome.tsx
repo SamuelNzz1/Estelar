@@ -56,8 +56,8 @@ export default function Welcome( {navigation}: WelcomeProps) {
                o que esconde por trás dele.
              </TextEstelar>
             </View>
-            <TouchableOpacity>
-              <SvgXml onPress={()=> navigation.navigate('Login') } style={styles.buttonSvg} xml={ButtonGo} />
+            <TouchableOpacity onPress={()=> navigation.navigate('Login') } >
+              <SvgXml  style={styles.buttonSvg} xml={ButtonGo} />
             </TouchableOpacity>
           </View>
 

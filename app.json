@@ -19,8 +19,7 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Precisamos da sua permissão para acessar a câmera",
         "NSPhotoLibraryUsageDescription": "Precisamos da sua permissão para acessar a biblioteca de fotos"
-      },
-      "bundleIdentifier": "com.estelarr.Estelar"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -32,7 +31,9 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ],
-      "package": "com.samuelsamuel.Estelar"
+      "package": "com.samuelsamuel.Estelar",
+      "googleServicesFile": "./google-services.json" 
+      
     },
     "web": {
       "favicon": "./assets/favicon.png"
