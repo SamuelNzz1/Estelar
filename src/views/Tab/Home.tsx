@@ -1,5 +1,4 @@
 import React from "react";
-import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import Container from "../../components/ComponentesGenericos/Container";
 import TopoHome from "../../components/HomeTela/TopoHome";
 import { StatusBar, StyleSheet } from "react-native";

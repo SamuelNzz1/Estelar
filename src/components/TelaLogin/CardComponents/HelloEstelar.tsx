@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 export default function HelloEstelar(){

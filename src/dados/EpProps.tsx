@@ -1,4 +1,4 @@
-import React from "react";
+
 import { jupiter, marte, terra, mercurio, venus, saturno, urano, netuno } from "../svgs/planetsSvg";
 type PlanetsProps = {
     svg: string,

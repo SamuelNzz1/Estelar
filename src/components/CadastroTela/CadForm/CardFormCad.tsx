@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { Modal,ActivityIndicator, StyleSheet, Image,  Text, View, Button, Platform, Dimensions, TouchableOpacity, StyleProp, ViewStyle, Alert, TouchableWithoutFeedback } from "react-native";
+import {ActivityIndicator, StyleSheet, View, Dimensions, TouchableOpacity, StyleProp, ViewStyle, Alert, TouchableWithoutFeedback } from "react-native";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import InputsCad from "./InputsCad";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
-import { fetchSignInMethodsForEmail, updateProfile } from 'firebase/auth';
-
+import {updateProfile } from 'firebase/auth';
 // ...
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { doc, addDoc, collection } from "firebase/firestore";
+import {addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../../../firebase/conect";
-import { setDoc } from "firebase/firestore";
 import { trueVisibility, falseVisibility } from "../../../svgs/passwordVisibilitySvg";
 import { SvgXml } from "react-native-svg";
+
 type CardFormCad = {
   navigation: {
     navigate: (screen : string) => void;

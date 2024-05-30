@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import TextEstelar from "../ComponentesGenericos/CustomText";
-import { SvgXml } from "react-native-svg";
 import { useState } from "react";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { collection, doc, getDocs, getFirestore, onSnapshot, query } from "firebase/firestore";

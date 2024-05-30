@@ -1,7 +1,7 @@
 import React from "react";
-import { Dimensions, StyleSheet, TextStyle } from "react-native";
+import { StyleSheet, TextStyle } from "react-native";
 import { TextInput } from "react-native";
-import { Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
+
 
 
 type inputEst = {
@@ -20,8 +20,7 @@ type inputEst = {
 
 export default function InputEst( {placeholder, color, boolean, colorBack, keyboardType, autoCapitalize, value, onChangeText, error, style} : inputEst){
 
-    const windowHeight = Dimensions.get("window").height;
-    const windowWidth = Dimensions.get("window").width;
+    
     return(
     <>
     

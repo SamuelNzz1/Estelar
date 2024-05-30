@@ -1,5 +1,4 @@
-import React from "react";
-import { Svg } from "react-native-svg";
+
 import { goViagem, goForum, goPrepOBA } from "../svgs/botoesHome";
 import ViagemAstroImage from '../images/ViagemAstro.png';
 import PreparatorioImage from '../images/Preparatorio.png';

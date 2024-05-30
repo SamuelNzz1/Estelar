@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, ImageBackground, Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ActivityIndicator, SafeAreaView, ScrollView } from "react-native";
-import Container from "../../components/ComponentesGenericos/Container";
+import { Alert, Image,  Keyboard, KeyboardAvoidingView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ActivityIndicator, SafeAreaView, ScrollView } from "react-native";
+
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { SvgXml } from "react-native-svg";
@@ -9,12 +9,11 @@ import { bola2 } from "../../svgs/bolasEditPerfil";
 import { ButtonBack } from "../../components/CadastroTela/CadTopo/ButtonBack";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import InputEst from "../../components/ComponentesGenericos/InputEstelar";
-import { AuthCredential, EmailAuthProvider, deleteUser, getAuth, onAuthStateChanged, reauthenticateWithCredential, updatePassword, updateProfile } from "firebase/auth";
-import { collection, deleteDoc, doc, getDocs, getFirestore, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { EmailAuthProvider, deleteUser, getAuth,  reauthenticateWithCredential, updatePassword, updateProfile } from "firebase/auth";
+import { collection, deleteDoc, doc, getDocs, getFirestore, query,  updateDoc, where } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
 import confirmMessage from "../../images/confirmDeleteAccount.png"
 import confirmMessageLogout from "../../images/sairContaConfirm.png"
-import { useRoute } from '@react-navigation/native';
 import { noDelete, yesDelete } from "../../svgs/ButtonsConfirmDelete";
 import { logout } from "../../svgs/logout";
 
@@ -37,7 +36,7 @@ type editPerfil = {
  
 
 export default function TelaEditPerfil({navigation}:editPerfil){
-    const route = useRoute();
+   
     const [isLoadingP, setIsLoadingP] = useState<boolean> (false);
     const autenticacao = getAuth();
     const usuario : any = autenticacao.currentUser; 
@@ -45,22 +44,22 @@ export default function TelaEditPerfil({navigation}:editPerfil){
     const userId = usuario.uid; // Substitua pelo ID do usuário
     const userCollection = collection(firestore, 'users');
     
-    const [pickImage, setPickImage] = useState<any>("");
+   
     const [pickAv1, setPickAv1] = useState<boolean> (false);
     const [pickAv2, setPickAv2] = useState<boolean> (false);
     const [pickAv3, setPickAv3] = useState<boolean> (false);
 
-    const [newImage, setNewImage] = useState<any> ();
+ 
 
 
     const [profileImage, setProfileImage] = useState <any> ("")
-    const [imagePerfil, setImagePerfil] = useState<any>(noImagem);
+    const [imagePerfil, setImagePerfil] = useState<any>("");
 
 
     const [showImage, setShowImage] = useState(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
   
-    const userRef = doc(firestore, 'users', userId);
+    
     const [logouty, setLogouty] = useState<boolean> (false);
     
     const [passwordVisibility, setPasswordVisibility] = useState(true);
@@ -212,11 +211,7 @@ export default function TelaEditPerfil({navigation}:editPerfil){
 
 
 
-      const isUri = (value : any) => {
-        // Verifica se o valor é uma string e se começa com "http://" ou "https://"
-        return typeof value === "string" && (value.startsWith("http://") || value.startsWith("https://") || value.startsWith("file:") );
-      };
-
+    
 
       const handleAlterPerfil = async () => {
         setIsLoading(true);

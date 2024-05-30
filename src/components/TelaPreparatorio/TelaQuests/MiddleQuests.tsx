@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { View } from "react-native";
 import TextEstelar from "../../ComponentesGenericos/CustomText";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useFocusEffect} from "@react-navigation/native";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { RadioButton2 } from "../RadioButton";
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, updateDoc, where } from "firebase/firestore";

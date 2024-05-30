@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, View, ViewStyle } from "react-native";
-import { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { isSelectedRadio } from "../../svgs/isSelectedRadio";
 import { SvgXml } from "react-native-svg";

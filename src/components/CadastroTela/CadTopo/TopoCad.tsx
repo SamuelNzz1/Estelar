@@ -1,7 +1,6 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, View, TextStyle, StyleProp, ViewStyle, TouchableOpacity} from "react-native";
+import { Image,StyleSheet, View, StyleProp, ViewStyle, TouchableOpacity} from "react-native";
 import { SvgXml } from "react-native-svg";
-import { CadastroPlaneta } from "./CadastroPlaneta";
 import { ButtonBack } from "./ButtonBack";
 import { miniLogo } from "../../../svgs/welcomeTela/minilogoSvg";
 type TopoCad = {

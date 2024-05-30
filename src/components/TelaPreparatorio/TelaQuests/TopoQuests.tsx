@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ButtonBack, ButtonGoo } from "../../CadastroTela/CadTopo/ButtonBack";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import TextEstelar from "../../ComponentesGenericos/CustomText";

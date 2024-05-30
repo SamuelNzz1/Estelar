@@ -18,11 +18,11 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.29",
     "@types/react": "~18.2.79",
-    "expo": "^51.0.0",
+    "expo": "^51.0.9",
     "expo-status-bar": "~1.12.1",
-    "firebase": "^10.8.0",
+    "firebase": "^10.12.2",
     "install": "^0.13.0",
-    "npm": "^10.4.0",
+    "npm": "^10.8.1",
     "react": "18.2.0",
     "react-ga": "^3.3.1",
     "react-native": "0.74.1",
@@ -31,7 +31,7 @@
     "react-native-svg": "15.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
+    "@babel/core": "^7.24.6",
     "typescript": "~5.3.3"
   },
   "private": true

@@ -1,5 +1,5 @@
 import React from "react";
-import { Animated, FlatList, View } from "react-native";
+import { Animated, View } from "react-native";
 import { CardPlanet } from "./cardPlanets/CardPlanet";
 import { SvgXml } from "react-native-svg";
 import { searchIcon } from "../../../svgs/search";

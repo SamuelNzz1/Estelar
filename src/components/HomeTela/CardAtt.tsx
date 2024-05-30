@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { ImageBackground, StyleSheet, View, TouchableOpacity } from "react-native";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";

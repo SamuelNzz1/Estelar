@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SvgXml } from "react-native-svg";
 import { arrowBackPrep } from "../../svgs/arrowBackPrep";
-import { ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ImageBackground, StyleSheet, TouchableOpacity} from "react-native";
 import prepFundo from "../../images/prepFundo.png";
 import { CardPrep } from "../../components/TelaPreparatorio/CardPrep";
     

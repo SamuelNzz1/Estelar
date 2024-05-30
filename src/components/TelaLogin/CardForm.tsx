@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity, Alert, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
+import { View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import HelloEstelar from "./CardComponents/HelloEstelar";
 
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import { SvgXml } from "react-native-svg";
 import { Image } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../firebase/conect";
 import { getAuth, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
 import { trueVisibility, falseVisibility } from "../../svgs/passwordVisibilitySvg";
 
@@ -42,7 +39,6 @@ export default function  CardForm({ navigation } : FormNavi) {
   const handleUserRegister = async () =>{
     setIsLoading(true)
 
-    console.log( senha + " " + email);
     const auth = getAuth();
     const user = auth.currentUser;
     

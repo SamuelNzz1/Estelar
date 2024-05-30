@@ -3,7 +3,7 @@ import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { StyleSheet, View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { SvgXml } from "react-native-svg";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { PencilEdit } from "../../svgs/editPerfilSvg";
 import { dadosPerfil } from "../../dados/PerfilProps";
 
@@ -14,8 +14,8 @@ import Avatar3 from "../../images/Avatar3.png";
 
 
 import CardStatus from "../../components/PerfilTela/CardStatus";
-import { collection, getDoc, getDocs, getFirestore, query, where,  doc, onSnapshot } from "firebase/firestore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { collection, getDocs, getFirestore, query, where,  doc, onSnapshot } from "firebase/firestore";
+
 export default function Perfil({navigation} : any ){
 
 
@@ -111,7 +111,7 @@ export default function Perfil({navigation} : any ){
                     {userName &&
                         <TextEstelar style={styles.bemvindo}>{userName}</TextEstelar>
                     }   
-                    <TouchableOpacity onPress={()=>navigation.navigate("EditPerfil", {imagePerfil, setImagePerfil})} style = {styles.edit}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("EditPerfil")} style = {styles.edit}>
                         <View>
                         <TextEstelar style = {styles.editPerfi}>
                             Editar perfil

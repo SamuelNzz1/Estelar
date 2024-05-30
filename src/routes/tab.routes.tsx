@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { miniLogo } from "../svgs/welcomeTela/minilogoSvg";
 
 import { SvgXml } from "react-native-svg";
 import { HomeSvg } from "../svgs/homeSvg";

@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { cardEpEli } from "../../../../svgs/cardEp";
-import { jupiter ,terra, marte, mercurio } from "../../../../svgs/planetsSvg";
 import { SvgXml } from "react-native-svg";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import TextEstelar from "../../../ComponentesGenericos/CustomText";

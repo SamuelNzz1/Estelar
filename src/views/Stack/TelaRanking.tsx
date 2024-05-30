@@ -10,7 +10,6 @@ import { TopRanking } from "../../components/Ranking/TopRanking"
 import { SvgXml } from "react-native-svg"
 import { OutputRanking } from "../../components/Ranking/OutputRanking"
 import { ProfileRankingM } from "../../components/Ranking/ProfileRankingM"
-import TextEstelar from "../../components/ComponentesGenericos/CustomText"
 
 type RankingViewProps = {
   navigation : any

@@ -1,6 +1,6 @@
-import React, {useRef, useEffect} from "react";
-import { StyleSheet,ScrollView, View, TextStyle, StyleProp, ViewStyle  } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
+import { StyleSheet, View, StyleProp, ViewStyle  } from "react-native";
+
 
 
 type Container = {

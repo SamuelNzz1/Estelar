@@ -1,5 +1,3 @@
-import React from "react";
-import { Svg } from "react-native-svg";
 
 import star from "../images/star.png";
 import planet from "../images/planet.png";

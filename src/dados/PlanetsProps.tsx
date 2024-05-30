@@ -1,5 +1,4 @@
-import React from "react";
-import { jupiter, marte, terra, mercurio } from "../svgs/planetsSvg";
+
 import JupiterIm1 from "../images/JupiterIm1.png";
 import JupiterIm2 from "../images/JupiterIm2.png";
 import JupiterIm3 from "../images/JupiterIm3.png";

@@ -1,4 +1,4 @@
-import React from "react";
+
 import nivel1Q1Image from "../images/nivel1Q1Image.png"
 
 import nivel2Q2Image from "../images/nivel2Q2Image.png"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Alert, Image, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
+import { Alert,  ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native"
 import { CardEnum } from "./components/CardEnun"
 import { ButtonResp } from "./components/ButtonsResp"
 import { getAuth } from "firebase/auth"

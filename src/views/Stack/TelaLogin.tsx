@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Keyboard, KeyboardAvoidingView, StatusBar } from "react-native";
+import { Keyboard, KeyboardAvoidingView } from "react-native";
 import {
-  View,
   StyleSheet,
   ImageBackground,
   TouchableWithoutFeedback,

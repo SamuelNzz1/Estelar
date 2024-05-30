@@ -1,5 +1,4 @@
 import React from "react";
-import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { SafeAreaView, ScrollView } from "react-native";
 import { TopTelaSobreEp } from "../../components/TelaSobreEp/TopTelaEp/TopTelaSobreEp";
 import { MidleSobreEp } from "../../components/TelaSobreEp/MidleTelaSobreEp/MidleSobreEp";

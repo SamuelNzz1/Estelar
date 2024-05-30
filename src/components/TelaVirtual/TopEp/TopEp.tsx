@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { SvgXml } from "react-native-svg";
 import { ButtonBack } from "../../../components/CadastroTela/CadTopo/ButtonBack";
 import { miniLogo } from "../../../svgs/welcomeTela/minilogoSvg";

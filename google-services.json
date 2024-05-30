@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "117201149818",
+    "project_id": "estelar-50146",
+    "storage_bucket": "estelar-50146.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117201149818:android:19cba5c7c5c3f316cdc0c3",
+        "android_client_info": {
+          "package_name": "com.estelarr.Estelar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117201149818-8uupn8ge932djn032bkka5pfn10a1pcm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU4fQcB_FZmIMTAEiKUJyP1wCipU9dmv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117201149818-8uupn8ge932djn032bkka5pfn10a1pcm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

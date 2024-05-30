@@ -3,11 +3,11 @@ import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from "reac
 import fundoResultado from "../../images/fundoResultado.png"
 import { SvgXml } from "react-native-svg";
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
-import { resultadoMissaoConcluida, resultadoMissaoFalhada, resultadoMissao2 } from "../../svgs/resultadoMissao";
+import { resultadoMissaoConcluida, resultadoMissaoFalhada } from "../../svgs/resultadoMissao";
 import TextEstelar from "../../components/ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import completeMission from "../../images/completeMission.png"
-import { starPoint, starPointM } from "../../svgs/starPoint";
+import { starPoint} from "../../svgs/starPoint";
 type resultadoProps = {
     route: any,
     navigation: any,

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import CardAtt from "./CardAtt";
@@ -10,10 +10,6 @@ type navi ={
 }
   
 export default function MidleHome({navigation}:navi ) {
-    const screenWidth = Dimensions.get("window").width;
-    const screenHeight = Dimensions.get("window").height;
-   
-    
     
 
     return (

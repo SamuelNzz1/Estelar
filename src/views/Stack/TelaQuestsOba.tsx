@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
 import Container from "../../components/ComponentesGenericos/Container"
-import { View } from "react-native"
 import { TopoQuests } from "../../components/TelaPreparatorio/TelaQuests/TopoQuests"
 import { Prova23N1, Prova23N2, Prova23N3, Prova23N4 } from "../../dados/ProvasDados"
 import { MiddleQuests } from "../../components/TelaPreparatorio/TelaQuests/MiddleQuests"
-import { RadioButton2 } from "../../components/TelaPreparatorio/RadioButton"
+
 type typeQuests = {
     navigation: any,
     route : any,

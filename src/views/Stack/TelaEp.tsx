@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Container from "../../components/ComponentesGenericos/Container";
 import { TopEp } from "../../components/TelaVirtual/TopEp/TopEp";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native";

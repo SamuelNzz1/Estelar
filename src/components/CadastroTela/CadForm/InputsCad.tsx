@@ -1,9 +1,7 @@
 import React from "react";
-import { View, StyleSheet, Dimensions} from "react-native";
+import { View, StyleSheet} from "react-native";
 import InputEst from "../../ComponentesGenericos/InputEstelar";
 import { useRoute } from '@react-navigation/native';
-import { SvgXml } from "react-native-svg";
-import { trueVisibility,  falseVisibility } from "../../../svgs/passwordVisibilitySvg";
 type InputsCad ={
     name: string,
     senha: string, 
@@ -15,8 +13,6 @@ type InputsCad ={
     
 }
 export default function InputsCad({name, senha, email, confirmarsenha, onChangeText, boolean, error}: InputsCad){
-    const windowHeight = Dimensions.get("window").height;
-    const windowWidth = Dimensions.get("window").width;
     const route = useRoute();
     const rotaAtual = route.name;
     return(

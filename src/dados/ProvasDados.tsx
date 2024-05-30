@@ -1,4 +1,4 @@
-import React from "react";
+
 import imageQ8 from "../images/imageQ8.png";
 import imageQ9 from "../images/imageQ9.png";
 import imageQ5N2 from "../images/imageQ5N2.png"

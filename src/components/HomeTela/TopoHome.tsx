@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Image, ImageBackground, StyleSheet, View, TextStyle, StyleProp, ViewStyle} from "react-native";
+import {  StyleSheet, View, StyleProp, ViewStyle} from "react-native";
 import { SvgXml } from "react-native-svg";
 import TextEstelar from "../ComponentesGenericos/CustomText";
 import { bolinhasTop } from "../../svgs/bolinhasHomeTop";
 import { RFValue as RF } from "react-native-responsive-fontsize";
 import { bolonaHome } from "../../svgs/bolona";
 import { RetanguloTorto } from "../../svgs/retanguloTortoHome";
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { miniLogo } from "../../svgs/welcomeTela/minilogoSvg";
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 type topoHome = {

@@ -3,7 +3,7 @@ import { Image, StyleSheet, TextStyle, View } from "react-native"
 import TextEstelar from "../ComponentesGenericos/CustomText"
 import { RFValue as RF } from "react-native-responsive-fontsize"
 import { SvgXml } from "react-native-svg"
-import { starPoint, starPointM, starPointR } from "../../svgs/starPoint"
+import { starPointM } from "../../svgs/starPoint"
 
 import noImagem from "../../images/Perfil.png";
 import Avatar1 from "../../images/Avatar1.png";

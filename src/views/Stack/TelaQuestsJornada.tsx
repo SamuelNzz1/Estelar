@@ -11,7 +11,7 @@ type propsTelaQuestsJornada = {
 export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation, route}) =>{
     const [questAtual, setQuestAtual] = useState<number>(0);
     const {planet}  = route.params;
-    const [backgroundLoaded, setBackgroundLoaded] = useState<boolean>(false);
+
     const [lifes, setLifes] = useState<number>(3);
     
     const [tempoRestante, setTempoRestante] = useState(60);
@@ -38,7 +38,7 @@ export const TelaQuestsJornadas: React.FC<propsTelaQuestsJornada> = ({navigation
         setTempoRestante(0);
     }
     const handleLoad = () =>{
-        setBackgroundLoaded(true);
+      
 
       
     }
