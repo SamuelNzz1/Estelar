@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "platforms": ["ios", "android"],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -20,7 +19,8 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Precisamos da sua permissão para acessar a câmera",
         "NSPhotoLibraryUsageDescription": "Precisamos da sua permissão para acessar a biblioteca de fotos"
-      }
+      },
+      "bundleIdentifier": "com.estelarr.Estelar"
     },
     "android": {
       "adaptiveIcon": {
@@ -32,8 +32,7 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ],
-      "package": "com.samuelsamuel.Estelar",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.samuelsamuel.Estelar"
     },
     "web": {
       "favicon": "./assets/favicon.png"
